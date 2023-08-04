@@ -1,5 +1,5 @@
 <script setup>
-import Pagination from "../../components/Base/pagination";
+import Pagination from "#imports";
 import ProductCard from "../../components/Catalog/ProductCard";
 import EBtn from "../../components/Base/E-btn";
 import {useApiFetch} from "../../composables/api";
