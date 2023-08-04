@@ -1,7 +1,7 @@
 <script setup>
-import Pagination from "../../components/Base/pagination";
-import ProductCard from "../../components/Catalog/ProductCard";
-import EBtn from "../../components/Base/E-btn";
+import Pagination from "#imports";
+import ProductCard from "#imports";
+import EBtn from "#imports";
 import {useApiFetch} from "../../composables/api";
 
 const route = useRoute();

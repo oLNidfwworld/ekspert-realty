@@ -1,11 +1,11 @@
 <script setup>
 
-import {computed, onMounted, ref, watch} from "vue";
-  import {useApiFetch} from "../../composables/api";
-  import {useAsyncData} from "nuxt/app";
-  import ProductCard from "../../components/Catalog/ProductCard";
-import EBtn from "~/components/Base/E-btn.vue";
-import Pagination from "~/components/Base/Pagination.vue";
+import {computed, onMounted, ref, watch} from "#imports";
+  import {useApiFetch} from "#imports";
+  import {useAsyncData} from "#imports";
+  import ProductCard from "#imports";
+import EBtn from "#imports";
+import Pagination from "#imports";
 
 const route = useRoute()
 const router = useRouter()
