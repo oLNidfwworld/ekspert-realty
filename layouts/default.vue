@@ -1,7 +1,8 @@
-<script setup>
+<script setup lang="ts">
 // vue transition bug handle
 import {useFilterStore} from "../store/smartFilter";
 import ProductCard from "../components/Catalog/ProductCard";
+import {useSeoMeta} from "@unhead/vue";
 const messages = [
   `Uncaught NotFoundError: Failed to execute 'insertBefore' on 'Node': The node before which the new node is to be inserted is not a child of this node.`, // chromium based
   `NotFoundError: The object can not be found here.`, // safari
@@ -22,6 +23,9 @@ const transition = (to, from) => {
 }
 const route = useRoute()
 const filter = useFilterStore()
+useSeoMeta({
+  keywords : 'недвижимость,жильё,квартиры,дачи,дома,коттеджи,комнаты,аренда',
+})
 </script>
 <template>
     <div class="page-wrapper">

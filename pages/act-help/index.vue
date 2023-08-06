@@ -1,7 +1,8 @@
-<script setup>
+<script setup lang="ts">
 
 import EBtn from "~/components/Base/E-btn.vue";
 import EInput from "~/components/Base/E-input.vue";
+import {useSeoMeta} from "unhead";
 
 const sendData = async (e) => {
   if (phone.value.length > 15 || name.value !== "") {
@@ -26,6 +27,13 @@ const sendData = async (e) => {
 const fallback = ref(false), responseMsg = ref('');
 const isPopupVisible = ref(false);
 const name = ref(null),phone = ref(undefined),email = ref(undefined),comment = ref(undefined);
+
+useSeoMeta({
+  title : 'Составление договоров | Эксперт',
+  ogTitle : 'Составление договоров | Эксперт',
+  description : 'Эксперт. Агенство недвижимости.',
+  ogDescription : 'Эксперт. Агенство недвижимости.',
+})
 
 </script>
 <template>

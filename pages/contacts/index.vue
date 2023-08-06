@@ -1,8 +1,19 @@
 <script setup>
+import {useSeoMeta} from "@unhead/vue";
+
 const mapCenter = ref([55.780826, 38.670362])
 
 const controls = ['fullscreenControl'];
 const detailedControls = { zoomControl: { position: { right: 10, top: 50 } } };
+
+useSeoMeta({
+  title: 'Контакты | Эксперт',
+  ogTitle: 'Контакты | Эксперт',
+  description: 'Если у вас возникли вопросы, предложения, или вы хотите отправить заявку, вы можете использовать форму ниже или связаться по любому из указанных выше контактов.',
+  ogDescription: 'Если у вас возникли вопросы, предложения, или вы хотите отправить заявку, вы можете использовать форму ниже или связаться по любому из указанных выше контактов.',
+})
+
+
 </script>
 <template>
   <div  >

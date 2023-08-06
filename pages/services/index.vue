@@ -1,5 +1,12 @@
-<script setup>
+<script setup lang="ts">
+  import {useSeoMeta} from "@unhead/vue";
 
+  useSeoMeta({
+    title: 'Услуги',
+    ogTitle: 'Услуги',
+    description: 'Эксперт. Агенство недвижимости.',
+    ogDescription: 'Эксперт. Агенство недвижимости.',
+  })
 </script>
 <template>
   <div>

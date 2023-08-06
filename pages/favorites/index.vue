@@ -21,7 +21,7 @@ const {data:catalog, refresh, pending} = await useApiFetchWithRefresh('/Filter/'
 
 </script>
 <template>
-  <div>
+  <noindex>
     <ClientOnly>
 <!--    <div class="flex w-full justify-end mb-8">-->
 <!--      <e-btn :class="[pageSizeApi === '20' ? 'btn-red': 'btn-grey', 'mr-2']" @click="router.push({path: route.path, query: { ...route.query, size: 20} })">20</e-btn>-->
@@ -35,7 +35,7 @@ const {data:catalog, refresh, pending} = await useApiFetchWithRefresh('/Filter/'
       <!--      <Pagination :current-page="catalog.nav" :total-pages="catalog.nav_size"/>-->
     </div>
     </ClientOnly>
-  </div>
+  </noindex>
 </template>
 
 <style scoped>

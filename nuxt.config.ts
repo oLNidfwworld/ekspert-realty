@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import keywords from "ajv-keywords";
+
 export default defineNuxtConfig({
     nitro: {
         preset: 'node-server'
@@ -13,9 +15,14 @@ export default defineNuxtConfig({
         layoutTransition: {
             name: 'slide',
             mode: 'out-in' // default
-        }
+        },
     },
+    head: [
+        { rel: 'icon', type: 'image/x-icon', href: '/public/favicon.ico' },
+
+    ],
     modules: [
+        'nuxt-simple-sitemap',
         '@nuxtjs/tailwindcss',
         ['@pinia/nuxt',
             {

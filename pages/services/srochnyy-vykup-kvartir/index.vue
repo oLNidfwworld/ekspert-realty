@@ -44,8 +44,15 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import {useSeoMeta} from "@unhead/vue";
 
+useSeoMeta({
+  title: 'Срочный выкуп квартир в Павловском-посаде | Эксперт',
+  ogTitle: 'Срочный выкуп квартир в Павловском-посаде | Эксперт',
+  description: 'Срочный выкуп квартир и другой недвижимости в Павловском-посаде',
+  ogDescription : 'Срочный выкуп квартир и другой недвижимости в Павловском-посаде'
+})
 </script>
 
 <style scoped>
