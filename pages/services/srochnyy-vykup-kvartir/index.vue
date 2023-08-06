@@ -44,7 +44,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {useSeoMeta} from "@unhead/vue";
 
 useSeoMeta({
