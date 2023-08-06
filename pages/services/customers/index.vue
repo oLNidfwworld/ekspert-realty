@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 
 import EBtn from "~/components/Base/E-btn.vue";
 import {ref} from "vue";
