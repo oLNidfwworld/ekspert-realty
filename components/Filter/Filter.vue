@@ -4,8 +4,8 @@ import EInput from "../Base/E-input";
 import EMultiselector from "../Base/E-multiselector";
 import EMultiinput from "../Base/E-multiinput";
 import FilterFlats from "./FilterFlats";
-import {useFilterStore} from "../../store/smartFilter";
-import {useApiFetch} from "../../composables/api";
+import {useFilterStore} from "~/store/smartFilter";
+import {useApiFetch} from "~/composables/api";
 const filterType = ref('buy')
 const filterFlats = resolveComponent('FilterFlats')
 const filterCountryEstate = resolveComponent('FilterCountryEstate')
@@ -35,21 +35,22 @@ const searchProduct = useThrottleFn(async (e) => {
 }, 1000)
 const searchResult = ref(null)
 const searchString = ref('')
-
+console.log(filter.currentLink.split('/'))
 </script>
 <template>
   <section class="filter__wrapper">
     <div class="container">
     <h1 class="filter__title">Купить квартиру в Павловском Посаде</h1>
       <div class="filter__type">
-        <button @click="filter.setFilterType('buy')" :class="[ filter.filterType === 'buy'? 'filter__type--active': '', 'filter__type-item']">Купить</button>
-        <button @click="filter.setFilterType('rent')" :class="[ filter.filterType === 'rent'? 'filter__type--active': '', 'filter__type-item']">Арендовать</button>
+        <nuxt-link :href='filter.currentLink' @click="filter.setFilterServiceType('buy')" :class="[ filter.filterServiceType === 'buy'? 'filter__type--active': '', 'filter__type-item']">Купить</nuxt-link>
+        <nuxt-link :href="filter.currentLink" @click="filter.setFilterServiceType('rent')" :class="[ filter.filterServiceType === 'rent'? 'filter__type--active': '', 'filter__type-item']">Арендовать</nuxt-link>
       </div>
       <div class="filter-top-wrapper">
         <div class="filter-estate__type">
           <e-btn @click="estateType = 'Вторичная'" :class="[ estateType === 'Вторичная'? 'filter__type--active': '', 'btn-grey text-sm']">Вторичная</e-btn>
           <e-btn @click="estateType = 'Загородная'" :class="[ estateType === 'Загородная'? 'filter__type--active': '', 'btn-grey text-sm']">Загородная</e-btn>
           <e-btn @click="estateType = 'Коммерческая'" :class="[ estateType === 'Коммерческая'? 'filter__type--active': '', 'btn-grey text-sm']">Коммерческая</e-btn>
+
         </div>
         <div class="hidden md:flex max-w-[310px] flex-col relative">
           <e-input class="relative" type="text" v-model="searchString" @input="searchProduct" placeholder="Поиск по ID объекта"/>

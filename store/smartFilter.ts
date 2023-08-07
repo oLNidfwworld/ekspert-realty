@@ -1,12 +1,29 @@
 import {Ref} from "vue";
+import {RemovableRef} from "@vueuse/shared";
 
 export const useFilterStore = defineStore('filter', () =>{
     const filterParams: RemovableRef<string> = useSessionStorage('filterParams', [])
     const filterResult = <Ref>ref([]);
     const filterType = <Ref>ref('buy');
+
+
+    const filterCity = <Ref>ref('');
+    const filterServiceType = <Ref>ref('buy');
+    const filterImmovableType = <Ref>ref('');
+    const filterImmovableProp = <Ref>ref('');
+    const currentLink = <Ref>ref('/realty/oz/rent/commerce/lol');
+
+    const setFilterServiceType = async  (params: Object) => {
+        filterServiceType.value = params;
+
+    }
+
+
+
     const setParams = async (params: Object) => {
         filterParams.value = params
     };
+
     const formatParams = (params: Object) => {
         let formatted:Object = {}
         params.forEach((el) => {
@@ -37,6 +54,9 @@ export const useFilterStore = defineStore('filter', () =>{
         })
     }
     return {
+        setFilterServiceType,
+        currentLink,
+
         filterParams,
         filterResult,
         setParams,
@@ -44,6 +64,6 @@ export const useFilterStore = defineStore('filter', () =>{
         filterThisShit,
         filterType,
         setFilterType,
-        filterItemById
+        filterItemById,
     }
 });

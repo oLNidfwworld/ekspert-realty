@@ -31,7 +31,7 @@ useSeoMeta({
     <div class="page-wrapper">
         <TheHeader/>
             <div class="content-wrapper">
-                <Filter v-if="route.path === '/'|| route.path === '/map' "/>
+                <Filter v-if="route.path === '/'|| route.path === '/map'|| route.path.split('/')[1] === 'realty' "/>
                 <div class="top-banner" v-else-if="route.path === '/blog/' || route.path === '/act-help/' ">
                   <div class="m-auto container">
                     <div class="top-banner__text" v-show="route.path === `/blog/`">Блог</div>
