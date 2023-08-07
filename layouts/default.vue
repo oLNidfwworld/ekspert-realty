@@ -62,7 +62,7 @@ useSeoMeta({
 <!--                  <Pagination v-if="filter.filterResult" :current-page="filter.filterResult.nav" :total-pages="filter.filterResult.nav_size"/>-->
                 </transition-group>
                 <main class="container">
-                    <slot />
+                  <slot />
                 </main>
             </div>
         <TheFooter/>
@@ -72,6 +72,22 @@ useSeoMeta({
 body {
   font-family: 'Open Sans', sans-serif;
 }
+
+.page-fading-enter-active,
+.page-fading-leave-active{
+  transition: 0.3s;
+}
+
+.page-fading-leave-from,
+.page-fading-enter-to{
+  opacity: 1;
+}
+
+.page-fading-leave-to,
+.page-fading-enter-from{
+  opacity: 0;
+}
+
 .content-wrapper {
   @apply relative mb-20;
   padding-top:90px;

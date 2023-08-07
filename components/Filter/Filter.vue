@@ -42,8 +42,8 @@ console.log(filter.currentLink.split('/'))
     <div class="container">
     <h1 class="filter__title">Купить квартиру в Павловском Посаде</h1>
       <div class="filter__type">
-        <nuxt-link :href='filter.currentLink' @click="filter.setFilterServiceType('buy')" :class="[ filter.filterServiceType === 'buy'? 'filter__type--active': '', 'filter__type-item']">Купить</nuxt-link>
-        <nuxt-link :href="filter.currentLink" @click="filter.setFilterServiceType('rent')" :class="[ filter.filterServiceType === 'rent'? 'filter__type--active': '', 'filter__type-item']">Арендовать</nuxt-link>
+        <nuxt-link :href="`/realty/${filter.filterCity}/buy/`" @click="filter.setFilterServiceType('buy')" :class="[ filter.filterServiceType === 'buy'? 'filter__type--active': '', 'filter__type-item']">Купить</nuxt-link>
+        <nuxt-link :href="`/realty/${filter.filterCity}/rent/`" @click="filter.setFilterServiceType('rent')" :class="[ filter.filterServiceType === 'rent'? 'filter__type--active': '', 'filter__type-item']">Арендовать</nuxt-link>
       </div>
       <div class="filter-top-wrapper">
         <div class="filter-estate__type">

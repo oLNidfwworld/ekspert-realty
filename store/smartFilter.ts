@@ -7,7 +7,7 @@ export const useFilterStore = defineStore('filter', () =>{
     const filterType = <Ref>ref('buy');
 
 
-    const filterCity = <Ref>ref('');
+    const filterCity = <Ref>ref('oz');
     const filterServiceType = <Ref>ref('buy');
     const filterImmovableType = <Ref>ref('');
     const filterImmovableProp = <Ref>ref('');
@@ -15,7 +15,7 @@ export const useFilterStore = defineStore('filter', () =>{
 
     const setFilterServiceType = async  (params: Object) => {
         filterServiceType.value = params;
-
+        console.log(filterServiceType.value)
     }
 
 
@@ -56,6 +56,8 @@ export const useFilterStore = defineStore('filter', () =>{
     return {
         setFilterServiceType,
         currentLink,
+        filterCity,
+        filterServiceType,
 
         filterParams,
         filterResult,
