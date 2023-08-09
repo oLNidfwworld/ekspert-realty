@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import EBtn from "../Base/E-btn";
 import EInput from "../Base/E-input";
 import EMultiselector from "../Base/E-multiselector";
@@ -6,11 +6,11 @@ import EMultiinput from "../Base/E-multiinput";
 import FilterFlats from "./FilterFlats";
 import {useFilterStore} from "~/store/smartFilter";
 import {useApiFetch} from "~/composables/api";
-const filterType = ref('buy')
+import  {Ref} from 'vue';
 const filterFlats = resolveComponent('FilterFlats')
 const filterCountryEstate = resolveComponent('FilterCountryEstate')
 const filterCommerceEstate = resolveComponent('FilterCommerceEstate')
-const estateType = ref('Вторичная')
+const estateType = <Ref>ref('Вторичная')
 const estateFilter = computed(() => {
   if(estateType.value === 'Вторичная') {
     return filterFlats
@@ -33,9 +33,14 @@ const searchProduct = useThrottleFn(async (e) => {
     params: { search: e.target.value}
   })
 }, 1000)
-const searchResult = ref(null)
+const searchResult = <Ref>ref(null)
 const searchString = ref('')
-console.log(filter.currentLink.split('/'))
+
+
+const changeEstateType = (estateTypeValue : String,immovableTypeValue : String) : void =>{
+  estateType.value = estateTypeValue
+  filter.setFilterImmovableType(immovableTypeValue);
+}
 </script>
 <template>
   <section class="filter__wrapper">
@@ -47,9 +52,9 @@ console.log(filter.currentLink.split('/'))
       </div>
       <div class="filter-top-wrapper">
         <div class="filter-estate__type">
-          <e-btn @click="estateType = 'Вторичная'" :class="[ estateType === 'Вторичная'? 'filter__type--active': '', 'btn-grey text-sm']">Вторичная</e-btn>
-          <e-btn @click="estateType = 'Загородная'" :class="[ estateType === 'Загородная'? 'filter__type--active': '', 'btn-grey text-sm']">Загородная</e-btn>
-          <e-btn @click="estateType = 'Коммерческая'" :class="[ estateType === 'Коммерческая'? 'filter__type--active': '', 'btn-grey text-sm']">Коммерческая</e-btn>
+          <nuxt-link :href="`/realty/${filter.filterCity}/${filter.filterServiceType}/vtorichka/`"  @click="changeEstateType('Вторичная','vtorichka')" :class="[ estateType === 'Вторичная'? 'filter__type--active': '', 'btn-grey text-sm']">Вторичная</nuxt-link>
+          <nuxt-link :href="`/realty/${filter.filterCity}/${filter.filterServiceType}/zagorodnaya/`"  @click="changeEstateType('Загородная','zagorodnaya')" :class="[ estateType === 'Загородная'? 'filter__type--active': '', 'btn-grey text-sm']">Загородная</nuxt-link>
+          <nuxt-link :href="`/realty/${filter.filterCity}/${filter.filterServiceType}/commerce/`"   @click="changeEstateType('Коммерческая','commerce')" :class="[ estateType === 'Коммерческая'? 'filter__type--active': '', 'btn-grey text-sm']">Коммерческая</nuxt-link>
 
         </div>
         <div class="hidden md:flex max-w-[310px] flex-col relative">

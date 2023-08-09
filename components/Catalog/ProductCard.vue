@@ -15,7 +15,9 @@ const price =computed(() => props.product.price.toLocaleString('ru-RU'))
 </script>
 <template>
   <div class="product-card">
-    <PictureSlider sliderClasses="product-slider-image" :pictures="product.photos"/>
+    <ClientOnly>
+      <PictureSlider sliderClasses="product-slider-image" :pictures="product.photos"/>
+    </ClientOnly>
     <div class="flex flex-col p-7">
       <div class="mb-3 flex justify-between">
         <span class="font-bold text-lg md:text-2xl mb-2">{{product.name}}</span>
