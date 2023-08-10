@@ -57,10 +57,6 @@ useSeoMeta({
                 </div>
                 <div v-else class="min-h-[50px]">
                 </div>
-                <transition-group v-if="route.path === '/'" tag="section" name="left-right-slide" class="container grid grid-cols-1 gap-5 mb-5">
-                  <ProductCard v-for="(item, index) in filter.filterResult.items" :product="item" :key="index"/>
-<!--                  <Pagination v-if="filter.filterResult" :current-page="filter.filterResult.nav" :total-pages="filter.filterResult.nav_size"/>-->
-                </transition-group>
                 <main class="container">
                   <slot />
                 </main>
@@ -75,7 +71,7 @@ body {
 
 .page-fading-enter-active,
 .page-fading-leave-active{
-  transition: 0.3s;
+  transition: 0.6s ease;
 }
 
 .page-fading-leave-from,

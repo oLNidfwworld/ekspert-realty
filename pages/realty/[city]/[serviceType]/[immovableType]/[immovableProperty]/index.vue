@@ -20,6 +20,7 @@ const { data: catalogItems, pending, error, refresh } = await useAsyncData(
           query: {
             page: `page-${page.value}`,
             size: `${pageSizeApi.value}`,
+            pricerange: `${(route.query.pricerange)?route.query.pricerange:''}`,
           }
         }
     )
@@ -27,6 +28,7 @@ const { data: catalogItems, pending, error, refresh } = await useAsyncData(
 watch(() => route.query, (cur) => {
   refresh()
 })
+
 if(catalogItems.value.status === '404'){
   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
 }

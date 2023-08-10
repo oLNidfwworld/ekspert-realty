@@ -11,7 +11,7 @@ export const useFilterStore = defineStore('filter', () =>{
     const filterCity = <Ref>ref('all-cities');
     const filterServiceType = <Ref>ref('buy');
     const filterImmovableType = <Ref>ref('vtorichka');
-    const filterImmovableProp = <Ref>ref('');
+    const filterImmovableProp = <Ref>ref('all-immovable-properties');
     const filterImmovablePropParams = <Ref>ref('');
 
     const setFilterServiceType = async  (params: Object) => {
@@ -28,14 +28,16 @@ export const useFilterStore = defineStore('filter', () =>{
     const formatParams = async (params: Object) => {
         let paramsPart : string = '' ;
         let urlPart : string = '' ;
-        await params.forEach((el)=>{
+        let cityPart : string = '';
+        toRaw(params).forEach((el)=>{
             switch (el.type){
                 case 'multiInput':
-                    if(el.value !== null){
+                    const elValue = el?.value;
+                    if(elValue && (elValue.min !== '') && (elValue.max !== '')){
                         if(paramsPart === ''){
-                            paramsPart += `?${el.name}=${String(el.value.min)}between${String(el.value.max)}`;
+                            paramsPart += `?${el.name}=${String(elValue.min)}between${String(elValue.max)}`;
                         }else{
-                            paramsPart += `&${el.name}=${String(el.value.min)}between${String(el.value.max)}`;
+                            paramsPart += `&${el.name}=${String(elValue.min)}between${String(elValue.max)}`;
                         }
                     }
                     break;
@@ -47,31 +49,36 @@ export const useFilterStore = defineStore('filter', () =>{
                             urlPart += '-'.concat(elVal.value);
                         }
                     })
+                    if(urlPart == ''){
+                        urlPart = 'all-immovable-properties';
+                    }
                     break;
                 case 'multiSelect':
                     if(el.value !== null ){
-                        filterCity.value = ''
+                        cityPart = ''
                         el.value.forEach((elVal,i)=>{
                             if(i<=0){
-                                filterCity.value += elVal;
+                                cityPart += elVal;
                             }else{
-                                filterCity.value += '-'.concat(elVal);
+                                cityPart += '-'.concat(elVal);
                             }
                         })
-                        if(filterCity.value == ''){
-                            filterCity.value = 'all-cities';
+                        if(cityPart == ''){
+                            cityPart = 'all-cities';
                         }
                     }else{
-                        filterCity.value = 'all-cities';
+                        cityPart = 'all-cities';
                     }
                     break;
             }
         })
-        console.log(filterCity.value)
+        filterCity.value = cityPart;
+        filterImmovableProp.value = urlPart;
+        filterImmovablePropParams.value =  paramsPart;
     }
     const filterThisShit = async (params: Object) => {
-        formatParams(params);
-        navigateTo();
+        await formatParams(params);
+        navigateTo(`/realty/${filterCity.value}/${filterServiceType.value}/${filterImmovableType.value}/${filterImmovableProp.value}/${filterImmovablePropParams.value}`)
     }
     const nullifyFilterResult = () => {
         filterResult.value = [];
