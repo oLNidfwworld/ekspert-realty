@@ -6,6 +6,8 @@ import {computed, watch} from "vue";
 import Pagination from "../../../../components/Base/Pagination";
 import EBtn from "../../../../components/Base/E-btn";
 
+import Skeleton from "primevue/skeleton";
+
 const route = useRoute();
 const router = useRouter();
 const page = computed(() => {
@@ -36,15 +38,26 @@ if(catalogItems.value.status === '404'){
 console.log(catalogItems.value)
 </script>
 <template>
-  <div>
-    <div class="flex w-full justify-end mb-8">
-      <e-btn :class="[pageSizeApi === '20' ? 'btn-red': 'btn-grey', 'mr-2']" @click="router.push({path: route.path, query: { ...route.query, size: 20} })">20</e-btn>
-      <e-btn :class="[pageSizeApi === '40' ? 'btn-red': 'btn-grey']" @click="router.push({path: route.path, query: { ...route.query, size: 40}})">40</e-btn>
+  <div v-if="pending">
+    <div class="flex justify-end mb-5 gap-2">
+      <Skeleton width="50px" height="50px"></Skeleton>
+      <Skeleton width="50px" height="50px"></Skeleton>
     </div>
-    <div class="grid grid-cols-1 gap-5">
-      <ProductCard v-if="catalogItems.items" v-for="(item,index) in catalogItems.items" :product="item" :key="index"/>
-      <Pagination :current-page="catalogItems.nav" :total-pages="catalogItems.nav_size"/>
+    <Skeleton width="100%" height="350px" class="mb-[1.25rem]"></Skeleton>
+    <Skeleton width="100%" height="350px" class="mb-[1.25rem]"></Skeleton>
+  </div>
+  <div v-else>
+    <div v-if="catalogItems.items">
+      <div class="flex w-full justify-end mb-8">
+        <e-btn :class="[pageSizeApi === '20' ? 'btn-red': 'btn-grey', 'mr-2']" @click="router.push({path: route.path, query: { ...route.query, size: 20} })">20</e-btn>
+        <e-btn :class="[pageSizeApi === '40' ? 'btn-red': 'btn-grey']" @click="router.push({path: route.path, query: { ...route.query, size: 40}})">40</e-btn>
+      </div>
+      <div class="grid grid-cols-1 gap-5">
+        <ProductCard v-if="catalogItems.items" v-for="(item,index) in catalogItems.items" :product="item" :key="index"/>
+        <Pagination :current-page="catalogItems.nav" :total-pages="catalogItems.nav_size"/>
+      </div>
     </div>
+    <no-products v-else/>
   </div>
 </template>
 <style scoped>

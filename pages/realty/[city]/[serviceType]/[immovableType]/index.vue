@@ -7,6 +7,9 @@ import Pagination from "../../../../../components/Base/Pagination";
 import EBtn from "../../../../../components/Base/E-btn";
 import NoProducts from "~/components/Catalog/NoProducts.vue";
 
+import Skeleton from "primevue/skeleton";
+
+
 const route = useRoute();
 const router = useRouter();
 const page = computed(() => {
@@ -34,7 +37,12 @@ if(catalogItems.value.status === '404'){
 </script>
 <template>
   <div v-if="pending">
-    ЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧачаЧача
+    <div class="flex justify-end mb-5 gap-2">
+      <Skeleton width="50px" height="50px"></Skeleton>
+      <Skeleton width="50px" height="50px"></Skeleton>
+    </div>
+    <Skeleton width="100%" height="350px" class="mb-[1.25rem]"></Skeleton>
+    <Skeleton width="100%" height="350px" class="mb-[1.25rem]"></Skeleton>
   </div>
   <div v-else>
     <div v-if="catalogItems.items">

@@ -12,15 +12,24 @@ export default defineNuxtConfig({
         },
     },
     app: {
-        pageTransition: {
-            name: 'page-fading',
-            mode: 'out-in' // default
-        },
+        // pageTransition: {
+        //     name: 'page-fading',
+        //     mode: 'out-in', // default
+        // },
+        // layoutTransition : {
+        //         name: 'page-fading',
+        //         mode: 'out-in' // default
+        // }
+    },
+    build : {
+        transpile: ["primevue"]
     },
     head: [
         { rel: 'icon', type: 'image/x-icon', href: '/public/favicon.ico' },
-
     ],
+    loadingIndicator: {
+        color: '#E02D1F',
+    },
     modules: [
         'nuxt-simple-sitemap',
         '@nuxtjs/tailwindcss',
@@ -39,7 +48,8 @@ export default defineNuxtConfig({
         '~/assets/css/tailwind.css',
         '~/assets/css/resets.css',
         '~/assets/css/vars.css',
-        '~/assets/fonts/OpenSans.css'
+        '~/assets/fonts/OpenSans.css',
+        "primevue/resources/themes/lara-light-blue/theme.css"
     ],
     postcss: {
         plugins: {

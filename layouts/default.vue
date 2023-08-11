@@ -30,6 +30,7 @@ useSeoMeta({
 <template>
     <div class="page-wrapper">
         <TheHeader/>
+          <NuxtLoadingIndicator color="#E02D1F" style="height:5px;top:90px;"/>
             <div class="content-wrapper">
                 <Filter v-if="route.path === '/'|| route.path === '/map'|| route.path.split('/')[1] === 'realty' "/>
                 <div class="top-banner" v-else-if="route.path === '/blog/' || route.path === '/act-help/' ">
@@ -140,13 +141,13 @@ body {
 .page{
     &-wrapper{
       @apply flex flex-col;
-      min-height:70vh;
+      min-height:100vh;
     }
 }
 .content{
   &-wrapper{
      @apply flex flex-col items-center overflow-hidden;
-     min-height:70vh;
+     min-height:100vh;
   }
 }
 .page-enter-active,

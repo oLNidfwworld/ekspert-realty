@@ -52,9 +52,9 @@ const changeEstateType = (estateTypeValue : String,immovableTypeValue : String) 
       </div>
       <div class="filter-top-wrapper">
         <div class="filter-estate__type">
-          <nuxt-link :href="`/realty/${filter.filterCity}/${filter.filterServiceType}/vtorichka/`"  @click="changeEstateType('Вторичная','vtorichka')" :class="[ estateType === 'Вторичная'? 'filter__type--active': '', 'btn-grey text-sm']">Вторичная</nuxt-link>
-          <nuxt-link :href="`/realty/${filter.filterCity}/${filter.filterServiceType}/zagorodnaya/`"  @click="changeEstateType('Загородная','zagorodnaya')" :class="[ estateType === 'Загородная'? 'filter__type--active': '', 'btn-grey text-sm']">Загородная</nuxt-link>
-          <nuxt-link :href="`/realty/${filter.filterCity}/${filter.filterServiceType}/commerce/`"   @click="changeEstateType('Коммерческая','commerce')" :class="[ estateType === 'Коммерческая'? 'filter__type--active': '', 'btn-grey text-sm']">Коммерческая</nuxt-link>
+          <nuxt-link :href="`/realty/${filter.filterCity}/${filter.filterServiceType}/vtorichka/`"  @click="changeEstateType('Вторичная','vtorichka')" :class="[ estateType === 'Вторичная'? 'filter__type--active': '', 'btn-grey font-bold py-3 px-4 rounded-md  text-sm']">Вторичная</nuxt-link>
+          <nuxt-link :href="`/realty/${filter.filterCity}/${filter.filterServiceType}/zagorodnaya/`"  @click="changeEstateType('Загородная','zagorodnaya')" :class="[ estateType === 'Загородная'? 'filter__type--active': '', 'btn-grey font-bold py-3 px-4 rounded-md   text-sm']">Загородная</nuxt-link>
+          <nuxt-link :href="`/realty/${filter.filterCity}/${filter.filterServiceType}/commerce/`"   @click="changeEstateType('Коммерческая','commerce')" :class="[ estateType === 'Коммерческая'? 'filter__type--active': '', 'btn-grey font-bold py-3 px-4 rounded-md text-sm']">Коммерческая</nuxt-link>
 
         </div>
         <div class="hidden md:flex max-w-[310px] flex-col relative">
@@ -66,7 +66,7 @@ const changeEstateType = (estateTypeValue : String,immovableTypeValue : String) 
           </ul>
         </div>
       </div>
-      <transition name="fade">
+      <transition name="fade" mode="out-in">
         <component :is="estateFilter"/>
       </transition>
     </div>
@@ -127,14 +127,18 @@ const changeEstateType = (estateTypeValue : String,immovableTypeValue : String) 
   margin-bottom: 4px;
 }
 .fade-leave-active {
-  transition: opacity 0.1ms ease;
+  transition: opacity 400ms ease;
 }
 .fade-enter-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 600ms ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
 }
 </style>
