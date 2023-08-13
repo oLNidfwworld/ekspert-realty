@@ -3,9 +3,20 @@
 import EBtn from "~/components/Base/E-btn.vue";
 import EInput from "~/components/Base/E-input.vue";
 import {useSeoMeta} from "unhead";
+import {watch} from "vue";
+import ETextarea from "../../components/Base/E-textarea.vue";
 
 const sendData = async (e) => {
-  if (phone.value.length > 15 || name.value !== "") {
+
+  if(phone.value.length < 17){
+    validationMessage.value = 'Неверный формат номера телефона'
+    validation.value = false;
+  }else{
+    validation.value = true;
+    validationMessage.value = ''
+  }
+
+  if (validation.value) {
     await useApiFetchWithRefresh('/Mail/', {
       method: 'POST',
       params: {
@@ -27,6 +38,9 @@ const sendData = async (e) => {
 const fallback = ref(false), responseMsg = ref('');
 const isPopupVisible = ref(false);
 const name = ref(null),phone = ref(undefined),email = ref(undefined),comment = ref(undefined);
+const validation = ref(false),validationMessage = ref('');
+
+
 
 useSeoMeta({
   title : 'Составление договоров | Эксперт',
@@ -34,6 +48,7 @@ useSeoMeta({
   description : 'Эксперт. Агенство недвижимости.',
   ogDescription : 'Эксперт. Агенство недвижимости.',
 })
+
 
 </script>
 <template>
@@ -54,11 +69,11 @@ useSeoMeta({
     <p>Договоры купли-продажи недвижимого имущества отличаются друг от друга различными источниками происхождения денежных средств у покупателей (собственные или кредитные, средства по материнскому капиталу и др.), формой расчётов между сторонами по договору, моментом передачи недвижимости, а также от пожеланий сторон сделки</p>
     <img src="/keys-giving.png">
     <h2>Договор дарения</h2>
-    <P>
+    <p>
       А если затронуть тему дарения, то это один из самых простых способов передать безвозмездно недвижимость. Однако и у дарения есть свои юридические нюансы.
       <br><br>
       Договором дарения можно закрепить ряд существенных условий, таких как:
-    </P>
+    </p>
     <ul>
       <li>
         отмену дарения, в случае, если даритель переживёт одаряемого</li>
@@ -81,10 +96,13 @@ useSeoMeta({
       <template v-slot:content>
         <form @submit.prevent="sendData($event)">
           <div class="grid gap-4 mb-4">
-            <e-input v-model="name" required placeholder="Имя"></e-input>
-            <e-input v-model="phone" required placeholder="Телефон"></e-input>
-            <e-input v-model="email" placeholder="Email"></e-input>
-            <e-input v-model="comment" placeholder="Комментарий"></e-input>
+            <e-input v-model="name" required placeholder="Имя*"></e-input>
+            <e-input mask="+{7} {9}00 000-00-00" type="phone" v-model="phone" required placeholder="Телефон*"></e-input>
+            <e-input type="email" v-model="email" placeholder="Email"></e-input>
+            <ETextarea style="resize: none;" rows="5" v-model="comment" placeholder="Комментарий"/>
+          </div>
+          <div class="text-red text-[14px] mb-3">
+            {{ validationMessage }}
           </div>
           <e-btn type="submit" class="m-auto ">Отправить</e-btn>
         </form>

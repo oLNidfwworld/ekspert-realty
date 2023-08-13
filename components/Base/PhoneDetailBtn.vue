@@ -5,9 +5,10 @@ const props = defineProps({
   variant: String,
 })
 const showPhone = ref(false)
+console.log(props.agentData)
 </script>
 <template>
-  <div>
+  <div v-if="agentData.name != '' || agentData.phone != ''">
     <div class="flex flex-col">
       <span class="mb-3">{{ agentData.name }}</span>
     <p class="mb-3 mr-1 flex" v-if="!showPhone">{{ agentData.phone.slice(0 , agentData.phone.length-4) }}X-XX <button class="ml-1 text-red text-sm flex items-center" v-if="!showPhone" @click="showPhone = !showPhone">
@@ -17,6 +18,9 @@ const showPhone = ref(false)
     </svg></button></p>
       <a class="mb-3" v-else :href="`tel:${agentData.phone.replace(/\D/g, '')}`">{{ agentData.phone }}</a>
     </div>
+  </div>
+  <div class="text-red" v-else>
+    Не указан
   </div>
 </template>
 

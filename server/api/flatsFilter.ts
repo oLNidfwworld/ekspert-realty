@@ -27,7 +27,7 @@ export default defineEventHandler((event) => {
             },
             {
                 label: 'Общая площадь, м2',
-                name: 'Square',
+                name: 'totalarea',
                 type: 'multiInput',
                 data: {
                     min: 0,
@@ -37,7 +37,7 @@ export default defineEventHandler((event) => {
             },
             {
                 label: 'Этаж',
-                name: 'Floor',
+                name: 'floors',
                 type: 'multiInput',
                 data: {
                     min: 0,
@@ -57,8 +57,9 @@ export default defineEventHandler((event) => {
             },
             {
                 label: 'Тип дома',
-                name: 'House_type',
+                name: 'housetype',
                 type: 'multiSelector',
+                inUrl : false,
                 data: [
                     {name: 'кирпичный',value: 'brick'},
                     {name: 'монолитно-кирпичный',value: 'monolite_brick'},
@@ -69,10 +70,11 @@ export default defineEventHandler((event) => {
             },
             {
                 label: 'Ипотека',
-                name: 'Ipoteka',
+                name: 'ipoteka',
                 type: 'multiSelector',
+                inUrl : false,
                 data: [
-                    {name: 'Есть возможность',value: 'acebf0c68c773ca21f03993450ae64ce'}
+                    {name: 'Есть возможность',value: 't'}
                 ],
                 value: []
             },

@@ -42,15 +42,33 @@ export const useFilterStore = defineStore('filter', () =>{
                     }
                     break;
                 case 'multiSelector':
-                    el.value.forEach((elVal,i)=>{
-                        if(i<=0){
-                            urlPart += elVal.value;
-                        }else{
-                            urlPart += '-'.concat(elVal.value);
+                    if(el.inUrl != false){
+                        el.value.forEach((elVal,i)=>{
+                            if(i<=0){
+                                urlPart += elVal.value;
+                            }else{
+                                urlPart += '-'.concat(elVal.value);
+                            }
+                        })
+                        if(urlPart == ''){
+                            urlPart = 'all-immovable-properties';
                         }
-                    })
-                    if(urlPart == ''){
-                        urlPart = 'all-immovable-properties';
+                    }else{
+                        let tmp : string = ''
+                        if(el.value.length !== 0){
+                            el.value.forEach((elVal,i)=>{
+                                if(i<=0){
+                                    tmp  += elVal.value;
+                                }else{
+                                    tmp  += '-'.concat(elVal.value);
+                                }
+                            })
+                            if(paramsPart == ''){
+                                paramsPart += `?${el.name}=${String(tmp)}`
+                            }else{
+                                paramsPart += `&${el.name}=${String(tmp)}`
+                            }
+                        }
                     }
                     break;
                 case 'multiSelect':

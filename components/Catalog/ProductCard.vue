@@ -73,7 +73,7 @@ const price =computed(() => props.product.price.toLocaleString('ru-RU'))
         </li>
       </ul>
       <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
-        <e-btn class="w-full sm:w-fit btn-white mb-4 sm:mb-0" :to="{path: `/realty/${product.rootSection}/${product.id}/`}">Подробнее</e-btn>
+        <e-btn class="w-full sm:w-fit btn-white mb-4 sm:mb-0" :to="{path: `/realty/immovable-${product.id}/`}">Подробнее</e-btn>
         <PhoneBtn :agentData="product.agent" variant="btn-red"></PhoneBtn>
       </div>
     </div>

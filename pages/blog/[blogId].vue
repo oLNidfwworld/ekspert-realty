@@ -5,13 +5,11 @@ const route = useRoute()
 const { data:blogElement, pending, error, refresh } = await useAsyncData(
     () => useApiFetch(`/Blog/${route.params.blogId}/`)
 );
-console.log(blogElement)
 </script>
 <template>
   <div class="blog-element-image" :style="`background-image: url('http://test.ekspert-realty.ru${blogElement[0].DETAIL_PICTURE}')`"></div>
   <div v-html="blogElement[0].DETAIL_TEXT " class="blog-element-text">
   </div>
-
 </template>
 <style scoped>
   .blog-element{

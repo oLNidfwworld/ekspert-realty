@@ -32,7 +32,7 @@ useSeoMeta({
         <TheHeader/>
           <NuxtLoadingIndicator color="#E02D1F" style="height:5px;top:90px;"/>
             <div class="content-wrapper">
-                <Filter v-if="route.path === '/'|| route.path === '/map'|| route.path.split('/')[1] === 'realty' "/>
+                <Filter v-if="route.path === '/'|| route.path === '/map'|| (route.path.split('/')[1] === 'realty' && !route.path.split('/')[2].includes('immovable-')) "/>
                 <div class="top-banner" v-else-if="route.path === '/blog/' || route.path === '/act-help/' ">
                   <div class="m-auto container">
                     <div class="top-banner__text" v-show="route.path === `/blog/`">Блог</div>

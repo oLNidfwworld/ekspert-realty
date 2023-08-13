@@ -7,7 +7,7 @@ import Pagination from "../../../../components/Base/Pagination";
 import EBtn from "../../../../components/Base/E-btn";
 
 import Skeleton from "primevue/skeleton";
-
+import NoProducts from "~/components/Catalog/NoProducts.vue";
 const route = useRoute();
 const router = useRouter();
 const page = computed(() => {

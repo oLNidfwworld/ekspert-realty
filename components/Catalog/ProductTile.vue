@@ -22,7 +22,7 @@ const config = useRuntimeConfig()
     <span class="font-bold text-red text-2xl mb-4">
       {{price}} ₽
     </span>
-      <NuxtLink class="text-base font-bold mb-6 h-[50px]" :to="{path: `/realty/${product.rootSection}/${product.id}`}">{{product.name}}</NuxtLink>
+      <NuxtLink class="text-base font-bold mb-6 h-[50px]" :to="{path: `/realty/immovable-${product.id}`}">{{product.name}}</NuxtLink>
       <p class="text-sm mb-4 h-[60px]">{{product.location}}</p>
       <div class="flex justify-center">
         <ClientOnly>

@@ -14,7 +14,7 @@ console.log(blogg)
 </script>
 <template>
   <div class="grid gric-cols-1 md:grid-cols-2 lg:grid-cols-3 2lg:grid-cols-4 gap-2">
-    <blog-card v-for="(item,index) in blogg" :key="index" :blogPic="item.DETAIL_PICTURE" :blogElement="item"></blog-card>
+    <blog-card v-for="(item,index) in blogg.items" :key="index" :blogPic="item.DETAIL_PICTURE" :blogElement="item"></blog-card>
   </div>
 </template>
 <style scoped>

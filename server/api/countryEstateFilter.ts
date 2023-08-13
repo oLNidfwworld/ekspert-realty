@@ -16,7 +16,7 @@ export default defineEventHandler((event) => {
             },
             {
                 label: 'Цена',
-                name: 'Price',
+                name: 'pricerange',
                 type: 'multiInput',
                 data: {
                     min: 0,
@@ -29,16 +29,14 @@ export default defineEventHandler((event) => {
                 name: 'Location',
                 type: 'multiSelect',
                 data: [
-                    'Павловский Посад',
-                    'Орехово-Зуево',
-                    'Ногинск',
-                    'Электрогорск'
+                    {name : 'Павловский посад', value : 'pp'},
+                    {name : 'Орехово-зуево', value : 'oz'},
                 ],
                 value: null
             },
             {
                 label: 'Площадь дома, м2',
-                name: 'Square',
+                name: 'housearea',
                 type: 'multiInput',
                 data: {
                     min: 0,
@@ -48,7 +46,7 @@ export default defineEventHandler((event) => {
             },
             {
                 label: 'Площадь участка, м2',
-                name: 'Square_sec',
+                name: 'plotarea',
                 type: 'multiInput',
                 data: {
                     min: 0,
@@ -60,22 +58,24 @@ export default defineEventHandler((event) => {
                 label: 'Тип дома',
                 name: 'earth_category',
                 type: 'multiSelector',
+                inUrl : false,
                 data: [
-                    {name: 'Населённых пунктов (ИЖС)',value: '9e1ff630060e52cd144bab5a4d29ac38'},
-                    {name: 'Сельхозназначения (СНТ, ДНП)',value: 'e19d016aa76ede57b97f10912284df7d'}
+                    {name: 'Населённых пунктов (ИЖС)',value: 'IJS'},
+                    {name: 'Сельхозназначения (СНТ, ДНП)',value: 'SH'}
                 ],
                 value: []
             },
             {
-                label: 'Тип дома',
+                label: 'Коммуникации',
                 name: 'communication',
                 type: 'multiSelector',
+                inUrl : false,
                 data: [
-                    {name: 'Электричество',value: '295104f8afb7acdf6d3f0c820d0642a8'},
-                    {name: 'Газ',value: 'c2727c43d46884c995dd4da8db957fa3'},
-                    {name: 'Вода',value: 'b82c46322f281aa7c661a8bcf42ece2c'},
-                    {name: 'Канализация',value: '740f4bc687a10b6fec2525f04f5c370e'},
-                    {name: 'Отопление',value: '5dbf6c492a9e9f5e57fce68f256a5ff5'}
+                    {name: 'Электричество',value: 'electocity'},
+                    {name: 'Газ',value: 'gas'},
+                    {name: 'Вода',value: 'water'},
+                    {name: 'Канализация',value: 'canalization'},
+                    {name: 'Отопление',value: 'heating'}
                 ],
                 value: []
             }
