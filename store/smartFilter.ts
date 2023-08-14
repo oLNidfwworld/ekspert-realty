@@ -112,7 +112,9 @@ export const useFilterStore = defineStore('filter', () =>{
         setFilterImmovableType,
         filterCity,
         filterServiceType,
-
+        filterImmovableProp,
+        filterImmovablePropParams,
+        filterImmovableType,
         filterParams,
         filterResult,
         nullifyFilterResult,

@@ -4,23 +4,23 @@ export default defineEventHandler((event) => {
         links: [
             {
                 name:'1-комнатные',
-                url: '/realty/rent/1-flats-all'
+                url: '/realty/all-cities/rent/vtorichka/dnokomnatnye'
             },
             {
                 name:'2-комнатные',
-                url: '/realty/rent/2-flats-all'
+                url: '/realty/all-cities/rent/vtorichka/dvuhkomnatnye'
             },
             {
                 name:'3-комнатные',
-                url: '/realty/rent/2-flats-all'
+                url: '/realty/all-cities/rent/vtorichka/tryohkomnatnye'
             },
             // {
             //     name:'Квартиры-студии',
-            //     url: '/realty/rent/2-flats-all'
+            //     url: '/realty/buy/2-flats-all'
             // },
             {
                 name:'Комнаты в квартире',
-                url: '/realty/rent/room-flats-all'
+                url: '/realty/all-cities/rent/vtorichka/komnata'
             },
         ]
     }

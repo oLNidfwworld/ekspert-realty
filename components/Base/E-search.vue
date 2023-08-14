@@ -1,81 +1,34 @@
 <script setup>
 
   import {useApiFetch} from "~/composables/api";
-  import {useFetch} from "#app";
+  import {navigateTo, useFetch} from "#app";
   import directive from "vue-imask/esm/directive";
   import PictureSlider from "~/components/Catalog/PictureSlider.vue";
   import EBtn from "~/components/Base/E-btn.vue";
   import {ref, watch} from "vue";
   import {useRoute, useRouter} from "nuxt/app";
+  import {useSearchStore} from "~/store/search";
 
-  let charList = {
-    'q' : 'й',
-    'w' : 'ц',
-    'e' : 'у',
-    'r' : 'к',
-    't' : 'е',
-    'y' : 'н',
-    'u' : 'г',
-    'i' : 'ш',
-    'o' : 'щ',
-    'p' : 'з',
-    '[' : 'х',
-    ']' : 'ъ',
-    'a' : 'ф',
-    's' : 'ы',
-    'd' : 'в',
-    'f' : 'а',
-    'g' : 'п',
-    'h' : 'р',
-    'j' : 'о',
-    'k' : 'л',
-    'l' : 'д',
-    ';' : 'ж',
-    '\'' : 'э',
-    'z' : 'я',
-    'x' : 'ч',
-    'c' : 'с',
-    'v' : 'м',
-    'b' : 'и',
-    'n' : 'т',
-    'm' : 'ь',
-    ',' : 'б',
-    '.' : 'ю',
-  }
-  const router = useRouter()
+  const router = useRouter();
   const route = useRoute();
+
+  const filterStore = useSearchStore();
   const searchShow = ref(false);
   const isResult = ref(true);
-  const searchValue = ref('')
-  // function literalize(event){
-  //   let newValue = '';
-  //   if(event.target.value != '' && event.target.value !=undefined){
-  //     newValue = event.target.value
-  //     let splitedValue = newValue.split('');
-  //     if(newValue.match(/[a-z]||[[]||[]]||[;]||[']||[,]||[.]/g).length>1){
-  //       splitedValue.forEach((el,i,arr)=>{
-  //         if(charList[el.trim().toLowerCase()] !== undefined){
-  //           splitedValue[i] = charList[el.trim().toLowerCase()];
-  //         }
-  //       })
-  //     }
-  //     newValue = splitedValue.join('');
-  //   }else{
-  //   }
-  //   return newValue;
-  // }
+  const searchValue = ref('');
   let allData = ref([])
 
   const searchOnInput = useThrottleFn(async (e) => {
-    allData.value = await useApiFetch(`/CatalogSearch/${searchValue.value}/`, {
+    allData.value = await useApiFetch(`/CatalogSearch/${searchValue.value}`, {
       method: 'POST'
     })
-  }, 2500)
+  }, 1200)
 
-  const goToDetail = ()=>{
-    router.push('../../../../search/')
-    sessionStorage.setItem('searchString',searchValue.value)
-    searchShow.value= false;
+  const goToDetail = async ()=>{
+    searchShow.value = !searchShow.value
+    filterStore.clearResult();
+    await filterStore.pullToArray(toRaw(allData.value.items),searchValue.value);
+    navigateTo('/search');
   }
   watch(searchValue,()=>{
     if(searchValue.value === ""){
@@ -85,6 +38,7 @@
     }
   })
 
+  console.log(allData)
 </script>
 <template>
   <div>
@@ -105,35 +59,15 @@
         <div class="w-full bg-white  z-[89] top-[90px] fixed  h-fit" v-show="searchShow" >
           <div class="w-[90%] m-auto pt-2 pb-2" >
             <ClientOnly>
-              <input  placeholder="> Поиск" class="search-field" type="text" @keyup.enter="goToDetail" @input="searchOnInput" v-model.lazy="searchValue"/>
+              <input  placeholder="> Поиск" class="search-field" type="text" @keyup.enter="goToDetail" @input="searchOnInput" v-model="searchValue"/>
             </ClientOnly>
             <transition name="expand">
               <div v-show="searchShow && isResult" class="search-results">
                 <div class="search-results-item" v-if="allData" v-for="item in allData.items"  >
                   <div class="grid gap-4 xl:grid-cols-[auto,1fr,1fr]">
-                    <PictureSlider class="hidden md:block" sliderClasses="product-slider-image" :pictures="item.item.photos"></PictureSlider>
-                    <nuxt-link class="text-[30px] font-bold" >
-                      {{ item.item.name }}
+                    <nuxt-link @click="searchShow= !searchShow" to="/realty/">
+                      {{ item.name }}
                     </nuxt-link>
-                    <div class="chars">
-                      <div class="font-bold">{{ item.item.location }}</div> <br/>
-                      <div class="grid sm:grid-cols-2">
-                        <div><span class="font-bold">Цена:</span> {{ item.item.price }} р</div>
-                        <div><span class="font-bold">ID:</span> {{ item.item.productId }}</div>
-                        <div><span class="font-bold">Тип дома:</span>
-                          <span v-for="type in item.item.houseType ">{{type}}</span>
-                        </div>
-                        <div><span class="font-bold">Площадь:</span> {{ item.item.livingSquare }} кв.м</div>
-                        <div><span class="font-bold">Кол-во комнат:</span> {{ item.item.roomsCount }}</div>
-                        <div><span class="font-bold">Балконы:</span> {{ item.item.balcony }}</div>
-                        <div><span class="font-bold">Этаж:</span> {{ item.item.houseFloor }}</div>
-                      </div>
-                      <br>
-                      {{item.item.detailText}}
-                      <br>
-                      <br>
-                      <e-btn :to="`/realty/${item.item.rootSection}/${item.item.id}`" @click="searchShow = !searchShow"  >Подробнее</e-btn>
-                    </div>
                   </div>
                 </div>
               </div>

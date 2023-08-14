@@ -4,23 +4,23 @@ export default defineEventHandler((event) => {
         links: [
             {
                 name:'Офисные помещения',
-                url: '/realty/buy/1-flats-all'
+                url: '/realty/all-cities/all-services-types/commerce/office/'
             },
             {
                 name:'Помещения свободного назначения',
-                url: '/realty/buy/2-flats-all'
+                url: '/realty/all-cities/buy/commerce/any_goal_room/'
             },
             {
                 name:'Торговое помещение',
-                url: '/realty/buy/2-flats-all'
+                url: '/realty/all-cities/buy/commerce/trade_space/'
             },
             {
                 name:'Гараж и машиноместо',
-                url: '/realty/buy/2-flats-all'
+                url: '/realty/all-cities/buy/commerce/garage/'
             },
             {
                 name:'Земельный участок',
-                url: '/realty/buy/2-flats-all'
+                url: '/realty/all-cities/buy/commerce/area/'
             }
         ]
     }

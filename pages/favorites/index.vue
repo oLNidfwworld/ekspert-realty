@@ -9,7 +9,7 @@ import {useFavoriteStore} from "../../store/favorite";
 const route = useRoute();
 const router = useRouter();
 const favStore = useFavoriteStore()
-const {data:catalog, refresh, pending} = await useApiFetchWithRefresh('/Filter/', {
+const {data:catalog, refresh, pending} = await useApiFetchWithRefresh('/CatalogByIds/', {
   method: 'POST',
   params: {
     ids: JSON.stringify(favStore.favoriteList),
@@ -18,7 +18,7 @@ const {data:catalog, refresh, pending} = await useApiFetchWithRefresh('/Filter/'
   watch: favStore.favoriteList
 })
 
-console.log(catalog.value)
+console.log(JSON.stringify(favStore.favoriteList))
 console.log(favStore.favoriteList)
 </script>
 <template>

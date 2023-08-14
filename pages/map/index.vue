@@ -4,6 +4,8 @@ import ProductCard from "../../components/Catalog/ProductCard";
 import EBtn from "../../components/Base/E-btn";
 import {useApiFetch} from "../../composables/api";
 import {useFilterStore} from "../../store/smartFilter";
+import {useAsyncData} from "nuxt/app";
+import {YandexClusterer, YandexMap, YandexMarker} from "vue-yandex-maps";
 
 const route = useRoute();
 const router = useRouter();
@@ -16,15 +18,28 @@ const pageSizeApi = computed(() => {
   return (route.query.size && route.query.size > 0) ? route.query.size : '20'
 })
 console.log(route.params.section)
-const { data:catalog, pending, error, refresh } = await useAsyncData(
-    () => useApiFetch(`/Catalog`, {
-      query: {
-        sectionCode: route.params.section,
-        page: `page-${page.value}`,
-        size: `${pageSizeApi.value}`
-      }
-    })
+
+const filter = useFilterStore()
+const { data: catalog, pending, error, refresh } = await useAsyncData(
+    () => useApiFetch(`/CatalogReborn/${filter.filterCity}/${filter.filterServiceType}/${filter.filterImmovableType}/${filter.filterImmovableProp}/`,
+        {
+          query: {
+            page: `page-${page.value}`,
+            size: `${pageSizeApi.value}`,
+            pricerange: `${(route.query.pricerange)?route.query.pricerange:''}`,
+            totalarea: `${(route.query.totalarea)?route.query.totalarea:''}`,
+            floors: `${(route.query.floors)?route.query.floors:''}`,
+            ipoteka: `${(route.query.ipoteka)?route.query.ipoteka:''}`,
+            housetype: `${(route.query.housetype)?route.query.housetype:''}`,
+            housearea: `${(route.query.housearea)?route.query.housearea:''}`,
+            plotarea: `${(route.query.plotarea)?route.query.plotarea:''}`,
+            communication: `${(route.query.communication)?route.query.communication:''}`,
+            earth_category: `${(route.query.earth_category)?route.query.earth_category:''}`,
+          }
+        }
+    )
 )
+console.log(catalog.value)
 watch(() => route.query, (cur) => {
   refresh()
 })
@@ -35,7 +50,6 @@ const mapCenter = ref([
 
 const controls = ['fullscreenControl'];
 const detailedControls = { zoomControl: { position: { right: 10, top: 50 } } };
-const filter = useFilterStore()
 </script>
 <template>
   <div>
@@ -50,16 +64,17 @@ const filter = useFilterStore()
                   }
                 ],
                 }">
-          <YandexMarker v-for="(item, index) in filter.filterResult.items" :key="index" :coordinates="[item.coordinates.lat, item.coordinates.lon]" :options="{
+          <YandexMarker v-for="(item, index) in catalog.items" :key="index"
+                        :coordinates="[item.coordinates.lat, item.coordinates.lon]" :options="{
             iconLayout: 'default#imageWithContent',
             iconImageHref: '/ekspertMarker.svg',
             iconImageSize: [50, 50],
             iconImageOffset: [-25,-55]
-          }" :marker-id="`1-marker-${item.id}`">
+          }" :marker-id="item.id">
             <template #component>
               <div class="yandex-balloon">
                 <p class="mb-3">{{item.location}}</p>
-                <e-btn class="btn-red" :to="{path:`/rent/${item.id}`}">
+                <e-btn class="btn-red" :to="{path:`/realty/immovable-${item.id}`}">
                   Подробнее
                 </e-btn>
               </div>

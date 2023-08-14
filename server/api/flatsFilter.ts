@@ -7,11 +7,11 @@ export default defineEventHandler((event) => {
                 name: 'OBJECT_TYPE',
                 type: 'multiSelector',
                 data: [
-                    {name: 'Комната',value: 'room'},
-                    {name: '1к',value: '1'},
-                    {name: '2к',value: '2'},
-                    {name: '3к',value: '3'},
-                    {name: '4+',value: '4'}
+                    {name: 'Комната',value: 'komnata'},
+                    {name: '1к',value: 'dnokomnatnye'},
+                    {name: '2к',value: 'dvuhkomnatnye'},
+                    {name: '3к',value: 'tryohkomnatnye'},
+                    {name: '4+',value: 'chetyryohkomnatnye'}
                 ],
                 value: []
             },
