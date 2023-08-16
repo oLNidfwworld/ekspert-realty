@@ -94,7 +94,7 @@ console.log(product.value)
           </li>
           <li class="flex flex-col">
             <span>
-              Общая
+              Общая пл.
             </span>
             <span class="font-bold">
               {{product.item.square}}
@@ -102,7 +102,7 @@ console.log(product.value)
           </li>
           <li class="flex flex-col">
             <span>
-              Жилая
+              Жилая пл.
             </span>
             <span class="font-bold">
               {{product.item.livingSquare}}
@@ -110,10 +110,10 @@ console.log(product.value)
           </li>
           <li class="flex flex-col">
             <span>
-              Кухня
+              Пл. кухни
             </span>
             <span class="font-bold">
-              {{product.item.kitchenSquare}}
+              {{product.item.kitchenSquare}} м2
             </span>
           </li>
           <li class="flex flex-col">
@@ -121,7 +121,7 @@ console.log(product.value)
               Этаж
             </span>
             <span class="font-bold">
-              {{product.item.houseFloor}}
+              {{product.item.houseFloor}} из {{product.item.floorCount}}
             </span>
           </li>
         </ul>

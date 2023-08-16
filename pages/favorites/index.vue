@@ -15,7 +15,6 @@ const {data:catalog, refresh, pending} = await useApiFetchWithRefresh('/CatalogB
     ids: JSON.stringify(favStore.favoriteList),
     size: `9999`
   },
-  watch: favStore.favoriteList
 })
 
 console.log(JSON.stringify(favStore.favoriteList))

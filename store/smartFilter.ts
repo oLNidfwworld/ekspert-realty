@@ -1,9 +1,10 @@
 import {Ref} from "vue";
 import {RemovableRef} from "@vueuse/shared";
 import {navigateTo} from "#app";
+import {useAsyncData} from "nuxt/app";
+import {useApiFetch} from "~/composables/api";
 
 export const useFilterStore = defineStore('filter', () =>{
-    const filterParams: RemovableRef<string> = useSessionStorage('filterParams', [])
     const filterResult = <Ref>ref([]);
     const filterType = <Ref>ref('buy');
 
@@ -13,6 +14,8 @@ export const useFilterStore = defineStore('filter', () =>{
     const filterImmovableType = <Ref>ref('vtorichka');
     const filterImmovableProp = <Ref>ref('all-immovable-properties');
     const filterImmovablePropParams = <Ref>ref('');
+
+    const mapData = ref(null);
 
     const setFilterServiceType = async  (params: Object) => {
         filterServiceType.value = await params;
@@ -107,15 +110,21 @@ export const useFilterStore = defineStore('filter', () =>{
             params: { id: params}
         })
     }
+    const filterThisShitForMap = async (params: Object) => {
+        await formatParams(params);
+        mapData.value = await useApiFetch(`/CatalogReborn/${filterCity.value}/${filterServiceType.value}/${filterImmovableType.value}/${filterImmovableProp.value}/${filterImmovablePropParams.value}`)
+        console.log(mapData.value)
+    }
     return {
         setFilterServiceType,
         setFilterImmovableType,
+        filterThisShitForMap,
         filterCity,
         filterServiceType,
+        mapData,
         filterImmovableProp,
         filterImmovablePropParams,
         filterImmovableType,
-        filterParams,
         filterResult,
         nullifyFilterResult,
         filterThisShit,
