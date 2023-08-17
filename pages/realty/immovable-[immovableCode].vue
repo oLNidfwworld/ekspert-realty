@@ -126,7 +126,7 @@ console.log(product.value)
           </li>
         </ul>
         <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 px-2 py-3 mb-2">
-          <li class="flex flex-col">
+          <li v-if="product.item.balcony" class="flex flex-col">
             <span>
               Балкон/лоджия
             </span>
@@ -140,6 +140,14 @@ console.log(product.value)
             </span>
             <span class="font-bold">
               {{houseType}}
+            </span>
+          </li>
+          <li class="flex flex-col">
+            <span>
+              Сан. узел
+            </span>
+            <span class="font-bold">
+              {{product.item.bathroom}}
             </span>
           </li>
           <li class="flex flex-col">
