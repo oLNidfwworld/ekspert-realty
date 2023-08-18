@@ -152,10 +152,18 @@ console.log(product.value)
           </li>
           <li class="flex flex-col">
             <span>
-              Сан. узел
+              Лифт
             </span>
             <span class="font-bold">
-              {{product.item.bathroom}}
+              {{product.item.elevator}}
+            </span>
+          </li>
+          <li class="flex flex-col">
+            <span>
+              Ипотека
+            </span>
+            <span class="font-bold">
+              {{product.item.ipoteka}}
             </span>
           </li>
         </ul>
