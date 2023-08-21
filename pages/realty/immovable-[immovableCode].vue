@@ -84,39 +84,42 @@ console.log(product.value)
         </ClientOnly>
         <p class="font-semibold">{{product.item.location}}</p>
         <ul class="bg-grey-light grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 px-2 py-3">
-          <li class="flex flex-col">
+          <li v-if="product.item.roomsCount" class="flex flex-col">
             <span>
               Комнат
             </span>
-            <span class="font-bold">
+            <span v-if="product.item.objectType.code == 'komnata'" class="font-bold">
+              1 комната из {{product.item.roomsCount}}
+            </span>
+            <span v-else class="font-bold">
               {{product.item.roomsCount}}
             </span>
           </li>
-          <li class="flex flex-col">
+          <li v-if="product.item.square" class="flex flex-col">
             <span>
               Общая пл.
             </span>
             <span class="font-bold">
-              {{product.item.square}}
+              {{product.item.square}} м<sup>2</sup>
             </span>
           </li>
-          <li class="flex flex-col">
+          <li v-if="product.item.livingSquare" class="flex flex-col">
             <span>
               Жилая пл.
             </span>
             <span class="font-bold">
-              {{product.item.livingSquare}}
+              {{product.item.livingSquare}} м<sup>2</sup>
             </span>
           </li>
-          <li class="flex flex-col">
+          <li v-if="product.item.kitchenSquare" class="flex flex-col">
             <span>
               Пл. кухни
             </span>
             <span class="font-bold">
-              {{product.item.kitchenSquare}} м2
+              {{product.item.kitchenSquare}} м<sup>2</sup>
             </span>
           </li>
-          <li class="flex flex-col">
+          <li v-if="product.item.floorCount" class="flex flex-col">
             <span>
               Этаж
             </span>
@@ -134,7 +137,7 @@ console.log(product.value)
               {{product.item.balcony}}
             </span>
           </li>
-          <li class="flex flex-col">
+          <li v-if="houseType" class="flex flex-col">
             <span>
               Тип дома
             </span>
@@ -142,7 +145,7 @@ console.log(product.value)
               {{houseType}}
             </span>
           </li>
-          <li class="flex flex-col">
+          <li v-if="product.item.bathroom" class="flex flex-col">
             <span>
               Сан. узел
             </span>
@@ -150,7 +153,7 @@ console.log(product.value)
               {{product.item.bathroom}}
             </span>
           </li>
-          <li class="flex flex-col">
+          <li v-if="product.item.elevator" class="flex flex-col">
             <span>
               Лифт
             </span>
@@ -158,7 +161,7 @@ console.log(product.value)
               {{product.item.elevator}}
             </span>
           </li>
-          <li class="flex flex-col">
+          <li v-if="product.item.ipoteka" class="flex flex-col">
             <span>
               Ипотека
             </span>
