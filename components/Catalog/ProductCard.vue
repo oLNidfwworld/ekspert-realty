@@ -31,44 +31,67 @@ const price =computed(() => props.product.price.toLocaleString('ru-RU'))
         <span class="font-bold text-red text-2xl mb-4">{{price}} ₽</span>
       <p class="mb-1 font-semibold">{{product.location}}</p>
       <ul class="props grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 px-2 py-3 mb-7 md:mr-4" style="background: #D9D9D9;">
-        <li class="flex flex-col">
+
+        <li v-if="product.squareSec" class="flex flex-col">
+            <span>
+              Пл. участка
+            </span>
+          <span class="font-bold">
+              {{product.squareSec}}
+            </span>
+        </li>
+        <li v-if="product.roomsCount" class="flex flex-col">
             <span>
               Комнат
             </span>
-          <span class="font-bold">
+           <span v-if="product.objectType.code == 'komnata'" class="font-bold">
+              1 комната из {{product.roomsCount}}
+            </span>
+            <span class="font-bold" v-else>
               {{product.roomsCount}}
             </span>
         </li>
-        <li class="flex flex-col">
-            <span>
-              Общая
+        <li v-if="product.square" class="flex flex-col">
+            <span v-if="product.section === 'zagorodnaya'">
+              Площадь дома
+            </span>
+          <span v-else>
+              Общая пл.
             </span>
           <span class="font-bold">
-              {{product.square}}
+              {{product.square}} м<sup>2</sup>
             </span>
         </li>
-        <li class="flex flex-col">
+        <li v-if="product.livingSquare" class="flex flex-col">
             <span>
-              Жилая
+              Жилая пл.
             </span>
           <span class="font-bold">
-              {{product.livingSquare}}
+              {{product.livingSquare}} м<sup>2</sup>
             </span>
         </li>
-        <li class="flex flex-col">
+        <li v-if="product.kitchenSquare" class="flex flex-col">
             <span>
               Кухня
             </span>
           <span class="font-bold">
-              {{product.kitchenSquare}}
+              {{product.kitchenSquare}} м<sup>2</sup>
             </span>
         </li>
-        <li class="flex flex-col">
+        <li v-if="product.houseFloor" class="flex flex-col">
             <span>
               Этаж
             </span>
           <span class="font-bold">
               {{product.houseFloor}}
+            </span>
+        </li>
+        <li v-if="product.floorCount && (product.section === 'zagorodnaya' || product.section === 'commerce')" class="flex flex-col">
+            <span>
+              Этажность
+            </span>
+          <span class="font-bold">
+              {{product.floorCount}}
             </span>
         </li>
       </ul>

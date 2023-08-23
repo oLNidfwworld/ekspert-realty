@@ -76,14 +76,14 @@ const right = ref(null)
         spaceBetween: 50,
       },
     }"
-
       >
         <SwiperSlide class="w-[320px]" v-for="(item, index) in recommended.items" :product="item" :key="index">
           <ProductTile :product="item"/>
         </SwiperSlide>
       </Swiper>
-        <ServicesBlocks class="mt-10" :only4="true" :display-title="true"></ServicesBlocks>
       </ClientOnly>
+
+      <ServicesBlocks class="mt-10" :only4="true" :display-title="true"></ServicesBlocks>
     </section>
 
   </div>

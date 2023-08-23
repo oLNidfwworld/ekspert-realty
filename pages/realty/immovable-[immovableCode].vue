@@ -5,15 +5,13 @@ import EInput from "../../components/Base/E-input.vue";
 import Favorite from "../../components/Base/Favorite.vue";
 import ProductCard from "../../components/Catalog/ProductCard.vue";
 import {useApiFetch, useApiFetchWithRefresh} from "../../composables/api";
-import PhoneDetailBtn from "../../components/Base/PhoneDetailBtn.vue";
-import {useFilterStore} from "../../store/smartFilter";
+import PhoneDetailBtn from "../../components/Base/PhoneDetailBtn.vue"
 import {computed} from "vue";
 const route = useRoute()
 const { data: product, pending, error, refresh } = await useAsyncData(
     () => useApiFetch(`/Catalog/${route.params.immovableCode}/`)
 )
 const price = computed(() => product.value.item.price.toLocaleString('ru-RU'))
-const filter = useFilterStore()
 const houseType = computed(() => {
   return Array.isArray(product.value.item.houseType)? product.value.item.houseType[0] : product.value.item.houseType
 })
@@ -59,6 +57,22 @@ useHead({
     { name: 'description', content: product.value.item.name }
   ],
 })
+
+const isMapAppear = ref(false)
+const mapElement = ref(null)
+const showMap = () => {
+  isMapAppear.value = !isMapAppear.value;
+  console.log(isMapAppear.value)
+  setTimeout(()=>{
+    if(isMapAppear.value){
+      console.log(mapElement.value)
+      mapElement.value.scrollIntoView({
+        block : 'center',
+        behavior : 'smooth'
+      })
+    }
+  },10)
+}
 console.log(product.value)
 </script>
 <template>
@@ -96,11 +110,22 @@ console.log(product.value)
             </span>
           </li>
           <li v-if="product.item.square" class="flex flex-col">
-            <span>
+            <span v-if="product.item.section == 'zagorodnaya'">
+              Пл. дома
+            </span>
+            <span v-else>
               Общая пл.
             </span>
-            <span class="font-bold">
+            <span class="font-bold" >
               {{product.item.square}} м<sup>2</sup>
+            </span>
+          </li>
+          <li v-if="product.item.squareSec" class="flex flex-col">
+            <span>
+              Пл. участка
+            </span>
+            <span class="font-bold">
+              {{product.item.squareSec}}
             </span>
           </li>
           <li v-if="product.item.livingSquare" class="flex flex-col">
@@ -119,7 +144,7 @@ console.log(product.value)
               {{product.item.kitchenSquare}} м<sup>2</sup>
             </span>
           </li>
-          <li v-if="product.item.floorCount" class="flex flex-col">
+          <li v-if="product.item.floorCount && product.item.section !== 'zagorodnaya'" class="flex flex-col">
             <span>
               Этаж
             </span>
@@ -169,13 +194,23 @@ console.log(product.value)
               {{product.item.ipoteka}}
             </span>
           </li>
+          <li v-if="product.item.communications" v-for="(comm,commi) in product.item.communications" class="flex flex-col">
+            <span>
+              {{ comm.name }}
+            </span>
+            <span class="font-bold">
+              Да
+            </span>
+          </li>
         </ul>
         <div class="flex flex-col md:flex-row justify-between gap-4">
           <div class="flex flex-col sm:flex-row md:flex-col flex-shirk flex-wrap grid-cols-1 gap-4 w-full mb-8">
             <ClientOnly>
               <Favorite class="btn-grey btn border-red text-red p-3 btn-grey sm:w-fit md:w-full btn-grey" :enableText="true" :product-id="product.item.id"/>
-              <e-btn @click="filter.filterItemById(product.item.id)" :to="{ path:'/map'}" class="btn-grey sm:w-fit md:w-full"><nuxt-icon class="text-red mr-2" width="30px" height="30px" name="MapMarker"/> На карте</e-btn>
+              <e-btn @click="showMap" :class="{'mapActive':isMapAppear }" class="btn-grey sm:w-fit md:w-full"><nuxt-icon class="text-red mr-2" width="30px" height="30px" name="MapMarker"/>На карте</e-btn>
               <e-btn class="btn-grey sm:w-fit md:w-full" @click="print"><nuxt-icon class="text-red mr-2" width="30px" height="30px" name="Print"/>Версия для печати</e-btn>
+              <e-btn class="btn-grey sm:w-fit md:w-full" ><nuxt-icon class="text-red mr-2" width="30px" height="30px" name="Share"/>Поделиться </e-btn>
+              <Share></Share>
             </ClientOnly>
           </div>
           <div class="bg-concrete grid grid-cols-1 font-semibold pt-2 md:w-full">
@@ -196,7 +231,7 @@ console.log(product.value)
       </div>
       {{product.item.detailText}}
     </div>
-    <div v-if="product.item.coordinates.lat && product.item.coordinates.lon">
+    <div ref="mapElement" v-if=" product.item.coordinates.lat && product.item.coordinates.lon && isMapAppear" >
       <ClientOnly >
         <YandexMap  :coordinates="[product.item.coordinates.lat, product.item.coordinates.lon]">
           <!--Markers-->
@@ -262,5 +297,12 @@ console.log(product.value)
  }
 }
 }
+}
+.mapActive{
+  background : var(--red);
+  color: var(--white);
+  span.nuxt-icon.nuxt-icon--fill svg path{
+    fill : var(--white) !important;
+  }
 }
 </style>
