@@ -55,7 +55,8 @@ const config = useRuntimeConfig()
           class="item-image swiper-detail__slide swiper-detail__thumbs-wrapper"
           :freeMode="true"
           :watchSlidesProgress="true"
-          :slides-per-view="2.3"
+          :slides-per-view="2"
+          :space-between="13"
           :navigation="{
                 prevEl: prev,
                 nextEl: next,
@@ -65,10 +66,16 @@ const config = useRuntimeConfig()
           slidesPerView: 4
         },
         '780': {
-          slidesPerView: 7
+          slidesPerView: 6
         },
         '1024': {
-          slidesPerView: 4
+          slidesPerView: 3,
+        },
+        '1280': {
+          slidesPerView: 4,
+        },
+        '1440': {
+          slidesPerView: 5,
         },
       }"
       >
@@ -92,7 +99,7 @@ const config = useRuntimeConfig()
 <style lang="postcss">
 .swiper-detail {
     &__slide {
-      @apply w-[320px] sm:w-[480px] md:w-[780px] lg:w-[450px] h-[200px] sm:h-[400px] lg:h-[450px] rounded-md;
+      @apply h-[200px] sm:h-[400px] lg:h-[380px] xl:h-[450px] rounded-md;
     }
     &__thumbs {
       @apply w-[90px] h-[60px] rounded-md;

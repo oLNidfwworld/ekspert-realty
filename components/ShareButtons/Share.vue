@@ -1,12 +1,17 @@
 <script setup>
 
-
-import VkButton from "~/components/ShareButtons/VkButton.vue";
+const props = defineProps({
+  titol : String,
+  link : String,
+})
+console.log(props.link)
 </script>
 <template>
-  <div>
-    <VkButton></VkButton>
-  </div>
+    <a class="mr-2" target="_blank" :title="titol" :href='link' >
+      <i>
+        <slot></slot>
+      </i>
+    </a>
 </template>
 <style scoped>
 

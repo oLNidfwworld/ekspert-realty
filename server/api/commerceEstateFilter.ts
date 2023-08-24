@@ -35,10 +35,10 @@ export default defineEventHandler((event) => {
                 name: 'Location',
                 type: 'multiSelect',
                 data: [
-                    'Павловский Посад',
-                    'Орехово-Зуево',
-                    'Ногинск',
-                    'Электрогорск'
+                    {name : 'Павловский посад', value : 'pavlovskiy_posad'},
+                    {name : 'Орехово-зуево', value : 'orekhovo_zuevo'},
+                    {name : 'Домодедово', value : 'domodedovo'},
+                    {name : 'Мытищи', value : 'mytishchi'},
                 ],
                 value: null
             },
