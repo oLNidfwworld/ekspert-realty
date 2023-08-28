@@ -26,6 +26,15 @@ const { data: catalogItems, pending, error, refresh } = await useAsyncData(
         }
     )
 )
+const {data : metaData} = useAsyncData(
+    () => $fetch('/api/seoSectionMeta'),
+    {
+      query : {
+        joint : 'tr'
+      }
+    }
+)
+console.log(catalogItems.value)
 watch(() => route.query, (cur) => {
   refresh()
 })

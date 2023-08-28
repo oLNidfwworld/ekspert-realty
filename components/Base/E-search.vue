@@ -76,7 +76,7 @@
         </div>
       </transition>
       <transition name="fade">
-        <div class="w-full h-full bg-[black] opacity-50 fixed z-[88]" v-show="searchShow"></div>
+        <div class="w-full h-full bg-[#00000082]  fixed z-[88]" v-show="searchShow"></div>
       </transition>
     </teleport>
   </div>

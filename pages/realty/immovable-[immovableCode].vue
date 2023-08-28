@@ -7,7 +7,6 @@ import ProductCard from "../../components/Catalog/ProductCard.vue";
 import {useApiFetch, useApiFetchWithRefresh} from "../../composables/api";
 import PhoneDetailBtn from "../../components/Base/PhoneDetailBtn.vue"
 import {computed} from "vue";
-import Lightbox from "~/components/GallertView/Lightbox.vue";
 const route = useRoute()
 const { data: product, pending, error, refresh } = await useAsyncData(
     () => useApiFetch(`/Catalog/${route.params.immovableCode}/`)
@@ -76,17 +75,10 @@ const showMap = () => {
     }
   },10)
 }
-console.log(product.value)
-// const links = ref({
-//   tg : `https://t.me/share/url?url=${window.location.href}&text=${product.item.name}`,
-//   vk : `http://vk.com/share.php?url=${window.location.href}&title=${product.item.name}&description=&noparse=`,
-//   whasup : `https://api.whatsapp.com/send?text=${product.item.name} ${window.location.href}`,
-//   viber : `viber://forward?text=${product.item.name} ${window.location.href}&utm_source=share2`,
-//   ok : `https://connect.ok.ru/offer?url=${window.location.href}&title=${product.item.name}`,
-// })
 const currUrl = () => {
   return location.href;
 }
+
 </script>
 <template>
   <div class="grid gap-10 catalog-item__detail-wrapper">
@@ -216,7 +208,6 @@ const currUrl = () => {
             </span>
           </li>
         </ul>
-        <Lightbox></Lightbox>
         <div class="grid grid-cols-1 lg:grid-cols-[5fr_6fr] xl:grid-cols-[3fr_6fr] justify-between gap-3 lg:gap-[91px]">
           <div class="flex flex-col sm:flex-row md:flex-col flex-shirk flex-wrap grid-cols-1 gap-4 w-full mb-8">
             <ClientOnly>

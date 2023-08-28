@@ -112,7 +112,14 @@ export const useFilterStore = defineStore('filter', () =>{
     }
     const filterThisShitForMap = async (params: Object) => {
         await formatParams(params);
-        mapData.value = await useApiFetch(`/CatalogReborn/${filterCity.value}/${filterServiceType.value}/${filterImmovableType.value}/${filterImmovableProp.value}/${filterImmovablePropParams.value}`)
+        mapData.value = await useApiFetch(`/CatalogReborn/${filterCity.value}/${filterServiceType.value}/${filterImmovableType.value}/${filterImmovableProp.value}/${filterImmovablePropParams.value}`,
+            {
+                query: {
+                    page: `page-1`,
+                    size: `10000000`
+                }
+            }
+            )
         console.log(mapData.value)
     }
     return {
