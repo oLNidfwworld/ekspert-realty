@@ -49,7 +49,7 @@ export default defineNuxtConfig({
         '~/assets/css/resets.css',
         '~/assets/css/vars.css',
         '~/assets/fonts/OpenSans.css',
-        "primevue/resources/themes/lara-light-blue/theme.css"
+        "/node_modules/primevue/resources/themes/lara-light-blue/theme.css"
     ],
     postcss: {
         plugins: {

@@ -28,10 +28,10 @@ useSeoMeta({
 })
 </script>
 <template>
-  <div class="page-wrapper">
+  <div class="page-wrapper map-layout">
     <TheHeader/>
     <NuxtLoadingIndicator color="#E02D1F" style="height:5px;top:90px;"/>
-    <div class="content-wrapper">
+    <div class="content-wrapper no-m">
       <Filter v-if="route.path === '/'|| route.path === '/map'|| (route.path.split('/')[1] === 'realty' && !route.path.split('/')[2].includes('immovable-')) "/>
       <div class="top-banner" v-else-if="route.path === '/blog/' || route.path === '/act-help/' ">
         <div class="m-auto container">
@@ -84,9 +84,14 @@ body {
 .page-fading-enter-from{
   opacity: 0;
 }
-
+.map-layout .filter__wrapper{
+  margin-bottom:0px !important;
+}
+.content-wrapper.no-m{
+  margin-bottom : 0px !important;
+}
 .content-wrapper {
-  @apply relative mb-20;
+  @apply relative;
   padding-top:90px;
 }
 .top-banner{

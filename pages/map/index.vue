@@ -41,14 +41,19 @@ watch(()=>filter.mapData, ()=>{
   console.log(filter.mapData.items);
 })
 const controls = ['fullscreenControl'];
-const detailedControls = { zoomControl: { position: { right: 10, top: 50 } } };
+const detailedControls = {
+  zoomControl: { position: { right: 10, top: 50 } },
+};
 const selectedItem = ref(null);
 const showObject = (data) => {
   selectedItem.value =  data;
 }
 definePageMeta({
   layout: "filter-layout",
-});
+})
+const scrollZoom = (event) => {
+  console.log(event)
+}
 </script>
 <template>
   <div >
@@ -57,7 +62,9 @@ definePageMeta({
 <!--    </div>-->
     <ClientOnly>
       <div class="relative">
-        <YandexMap style="height: 10000px" :controls="controls" :detailed-controls="detailedControls" :coordinates="mapCenter">
+        <YandexMap style="height: 10000px"
+                   :behaviors='["drag"]'
+                   :controls="controls" :detailed-controls="detailedControls" :coordinates="mapCenter">
               <YandexMarker @click="showObject(item)"  v-for="(item, index) in filter.mapData?.items" :key="index"
                             :coordinates="[item.coordinates.lat, item.coordinates.lon]" :options="{
               iconLayout: 'default#imageWithContent',
@@ -69,9 +76,23 @@ definePageMeta({
               </YandexMarker>
         </YandexMap>
 
-        <div class="absolute w-[310px] right-[10px] top-0 bottom-0 m-auto h-fit z-[100]">
+        <div class="absolute w-[310px] left-[10px] top-0 bottom-0 m-auto h-fit z-[100]">
           <transition name="appear">
-            <ProductTile v-if="selectedItem" :product="selectedItem"></ProductTile>
+            <div v-if="selectedItem" class="relative">
+              <i @click="selectedItem = null" class="absolute top-0 bottom-0 m-auto -right-[30px] block h-fit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="60" viewBox="0 0 25 60" fill="none">
+                  <g clip-path="url(#clip0_520_3)">
+                    <path d="M5 60C4.30967 60 3.75 58.6568 3.75 57L3.75 3C3.75 1.3432 4.30967 0 5 0C5.69033 0 6.25 1.3432 6.25 3L6.25 57C6.25 58.6568 5.69028 60 5 60ZM11.25 3L11.25 57C11.25 58.6568 11.8097 60 12.5 60C13.1903 60 13.75 58.6568 13.75 57L13.75 3C13.75 1.3432 13.1903 0 12.5 0C11.8097 0 11.25 1.3432 11.25 3ZM18.75 3L18.75 57C18.75 58.6568 19.3097 60 20 60C20.6903 60 21.25 58.6568 21.25 57L21.25 3C21.25 1.3432 20.6903 0 20 0C19.3097 0 18.75 1.3432 18.75 3Z" fill="black"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_520_3">
+                      <rect width="60" height="25" fill="white" transform="matrix(0 -1 1 0 0 60)"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </i>
+              <ProductTile  :product="selectedItem"></ProductTile>
+            </div>
           </transition>
         </div>
       </div>
@@ -86,7 +107,7 @@ definePageMeta({
 }
 .appear-leave-to,.appear-enter-from{
   opacity : 0;
-  transform : translateX(30px);
+  transform : translateX(-30px);
 }
 .appear-leave-from,.appear-enter-to{
   transform : translateX(0);
