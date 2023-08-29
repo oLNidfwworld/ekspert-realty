@@ -65,7 +65,7 @@
               <div v-show="searchShow && isResult" class="search-results">
                 <div class="search-results-item" v-if="allData" v-for="item in allData.items"  >
                   <div class="grid gap-4 xl:grid-cols-[auto,1fr,1fr]">
-                    <nuxt-link @click="searchShow= !searchShow" to="/realty/">
+                    <nuxt-link @click="searchShow= !searchShow" :to='`/realty/immovable-${item.id}`'>
                       {{ item.name }}
                     </nuxt-link>
                   </div>

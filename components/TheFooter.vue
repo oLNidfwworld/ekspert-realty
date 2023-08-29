@@ -27,13 +27,13 @@ const currentYear = new Date().getFullYear()
                 Мы в соц.сетях
               </h4>
               <ul class="socials">
-                <nuxt-link>
+                <nuxt-link href="https://vk.com/ekspert_realty">
                   <nuxt-icon width="30px" height="30px" name="Vk"/>
                 </nuxt-link>
-                <nuxt-link>
+                <nuxt-link href="https://www.facebook.com/groups/841397186055825/?fref=nf&__tn__=C-R">
                   <nuxt-icon width="30px" height="30px" name="Facebook"/>
                 </nuxt-link>
-                <nuxt-link>
+                <nuxt-link href="https://www.youtube.com/channel/UCMF6FOeygEuzxZ5Mk7rOIgg">
                   <nuxt-icon width="30px" height="30px" name="YouTube"/>
                 </nuxt-link>
               </ul>
@@ -54,13 +54,13 @@ const currentYear = new Date().getFullYear()
                 <nuxt-link>
                   <nuxt-icon width="30px" height="30px" name="Viber"/>
                 </nuxt-link>
-                <nuxt-link>
+                <nuxt-link href="https://wa.me/79015178651">
                   <nuxt-icon width="30px" height="30px" name="WhatsApp"/>
                 </nuxt-link>
-                <nuxt-link>
-                  <nuxt-icon width="30px" height="30px" name="Telegram"/>
-                </nuxt-link>
-                <nuxt-link>
+<!--                <nuxt-link  >-->
+<!--                  <nuxt-icon width="30px" height="30px" name="Telegram"/>-->
+<!--                </nuxt-link>-->
+                <nuxt-link href="mailto:ekspert07@bk.ru">
                   <nuxt-icon width="30px" height="30px" name="Mailru"/>
                 </nuxt-link>
               </ul>
