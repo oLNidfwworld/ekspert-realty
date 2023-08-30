@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import keywords from "ajv-keywords";
-
 export default defineNuxtConfig({
     nitro: {
         preset: 'node-server'
@@ -20,6 +19,11 @@ export default defineNuxtConfig({
         //         name: 'page-fading',
         //         mode: 'out-in' // default
         // }
+        head : {
+            meta : [
+                { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0' }
+            ]
+        }
     },
     build : {
         transpile: ["primevue"]
@@ -44,6 +48,10 @@ export default defineNuxtConfig({
         'nuxt-swiper',
 
     ],
+    routeRules: {
+        '/contact.html': { redirect: '/contact' },
+        '/external-route': { redirect: 'https://example.com' },
+    },
     css: [
         '~/assets/css/tailwind.css',
         '~/assets/css/resets.css',
@@ -62,5 +70,5 @@ export default defineNuxtConfig({
     alias: {
         pinia: "/node_modules/@pinia/nuxt/node_modules/pinia/dist/pinia.mjs"
     },
-    ssr : true
+    ssr : true,
 })

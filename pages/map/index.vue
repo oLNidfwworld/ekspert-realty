@@ -5,8 +5,9 @@ import EBtn from "../../components/Base/E-btn";
 import {useApiFetch} from "../../composables/api";
 import {useFilterStore} from "../../store/smartFilter";
 import {useAsyncData} from "nuxt/app";
-import {YandexClusterer, YandexMap, YandexMarker} from "vue-yandex-maps";
+import {loadYmap, YandexClusterer, YandexMap, YandexMarker} from "vue-yandex-maps";
 import ProductTile from "~/components/Catalog/ProductTile.vue";
+import async from "async";
 
 const route = useRoute();
 const router = useRouter();
@@ -18,7 +19,6 @@ const pageSize = ref(20)
 const pageSizeApi = computed(() => {
   return (route.query.size && route.query.size > 0) ? route.query.size : '20'
 })
-console.log(route.params.section)
 
 const filter = useFilterStore()
 
@@ -38,7 +38,6 @@ watch(()=>filter.mapData, ()=>{
     mapCenter.value = [55.78490049781022,38.65941388435301];
   }
 
-  console.log(filter.mapData.items);
 })
 const controls = ['fullscreenControl'];
 const detailedControls = {
@@ -51,9 +50,24 @@ const showObject = (data) => {
 definePageMeta({
   layout: "filter-layout",
 })
-const scrollZoom = (event) => {
-  console.log(event)
+const mapInstance = ref(null)
+const isWidthMoreThan780 = await useMediaQuery('(min-width: 780px)')
+const isLargeScreen = computed(() => isWidthMoreThan780.value)
+
+const mobileAndPcAdaptation = (mapInst = null) => {
+  if(mapInst !== null){
+    mapInstance.value = mapInst;
+    window.test = mapInstance.value
+  }
+  if(isLargeScreen.value){
+    mapInstance.value.behaviors.disable('scrollZoom')
+    mapInstance.value.behaviors.enable('drag')
+  }else{
+    mapInstance.value.behaviors.disable('drag')
+    mapInstance.value.behaviors.enable('scrollZoom')
+  }
 }
+watch(()=>isLargeScreen.value,()=> mobileAndPcAdaptation())
 </script>
 <template>
   <div >
@@ -62,8 +76,8 @@ const scrollZoom = (event) => {
 <!--    </div>-->
     <ClientOnly>
       <div class="relative">
-        <YandexMap style="height: 10000px"
-                   :behaviors='["drag"]'
+        <YandexMap @created="mobileAndPcAdaptation" style="height: 10000px"
+
                    :controls="controls" :detailed-controls="detailedControls" :coordinates="mapCenter">
               <YandexMarker @click="showObject(item)"  v-for="(item, index) in filter.mapData?.items" :key="index"
                             :coordinates="[item.coordinates.lat, item.coordinates.lon]" :options="{

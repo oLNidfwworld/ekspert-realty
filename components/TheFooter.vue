@@ -38,9 +38,6 @@ const currentYear = new Date().getFullYear()
                 </nuxt-link>
               </ul>
               <div class="flex flex-col">
-                <nuxt-link>
-                  Карта сайта
-                </nuxt-link>
                 <nuxt-link href="/blog/">
                   Блог
                 </nuxt-link>
