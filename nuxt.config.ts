@@ -49,8 +49,8 @@ export default defineNuxtConfig({
 
     ],
     routeRules: {
-        '/contact.html': { redirect: '/contact' },
-        '/external-route': { redirect: 'https://example.com' },
+        '/contact.html': { redirect: '/contact', statusCode: 301 },
+        '/external-route': { redirect: 'https://example.com', statusCode: 301 },
     },
     css: [
         '~/assets/css/tailwind.css',
