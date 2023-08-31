@@ -54,7 +54,13 @@ export default defineNuxtConfig({
                 to : "/contacts",
                 statusCode : 301,
             }
-        }
+        },
+        '/sitemap.xml': {
+            redirect : {
+                to : "/api/sitemap",
+                statusCode : 301,
+            }
+        },
     },
     css: [
         '~/assets/css/tailwind.css',
