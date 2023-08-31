@@ -22,7 +22,7 @@
     allData.value = await useApiFetch(`/CatalogSearch/${searchValue.value}`, {
       method: 'POST'
     })
-  }, 1200)
+  }, 600)
 
   const goToDetail = async ()=>{
     searchShow.value = !searchShow.value
@@ -56,11 +56,9 @@
     </div>
     <teleport to="body">
       <transition name="dropdown">
-        <div class="w-full bg-white  z-[89] top-[90px] fixed  h-fit" v-show="searchShow" >
+        <div class="w-full bg-white  z-[88] top-[90px] fixed  h-fit" v-show="searchShow" >
           <div class="w-[90%] m-auto pt-2 pb-2" >
-            <ClientOnly>
               <input  placeholder="> Поиск" class="search-field" type="text" @keyup.enter="goToDetail" @input="searchOnInput" v-model="searchValue"/>
-            </ClientOnly>
             <transition name="expand">
               <div v-show="searchShow && isResult" class="search-results">
                 <div class="search-results-item" v-if="allData" v-for="item in allData.items"  >
@@ -76,7 +74,7 @@
         </div>
       </transition>
       <transition name="fade">
-        <div class="w-full h-full bg-[#00000082]  fixed z-[88]" v-show="searchShow"></div>
+        <div class="w-full top-0 h-full bg-[#00000082]  fixed z-[87]" v-show="searchShow"></div>
       </transition>
     </teleport>
   </div>

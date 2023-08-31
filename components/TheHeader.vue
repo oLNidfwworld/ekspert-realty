@@ -9,7 +9,9 @@
               <a href="tel:+79015178651">+7 901 517-86-51</a>
             </div>
             <div>
-              <e-search></e-search>
+              <ClientOnly>
+                <e-search></e-search>
+              </ClientOnly>
             </div>
             <NuxtLink :to="{path: '/favorites/'}" class="cursor-pointer">
               <svg class="favorite" xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19" fill="none">
