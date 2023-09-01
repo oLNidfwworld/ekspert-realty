@@ -17,7 +17,7 @@ const router = useRouter()
   ); 
 
   if(seoData.value){
-    useServerSeoMeta( 
+    useSeoMeta( 
       seoData.value
     )
   }  

@@ -5,9 +5,23 @@ import ProductCard from "../../components/Catalog/ProductCard.vue";
 import {computed, watch} from "vue";
 import Pagination from "../../components/Base/Pagination";
 import EBtn from "../../components/Base/E-btn";
-
+import { useSeoMeta } from "unhead"
 const route = useRoute();
 const router = useRouter();
+ 
+  const { data : seoData } = await useAsyncData(
+      () => useApiFetch(`/Seo/`,{
+        query : {
+          'link' : route.path,
+        }
+      }), 
+  ); 
+
+  if(seoData.value){
+    useSeoMeta( 
+      seoData.value
+    )
+  }  
 const page = computed(() => {
   return route.query.page ? route.query.page.toString() : '1'
 })

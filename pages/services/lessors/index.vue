@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import {useServerSeoMeta} from "@unhead/vue";
+import {useSeoMeta} from "@unhead/vue";
 const route = useRoute();
   const { data : seoData } = await useAsyncData(
       () => useApiFetch(`/Seo/`,{
@@ -67,11 +67,11 @@ const route = useRoute();
   ); 
 
   if(seoData.value){
-    useServerSeoMeta( 
+    useSeoMeta( 
       seoData.value
     )
   }  
-// useServerSeoMeta({
+// useSeoMeta({
 //   title: 'Арендодателям | Эксперт',
 //   ogTitle: 'Арендодателям | Эксперт',
 //   description: 'Агентство недвижимости «Эксперт» работает на рынке недвижимости Москвы и Подмосковья более 10 лет. Благодаря широким партнерским связям мы имеем возможность оказать помощь арендодателям, заинтересованным в сдаче жилой и коммерческой недвижимости в любой точке столицы и Подмосковья. В штате агентства работают опытные эксперты, которые помогут с решением всех возникших проблем.',

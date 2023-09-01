@@ -25,7 +25,19 @@ const route = useRoute()
 const filter = useFilterStore() 
 
  
+const { data : seoData } = await useAsyncData(
+      () => useApiFetch(`/Seo/`,{
+        query : {
+          'link' : '#GLOBAL_KEYWORDS#',
+        }
+      }), 
+  ); 
 
+  if(seoData.value){
+    useSeoMeta( 
+      seoData.value
+    )
+  }  
 
 </script>
 <template>

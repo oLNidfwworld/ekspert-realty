@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import {useServerSeoMeta} from "@unhead/vue";
+  import {useSeoMeta} from "@unhead/vue";
   const route = useRoute();
   const { data : seoData } = await useAsyncData(
       () => useApiFetch(`/Seo/`,{
@@ -10,11 +10,11 @@
   ); 
 
   if(seoData.value){
-    useServerSeoMeta( 
+    useSeoMeta( 
       seoData.value
     )
   }  
-  // useServerSeoMeta({
+  // useSeoMeta({
   //   title: 'Услуги',
   //   ogTitle: 'Услуги',
   //   description: 'Эксперт. Агенство недвижимости.',

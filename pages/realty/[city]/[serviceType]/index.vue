@@ -20,7 +20,7 @@ const { data : seoData } = await useAsyncData(
   ); 
 
   if(seoData.value){
-    useServerSeoMeta( 
+    useSeoMeta( 
       seoData.value
     )
   }  

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {useServerSeoMeta} from "@unhead/vue";
+import {useSeoMeta} from "@unhead/vue";
 const route = useRoute();
   const { data : seoData } = await useAsyncData(
       () => useApiFetch(`/Seo/`,{
@@ -10,11 +10,11 @@ const route = useRoute();
   ); 
 
   if(seoData.value){
-    useServerSeoMeta( 
+    useSeoMeta( 
       seoData.value
     )
   }  
-// useServerSeoMeta({
+// useSeoMeta({
 //   title: 'Купить недвижимость в ипотеку | Эксперт',
 //   ogTitle: 'Купить недвижимость в ипотеку | Эксперт',
 //   description: 'Если Вы приняли решение купить или обменять квартиру, дом или земельный участок в Подмосковье или в Павловском Посаде, но Ваши финансовые возможности не позволяют сделать это без получения ипотечного кредита, тогда квалифицированные специалисты агентства «Эксперт», готовы помочь Вам в решении этого вопроса.',

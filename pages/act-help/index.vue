@@ -2,7 +2,7 @@
 
 import EBtn from "~/components/Base/E-btn.vue";
 import EInput from "~/components/Base/E-input.vue";
-import {useServerSeoMeta} from "unhead";
+import {useSeoMeta} from "unhead";
 import {watch} from "vue";
 import ETextarea from "../../components/Base/E-textarea.vue";
   const route = useRoute();

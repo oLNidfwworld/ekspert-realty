@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {useServerSeoMeta} from "@unhead/vue";
+import {useSeoMeta} from "@unhead/vue";
 const route = useRoute();
   const { data : seoData } = await useAsyncData(
       () => useApiFetch(`/Seo/`,{
@@ -10,11 +10,11 @@ const route = useRoute();
   ); 
 
   if(seoData.value){
-    useServerSeoMeta( 
+    useSeoMeta( 
       seoData.value
     )
   }  
-// useServerSeoMeta({
+// useSeoMeta({
 //   title: 'Продавцам | Эксперт',
 //   ogTitle: 'Продавцам | Эксперт',
 //   description: 'Специалисты агентства «Эксперт» готовы оказать профессиональное содействие в реализации всех видов недвижимого имущества. Если вам необходимо в кратчайшие сроки продать недвижимость, сотрудничество с нашей компанией позволит максимально быстро получить желаемый результат. Содействие в продаже недвижимости – одно из приоритетных направлений работы агентства.',

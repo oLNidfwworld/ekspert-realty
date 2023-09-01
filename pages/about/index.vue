@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts" setup>
-import {useServerSeoMeta} from "@unhead/vue";
+import {useSeoMeta} from "@unhead/vue";
 
 const route = useRoute();
 const { data : seoData } = await useAsyncData(
@@ -71,12 +71,12 @@ const { data : seoData } = await useAsyncData(
   ); 
 
   if(seoData.value){
-    useServerSeoMeta( 
+    useSeoMeta( 
       seoData.value
     )
   }  
 
-// useServerSeoMeta({
+// useSeoMeta({
 //   title: 'О компании | Эксперт',
 //   ogTitle: 'О компании | Эксперт',
 //   description: 'Одно из направлений нашей деятельности является продажа земельных участков в Подмосковье. Оперативно и на выгодных условиях вы можете приобрести землю различного назначения в любом уголке Московской области.',

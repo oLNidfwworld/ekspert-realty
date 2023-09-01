@@ -2,7 +2,7 @@
 
 import EBtn from "~/components/Base/E-btn.vue";
 import {ref} from "vue";
-import {useServerSeoMeta} from "@unhead/vue";
+import {useSeoMeta} from "@unhead/vue";
 
 const popupVisible = ref(false);
 const route = useRoute();
@@ -15,11 +15,11 @@ const route = useRoute();
   ); 
 
   if(seoData.value){
-    useServerSeoMeta( 
+    useSeoMeta( 
       seoData.value
     )
   }  
-// useServerSeoMeta({
+// useSeoMeta({
 //   title: 'Покупателям | Эксперт',
 //   ogTitle: 'Покупателям | Эксперт',
 //   description: 'Одно из основных направлений работы агентства недвижимости «Эксперт» – оказание квалифицированной помощи клиентам, которые планируют приобрести жилую или коммерческую недвижимость. Обратившись в агентство «Эксперт», можно получить качественный результат в оптимальные сроки.',

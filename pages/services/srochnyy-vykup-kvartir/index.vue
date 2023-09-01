@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts" setup>
-import {useServerSeoMeta} from "@unhead/vue";
+import {useSeoMeta} from "@unhead/vue";
 const route = useRoute();
   const { data : seoData } = await useAsyncData(
       () => useApiFetch(`/Seo/`,{
@@ -56,11 +56,11 @@ const route = useRoute();
   ); 
 
   if(seoData.value){
-    useServerSeoMeta( 
+    useSeoMeta( 
       seoData.value
     )
   }  
-// useServerSeoMeta({
+// useSeoMeta({
 //   title: 'Срочный выкуп квартир в Павловском-посаде | Эксперт',
 //   ogTitle: 'Срочный выкуп квартир в Павловском-посаде | Эксперт',
 //   description: 'Срочный выкуп квартир и другой недвижимости в Павловском-посаде',

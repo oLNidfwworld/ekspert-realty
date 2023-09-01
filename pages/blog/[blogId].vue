@@ -7,8 +7,12 @@ const { data:blogElement, pending, error, refresh } = await useAsyncData(
     () => useApiFetch(`/Blog/${route.params.blogId}/`)
 );
 const goBack = () => {
-  navigateTo('/blog')
+  navigateTo('/blog/')
 }
+useSeoMeta({
+  title : blogElement.value[0].SEO.ELEMENT_META_TITLE,
+  description : blogElement.value[0].SEO.ELEMENT_META_DESCRIPTION
+})
 </script>
 <template>
   <div>

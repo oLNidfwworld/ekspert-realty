@@ -48,9 +48,9 @@ const currentYear = new Date().getFullYear()
                     <a href="tel:+79015178651">+7 901 517-86-51</a>
                   </span>
               <ul class="socials">
-                <nuxt-link>
+                <!-- <nuxt-link>
                   <nuxt-icon width="30px" height="30px" name="Viber"/>
-                </nuxt-link>
+                </nuxt-link> -->
                 <nuxt-link href="https://wa.me/79015178651">
                   <nuxt-icon width="30px" height="30px" name="WhatsApp"/>
                 </nuxt-link>
@@ -62,7 +62,7 @@ const currentYear = new Date().getFullYear()
                 </nuxt-link>
               </ul>
               <p class="text-sm">
-                МО, г.Павловский Посад,<br> ул. Кирова, д.91
+                <a href="https://yandex.ru/maps/-/CDQWu6KJ">МО, г.Павловский Посад,<br> ул. Кирова, д.91</a>
               </p>
             </div>
           </div>

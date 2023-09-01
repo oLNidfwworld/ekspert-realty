@@ -47,7 +47,10 @@ const isMapHref = computed(()=>{
         </div>
       </transition-group>
       <div class="filter__main__bottom">
-        <e-btn class="btn-map" :to="{path: '/map'}"><nuxt-icon class="text-red mr-2" width="30px" height="30px" name="MapMarker"/> На карте</e-btn>
+        <e-btn class="btn-map" @click="()=>{
+          filter.filterThisShitForMap(filterParams.filter);
+          navigateTo('/map');
+          }"><nuxt-icon class="text-red mr-2" width="30px" height="30px" name="MapMarker"/> На карте</e-btn>
         <e-btn class="btn-red" style="padding: 8px;" @click="(isMapHref)?filter.filterThisShit(filterParams.filter):filter.filterThisShitForMap(filterParams.filter)">Показать</e-btn>
         <e-btn v-if="filterParams.filter.length > 5" class="btn-green filter__main-btn-extended" style="padding: 8px;" @click="isAdditionalPropsActive = !isAdditionalPropsActive">Расширенный фильтр</e-btn>
       </div>
