@@ -45,14 +45,27 @@
 </template>
 
 <script lang="ts" setup>
-import {useSeoMeta} from "@unhead/vue";
+import {useServerSeoMeta} from "@unhead/vue";
+const route = useRoute();
+  const { data : seoData } = await useAsyncData(
+      () => useApiFetch(`/Seo/`,{
+        query : {
+          'link' : route.path,
+        }
+      }), 
+  ); 
 
-useSeoMeta({
-  title: 'Срочный выкуп квартир в Павловском-посаде | Эксперт',
-  ogTitle: 'Срочный выкуп квартир в Павловском-посаде | Эксперт',
-  description: 'Срочный выкуп квартир и другой недвижимости в Павловском-посаде',
-  ogDescription : 'Срочный выкуп квартир и другой недвижимости в Павловском-посаде'
-})
+  if(seoData.value){
+    useServerSeoMeta( 
+      seoData.value
+    )
+  }  
+// useServerSeoMeta({
+//   title: 'Срочный выкуп квартир в Павловском-посаде | Эксперт',
+//   ogTitle: 'Срочный выкуп квартир в Павловском-посаде | Эксперт',
+//   description: 'Срочный выкуп квартир и другой недвижимости в Павловском-посаде',
+//   ogDescription : 'Срочный выкуп квартир и другой недвижимости в Павловском-посаде'
+// })
 </script>
 
 <style scoped>

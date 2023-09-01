@@ -16,6 +16,19 @@ const {data:catalog, refresh, pending} = await useApiFetchWithRefresh('/CatalogB
     size: `9999`
   },
 })
+const { data : seoData } = await useAsyncData(
+      () => useApiFetch(`/Seo/`,{
+        query : {
+          'link' : route.path,
+        }
+      }), 
+  ); 
+
+  if(seoData.value){
+    useServerSeoMeta( 
+      seoData.value
+    )
+  }  
 
 console.log(JSON.stringify(favStore.favoriteList))
 console.log(favStore.favoriteList)

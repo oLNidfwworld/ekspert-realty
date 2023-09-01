@@ -19,8 +19,10 @@
   let allData = ref([])
 
   const searchOnInput = useThrottleFn(async (e) => {
-    allData.value = await useApiFetch(`/CatalogSearch/${searchValue.value}`, {
-      method: 'POST'
+    allData.value = await useApiFetch(`/CatalogSearch/`, {
+      query : {
+        'query' : searchValue.value,
+      }
     })
   }, 600)
 

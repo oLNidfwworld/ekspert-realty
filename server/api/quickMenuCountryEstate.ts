@@ -4,11 +4,11 @@ export default defineEventHandler((event) => {
         links: [
             {
                 name:'Купить дом',
-                url: '/realty/all-cities/buy/zagorodnaya/house/'
+                url: '/realty/all-cities/buy/zagorodnaya/house'
             },
             {
                 name:'Купить долю',
-                url: '/realty/all-cities/buy/zagorodnaya/part/'
+                url: '/realty/all-cities/buy/zagorodnaya/part'
             },
             // {
             //     name:'Купить участок',
@@ -16,7 +16,7 @@ export default defineEventHandler((event) => {
             // },
             {
                 name:'Купить дачу',
-                url: '/realty/all-cities/buy/zagorodnaya/dacha/'
+                url: '/realty/all-cities/buy/zagorodnaya/dacha'
             }
 
         ]

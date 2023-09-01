@@ -12,6 +12,21 @@ import Skeleton from "primevue/skeleton";
 
 const route = useRoute();
 const router = useRouter();
+
+const { data : seoData } = await useAsyncData(
+      () => useApiFetch(`/Seo/`,{
+        query : {
+          'link' : route.path,
+        }
+      }), 
+  ); 
+
+  if(seoData.value){
+    useServerSeoMeta( 
+      seoData.value
+    )
+  }  
+
 const page = computed(() => {
   return route.query.page ? route.query.page.toString() : '1'
 })

@@ -4,15 +4,15 @@ export default defineEventHandler((event) => {
         links: [
             {
                 name:'Вторичную',
-                url: '/realty/rent/sub-ar_vtorichka'
+                url: '/realty/all-cities/rent/vtorichka/'
             },
             {
                 name:'Загородную',
-                url: '/realty/rent/sub-ar_kommerchskaya'
+                url: '/realty/all-cities/rent/zagorodnaya/'
             },
             {
                 name:'Коммерческую',
-                url: '/realty/rent/sub-ar_zagorodnaya'
+                url: '/realty/all-cities/rent/zagorodnaya/'
             },
         ]
     }

@@ -27,11 +27,13 @@ const filterPrice = ref(0)
 const filter = useFilterStore()
 
 const searchProduct = useThrottleFn(async (e) => {
-  console.log(e.target.value)
-  searchResult.value = await useApiFetch('/Filter/', {
-    method: 'POST',
-    params: { search: e.target.value}
-  })
+  
+  if(e.target.value.length > 3){
+      searchResult.value = await useApiFetch('/CatalogObjectIdSearch/', {
+      method: 'POST',
+      params: { search: e.target.value}
+    }) 
+  }
 }, 1000)
 const searchResult = <Ref>ref(null)
 const searchString = ref('')
@@ -71,7 +73,7 @@ const isMapHref = computed(()=>{
           <e-input class="relative" type="text" v-model="searchString" @input="searchProduct" placeholder="Поиск по ID объекта"/>
           <ul class="bg-white py-2 absolute z-2 top-[38px]" style="z-index: 11;" v-if="searchString.length > 3 && searchResult.items">
             <li class="search-item px-3 my-2 hover:bg-grey" v-for="(item, index) in searchResult.items" :key="index">
-              <NuxtLink :to="{path: `/realty/${item.rootSection}/${item.id}`}">{{item.name}}</NuxtLink>
+              <NuxtLink :to="{path: `/realty/immovable-${item.id}`}">{{item.name}}</NuxtLink>
             </li>
           </ul>
         </div>

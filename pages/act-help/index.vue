@@ -2,9 +2,23 @@
 
 import EBtn from "~/components/Base/E-btn.vue";
 import EInput from "~/components/Base/E-input.vue";
-import {useSeoMeta} from "unhead";
+import {useServerSeoMeta} from "unhead";
 import {watch} from "vue";
 import ETextarea from "../../components/Base/E-textarea.vue";
+  const route = useRoute();
+  const { data : seoData } = await useAsyncData(
+      () => useApiFetch(`/Seo/`,{
+        query : {
+          'link' : route.path,
+        }
+      }), 
+  ) 
+ 
+  if(seoData.value){
+    useSeoMeta( 
+      seoData.value
+    )
+  }  
 
 const sendData = async (e) => {
 
@@ -41,14 +55,7 @@ const name = ref(null),phone = ref(undefined),email = ref(undefined),comment = r
 const validation = ref(false),validationMessage = ref('');
 
 
-
-useSeoMeta({
-  title : 'Составление договоров | Эксперт',
-  ogTitle : 'Составление договоров | Эксперт',
-  description : 'Эксперт. Агенство недвижимости.',
-  ogDescription : 'Эксперт. Агенство недвижимости.',
-})
-
+ 
 
 </script>
 <template>

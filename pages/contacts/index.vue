@@ -1,17 +1,31 @@
 <script setup>
-import {useSeoMeta} from "@unhead/vue";
+import {useServerSeoMeta} from "@unhead/vue";
 
 const mapCenter = ref([55.780826, 38.670362])
 
 const controls = ['fullscreenControl'];
 const detailedControls = { zoomControl: { position: { right: 10, top: 50 } } };
 
-useSeoMeta({
-  title: 'Контакты | Эксперт',
-  ogTitle: 'Контакты | Эксперт',
-  description: 'Если у вас возникли вопросы, предложения, или вы хотите отправить заявку, вы можете использовать форму ниже или связаться по любому из указанных выше контактов.',
-  ogDescription: 'Если у вас возникли вопросы, предложения, или вы хотите отправить заявку, вы можете использовать форму ниже или связаться по любому из указанных выше контактов.',
-})
+// useServerSeoMeta({
+//   title: 'Контакты | Эксперт',
+//   ogTitle: 'Контакты | Эксперт',
+//   description: 'Если у вас возникли вопросы, предложения, или вы хотите отправить заявку, вы можете использовать форму ниже или связаться по любому из указанных выше контактов.',
+//   ogDescription: 'Если у вас возникли вопросы, предложения, или вы хотите отправить заявку, вы можете использовать форму ниже или связаться по любому из указанных выше контактов.',
+// })
+
+  const { data : seoData } = await useAsyncData(
+      () => useApiFetch(`/Seo/`,{
+        query : {
+          'link' : route.path,
+        }
+      }), 
+  ); 
+
+  if(seoData.value){
+    useServerSeoMeta( 
+      seoData.value
+    )
+  }  
 
 
 </script>

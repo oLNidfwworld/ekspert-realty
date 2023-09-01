@@ -22,10 +22,11 @@ const transition = (to, from) => {
   return +to.query.page < +from.query.page ? 'slide-right' : 'slide-left'
 }
 const route = useRoute()
-const filter = useFilterStore()
-useSeoMeta({
-  keywords : 'недвижимость,жильё,квартиры,дачи,дома,коттеджи,комнаты,аренда',
-})
+const filter = useFilterStore() 
+
+ 
+
+
 </script>
 <template>
     <div class="page-wrapper">

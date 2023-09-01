@@ -6,8 +6,21 @@ import {computed, onMounted, ref, useApiFetchWithRefresh, watch} from "#imports"
   import ProductCard from "~/components/Catalog/ProductCard.vue";
 import {useSearchStore} from "~/store/search";
 const route = useRoute()
-const router = useRouter()
+const router = useRouter() 
 
+  const { data : seoData } = await useAsyncData(
+      () => useApiFetch(`/Seo/`,{
+        query : {
+          'link' : route.path,
+        }
+      }), 
+  ); 
+
+  if(seoData.value){
+    useServerSeoMeta( 
+      seoData.value
+    )
+  }  
 const searchStore = useSearchStore();
 const {data:catalog, pending, error, refresh} = await useAsyncData(
     () => useApiFetch('/CatalogByIds/', {

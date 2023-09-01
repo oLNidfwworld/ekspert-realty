@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import QuickMenu from "../components/QuickMenu";
 import ProductTile from "../components/Catalog/ProductTile";
-import {useApiFetch} from "~/composables/api";
-import {useSeoMeta} from "@unhead/vue";
-
+import {useApiFetch} from "~/composables/api"; 
+import {useServerSeoMeta} from "unhead";
+const route = useRoute();
 const { data: quickMenuRent } = await useAsyncData(
     () => $fetch(`/api/quickMenuRent`)
 )
@@ -19,14 +19,22 @@ const { data: quickMenuCommerce } = await useAsyncData(
 const { data:recommended, pending, error, refresh } = await useAsyncData(
     () => useApiFetch(`/Catalog`)
 )
-useSeoMeta({
-  title: 'Агентство недвижимости в Павловском Посаде - Эксперт',
-  ogTitle: 'Агентство недвижимости в Павловском Посаде - Эксперт',
-  description: 'Купить квартиру, комнату, дом, коттедж, дачу, земельный участок или коммерческую недвижимость по доступным ценам. Удобный поиск загородной и городской недвижимости. Юридические услуги по недвижимости.',
-  ogDescription: 'Купить квартиру, комнату, дом, коттедж, дачу, земельный участок или коммерческую недвижимость по доступным ценам. Удобный поиск загородной и городской недвижимости. Юридические услуги по недвижимости.',
-})
 
-console.log(recommended.value)
+const { data : seoData } = await useAsyncData(
+    () => useApiFetch(`/Seo/`,{
+      query : {
+        'link' : route.path,
+      }
+    }), 
+); 
+console.log(seoData.value)
+if(seoData.value){
+  useSeoMeta( 
+    seoData.value
+  )
+}  
+ 
+ 
 const left = ref(null)
 const right = ref(null)
 </script>

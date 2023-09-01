@@ -10,6 +10,21 @@ import Skeleton from "primevue/skeleton";
 import NoProducts from "~/components/Catalog/NoProducts.vue";
 const route = useRoute();
 const router = useRouter();
+ 
+  const { data : seoData } = await useAsyncData(
+      () => useApiFetch(`/Seo/`,{
+        query : {
+          'link' : route.path,
+        }
+      }), 
+  ); 
+
+  if(seoData.value){
+    useServerSeoMeta( 
+      seoData.value
+    )
+  }  
+
 const page = computed(() => {
   return route.query.page ? route.query.page.toString() : '1'
 })
@@ -33,15 +48,13 @@ const {data : metaData} = useAsyncData(
         joint : 'tr'
       }
     }
-)
-console.log(catalogItems.value)
+) 
 watch(() => route.query, (cur) => {
   refresh()
 })
 if(catalogItems.value.status === '404'){
   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
-}
-console.log(catalogItems.value)
+} 
 </script>
 <template>
   <div v-if="pending">

@@ -4,15 +4,15 @@ export default defineEventHandler((event) => {
         links: [
             {
                 name:'1-комнатные',
-                url: '/realty/all-cities/rent/vtorichka/dnokomnatnye'
+                url: '/realty/all-cities/rent/vtorichka/dnokomnatnye/'
             },
             {
                 name:'2-комнатные',
-                url: '/realty/all-cities/rent/vtorichka/dvuhkomnatnye'
+                url: '/realty/all-cities/rent/vtorichka/dvuhkomnatnye/'
             },
             {
                 name:'3-комнатные',
-                url: '/realty/all-cities/rent/vtorichka/tryohkomnatnye'
+                url: '/realty/all-cities/rent/vtorichka/tryohkomnatnye/'
             },
             // {
             //     name:'Квартиры-студии',
@@ -20,7 +20,7 @@ export default defineEventHandler((event) => {
             // },
             {
                 name:'Комнаты в квартире',
-                url: '/realty/all-cities/rent/vtorichka/komnata'
+                url: '/realty/all-cities/rent/vtorichka/komnata/'
             },
         ]
     }

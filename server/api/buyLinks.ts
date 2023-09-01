@@ -1,22 +1,18 @@
 /* Здесь храним пункты меню для навигации по сайту (для шапки и подвала) */
 export default defineEventHandler((event) => {
-    return {
+    return { 
         links: [
             {
                 name:'Вторичную',
-                url: '/realty/buy/sub-flats_and_rooms'
-            },
-            {
-                name:'Новостройки',
-                url: '/realty/buy/sub-novostroiky'
+                url: '/realty/all-cities/buy/vtorichka/'
             },
             {
                 name:'Загородную',
-                url: '/realty/buy/sub-zagorodnaya'
+                url: '/realty/all-cities/buy/zagorodnaya/'
             },
             {
                 name:'Коммерческую',
-                url: '/realty/buy/sub-ar_kommerchskaya'
+                url: '/realty/all-cities/buy/zagorodnaya/'
             },
         ]
     }

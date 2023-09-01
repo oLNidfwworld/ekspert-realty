@@ -1,12 +1,25 @@
 <script setup lang="ts">
-  import {useSeoMeta} from "@unhead/vue";
+  import {useServerSeoMeta} from "@unhead/vue";
+  const route = useRoute();
+  const { data : seoData } = await useAsyncData(
+      () => useApiFetch(`/Seo/`,{
+        query : {
+          'link' : route.path,
+        }
+      }), 
+  ); 
 
-  useSeoMeta({
-    title: 'Услуги',
-    ogTitle: 'Услуги',
-    description: 'Эксперт. Агенство недвижимости.',
-    ogDescription: 'Эксперт. Агенство недвижимости.',
-  })
+  if(seoData.value){
+    useServerSeoMeta( 
+      seoData.value
+    )
+  }  
+  // useServerSeoMeta({
+  //   title: 'Услуги',
+  //   ogTitle: 'Услуги',
+  //   description: 'Эксперт. Агенство недвижимости.',
+  //   ogDescription: 'Эксперт. Агенство недвижимости.',
+  // })
 </script>
 <template>
   <div>
