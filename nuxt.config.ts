@@ -8,8 +8,7 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             API_BASE_URL: process.env.API_BASE_URL,
-            UPLOAD_URL: process.env.UPLOAD_URL,
-            dev : process.env.UPLOAD_URL
+            UPLOAD_URL: process.env.UPLOAD_URL, 
         },
     },
     app: {
@@ -24,15 +23,14 @@ export default defineNuxtConfig({
         head : {
             meta : [
                 { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0' }
-            ],
-            
+            ],  
         }
     },
     build : {
         transpile: ["primevue"]
     },
     head: [
-        { rel: 'icon', type: 'image/x-icon', href: '/public/favicon.ico' },
+        { rel: 'icon', type: 'image/x-icon', href: '/public/favicon.ico' }
     ],
     loadingIndicator: {
         color: '#E02D1F',
@@ -44,30 +42,13 @@ export default defineNuxtConfig({
             {
                 autoImports: ['defineStore', 'acceptHMRUpdate'],
             }
-        ],
-        [
-            '@nuxtjs/yandex-metrika',
-            {
-              id: '5096872',
-              clickmap:true,
-                trackLinks:true,
-                accurateTrackBounce:true,
-                webvisor:true
-
-            }
-          ],
+        ], 
         '@nuxt/image-edge',
         '@vueuse/nuxt',
         'nuxt-icons',
         'nuxt-swiper',
 
-    ],
-    publicRuntimeConfig: {
-        yandexMetrika: {
-          id: 5096872,
-          // ...
-        }
-      },
+    ], 
     routeRules: {
         '/contacts/index.php': {
             redirect : {
