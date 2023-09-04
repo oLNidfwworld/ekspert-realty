@@ -15,6 +15,9 @@ export const useFilterStore = defineStore('filter', () =>{
     const filterImmovableProp = <Ref>ref('all-immovable-properties');
     const filterImmovablePropParams = <Ref>ref('');
 
+    const defaultPageTitle = 'Эксперт недвижимость';
+    const pageTitle  = ref(defaultPageTitle);
+
     const mapData = ref(null);
 
     const setFilterServiceType = async  (params: Object) => {
@@ -98,8 +101,10 @@ export const useFilterStore = defineStore('filter', () =>{
         filterImmovablePropParams.value =  paramsPart;
     }
     const filterThisShit = async (params: Object) => {
-        await formatParams(params);
+        await formatParams(params); 
         navigateTo(`/realty/${filterCity.value}/${filterServiceType.value}/${filterImmovableType.value}/${filterImmovableProp.value}/${filterImmovablePropParams.value}`)
+    } 
+    const generateTitle = () => { 
     }
     const nullifyFilterResult = () => {
         filterResult.value = [];
@@ -126,6 +131,8 @@ export const useFilterStore = defineStore('filter', () =>{
         setFilterServiceType,
         setFilterImmovableType,
         filterThisShitForMap,
+        pageTitle,
+        generateTitle,
         filterCity,
         filterServiceType,
         mapData,
