@@ -16,7 +16,7 @@ export default defineNuxtConfig({
         //     name: 'page-fading',
         //     mode: 'out-in', // default
         // },
-        // layoutTransition : {
+        // layoutTransition : { 
         //         name: 'page-fading',
         //         mode: 'out-in' // default
         // }
@@ -24,28 +24,7 @@ export default defineNuxtConfig({
             meta : [
                 { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0' }
             ],
-//             script : [
-//                 {
-//                     innerHTML : `
-//                     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-//    m[i].l=1*new Date();
-//    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-//    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-//    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-//    ym(5096872, "init", {
-//         clickmap:true,
-//         trackLinks:true,
-//         accurateTrackBounce:true,
-//         webvisor:true
-//    });
-
-//                     `,
-//                     type : 'text/javascript',
-//                     defer : true,
-//                 }
-
-//             ]
+            
         }
     },
     build : {
@@ -65,16 +44,17 @@ export default defineNuxtConfig({
                 autoImports: ['defineStore', 'acceptHMRUpdate'],
             }
         ],
-        ['@nuxtjs/yandex-metrika',
+        [
+            '@nuxtjs/yandex-metrika',
             {
-                id: 5096872,
-                clickmap:true,
+              id: '5096872',
+              clickmap:true,
                 trackLinks:true,
                 accurateTrackBounce:true,
                 webvisor:true
-        
+
             }
-        ],
+          ],
         '@nuxt/image-edge',
         '@vueuse/nuxt',
         'nuxt-icons',

@@ -26,7 +26,6 @@
     "primevue": "^3.31.0",
     "vue": "^3.2.47",
     "vue-imask": "^6.4.3",
-    "vue-yandex-maps": "^1.0.7",
-    "vue3-yandex-metrika": "^0.0.3"
+    "vue-yandex-maps": "^1.0.7"
   }
 }
