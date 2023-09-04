@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             API_BASE_URL: process.env.API_BASE_URL,
-            UPLOAD_URL: process.env.UPLOAD_URL
+            UPLOAD_URL: process.env.UPLOAD_URL,
+            dev : process.env.UPLOAD_URL
         },
     },
     app: {
@@ -61,6 +62,12 @@ export default defineNuxtConfig({
         'nuxt-swiper',
 
     ],
+    publicRuntimeConfig: {
+        yandexMetrika: {
+          id: 5096872,
+          // ...
+        }
+      },
     routeRules: {
         '/contacts/index.php': {
             redirect : {
@@ -85,7 +92,7 @@ export default defineNuxtConfig({
         },
     },
     alias: {
-        pinia: "/node_modules/@pinia/nuxt/node_modules/pinia/dist/pinia.mjs"
+        pinia: "/node_modules/@pinia/nuxt/node_modules/pinia/dist/pinia.mjs" 
     },
     ssr : true,
 })
