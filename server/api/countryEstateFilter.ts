@@ -47,7 +47,7 @@ export default defineEventHandler((event) => {
                 value: null
             },
             {
-                label: 'Площадь участка, м2',
+                label: 'Площадь участка, сот.',
                 name: 'plotarea',
                 type: 'multiInput',
                 data: {

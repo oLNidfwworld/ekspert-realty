@@ -6,6 +6,7 @@ import {computed, watch} from "vue";
 import Pagination from "../../../../../../components/Base/Pagination";
 import EBtn from "../../../../../../components/Base/E-btn";
 
+import {useFilterStore} from "~/store/smartFilter";
 import Skeleton from "primevue/skeleton";
 import NoProducts from "~/components/Catalog/NoProducts.vue";
 const route = useRoute();
@@ -24,6 +25,8 @@ const { data : seoData } = await useAsyncData(
       seoData.value
     )
   }  
+
+
 
 const page = computed(() => {
   return route.query.page ? route.query.page.toString() : '1'
@@ -54,6 +57,9 @@ watch(() => route.query, (cur) => {
   refresh()
 })
 
+const filter = useFilterStore();
+
+filter.pageTitle = catalogItems.value.title;
 </script>
 <template>
   <div v-if="pending">

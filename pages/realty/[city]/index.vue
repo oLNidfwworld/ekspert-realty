@@ -6,6 +6,7 @@ import {computed, watch} from "vue";
 import Pagination from "../../../components/Base/Pagination";
 import EBtn from "../../../components/Base/E-btn";
 
+import {useFilterStore} from "~/store/smartFilter";
 import Skeleton from "primevue/skeleton";
 import NoProducts from "~/components/Catalog/NoProducts.vue";
 const route = useRoute();
@@ -40,15 +41,13 @@ const { data: catalogItems, pending, error, refresh } = await useAsyncData(
           }
         }
     )
-)
-const {data : metaData} = useAsyncData(
-    () => $fetch('/api/seoSectionMeta'),
-    {
-      query : {
-        joint : 'tr'
-      }
-    }
 ) 
+
+const filter = useFilterStore();
+
+filter.pageTitle = catalogItems.value.title;
+
+
 watch(() => route.query, (cur) => {
   refresh()
 })

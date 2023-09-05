@@ -6,6 +6,7 @@ import {computed, watch} from "vue";
 import Pagination from "../../../../components/Base/Pagination";
 import EBtn from "../../../../components/Base/E-btn";
 
+import {useFilterStore} from "~/store/smartFilter";
 import Skeleton from "primevue/skeleton";
 import NoProducts from "~/components/Catalog/NoProducts.vue";
 const route = useRoute();
@@ -43,14 +44,13 @@ const { data: catalogItems, pending, error, refresh } = await useAsyncData(
 )
 watch(() => route.query, (cur) => {
   refresh()
-})
-// onUnmounted(()=>{
-//   catalogItems.value = null;
-// })
+}) 
 if(catalogItems.value.status === '404'){
   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
 }
-console.log(catalogItems.value)
+const filter = useFilterStore();
+
+filter.pageTitle = catalogItems.value.title;
 </script>
 <template>
   <div v-if="pending">

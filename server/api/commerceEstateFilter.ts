@@ -43,8 +43,8 @@ export default defineEventHandler((event) => {
                 value: null
             },
             {
-                label: 'Площадь дома, м2',
-                name: 'Square',
+                label: 'Общая площадь, м2',
+                name: 'totalarea',
                 type: 'multiInput',
                 data: {
                     min: 0,
@@ -53,8 +53,8 @@ export default defineEventHandler((event) => {
                 value: null
             },
             {
-                label: 'Площадь участка, м2',
-                name: 'Square_sec',
+                label: 'Площадь участка, сот.',
+                name: 'plotarea',
                 type: 'multiInput',
                 data: {
                     min: 0,

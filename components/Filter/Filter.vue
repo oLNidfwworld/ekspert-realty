@@ -52,10 +52,7 @@ const isMapHref = computed(()=>{
   }else{
     return ''
   }
-}) 
-watch(()=> route.path , ()=>{
-  filter.generateTitle();
-})
+})  
 </script>
 <template>
   <section class="filter__wrapper">
@@ -87,7 +84,7 @@ watch(()=> route.path , ()=>{
     </div>
   </section>
 </template>
-<style lang="postcss" >
+<style  >
 .filter {
   &__wrapper {
     @apply flex justify-center bg-cover mb-5 w-full;
@@ -101,7 +98,11 @@ watch(()=> route.path , ()=>{
     }
   }
   &__title {
-    @apply font-bold text-4xl;
+    @apply font-bold text-4xl; 
+  }
+  &__title::first-letter{
+
+    text-transform: uppercase;
   }
   &__type {
     @apply flex bg-grey rounded-md font-bold w-full sm:w-fit mb-10 text-2xl md:text-3xl justify-between;

@@ -3,6 +3,7 @@ import QuickMenu from "../components/QuickMenu";
 import ProductTile from "../components/Catalog/ProductTile";
 import {useApiFetch} from "~/composables/api"; 
 import {useServerSeoMeta} from "unhead";
+import { useFilterStore } from "~~/store/smartFilter";
 const route = useRoute();
 const { data: quickMenuRent } = await useAsyncData(
     () => $fetch(`/api/quickMenuRent`)
@@ -33,7 +34,10 @@ if(seoData.value){
     seoData.value
   )
 }  
- 
+
+const filter = useFilterStore()
+
+filter.pageTitle = 'Эксперт недвижимость';
  
 const left = ref(null)
 const right = ref(null)
