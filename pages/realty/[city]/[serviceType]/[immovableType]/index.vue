@@ -32,9 +32,11 @@ const { data: catalogItems, pending, error, refresh } = await useAsyncData(
         }
     )
 )
-watch(() => route.query, (cur) => {
-  refresh()
-})
+
+
+if(catalogItems.value.status === '404'){
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+}
 
 const filter = useFilterStore();
 
@@ -46,11 +48,10 @@ useSeoMeta( {
   description : catalogItems.value.description
 })
 
-console.log(catalogItems.value)
+watch(() => route.query, (cur) => {
+  refresh()
+}) 
 
-if(catalogItems.value.status === '404'){
-  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
-}
 </script>
 <template>
   <div v-if="pending">
