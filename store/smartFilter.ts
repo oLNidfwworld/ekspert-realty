@@ -102,10 +102,7 @@ export const useFilterStore = defineStore('filter', () =>{
     const filterThisShit = async (params: Object) => {
         await formatParams(params); 
         navigateTo(`/realty/${filterCity.value}/${filterServiceType.value}/${filterImmovableType.value}/${filterImmovableProp.value}/${filterImmovablePropParams.value}`)
-    }  
-    const nullifyFilterResult = () => {
-        filterResult.value = [];
-    }
+    }   
     const filterItemById = async (params: Object) => {
         filterResult.value = await useApiFetch('/Filter/', {
             method: 'POST',
@@ -122,7 +119,7 @@ export const useFilterStore = defineStore('filter', () =>{
                 }
             }
             )
-            pageTitle.value = mapData.value.title
+            pageTitle.value = mapData.value.titler
     }
     return {
         setFilterServiceType,
@@ -135,8 +132,7 @@ export const useFilterStore = defineStore('filter', () =>{
         filterImmovableProp,
         filterImmovablePropParams,
         filterImmovableType,
-        filterResult,
-        nullifyFilterResult,
+        filterResult, 
         filterThisShit,
         filterType,
         setFilterType,
