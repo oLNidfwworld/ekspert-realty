@@ -50,20 +50,21 @@ export default defineNuxtConfig({
 
     ], 
     routeRules: {
-        '/mortgage/**': {
+        '/mortgage//': {
             redirect : {
                 to : "/services/mortpage/",
                 statusCode : 301,
             }
-        },
-        '/act-help/**': {
+        }, 
+        '/test//': {
             redirect : {
-                to : "http://sliva24.ru", 
+                to : "https://sliva24.ru",
+                statusCode : 301,
             }
-        },
-        '/contact/': {
+        }, 
+        '/contact//': {
             redirect : {
-                to : "/contacts/",
+                to : "/contacts//",
                 statusCode : 301,
             }
         }, 
@@ -97,91 +98,91 @@ export default defineNuxtConfig({
                 statusCode : 301,
             }
         },
-        '/realty/rooms_and_flats/': {
+        '/realty/rooms_and_flats//': {
             redirect : {
                 to : "/realty/all-cities/buy/vtorichka/",
                 statusCode : 301,
             }
         },
-        '/realty/rooms_and_flats/komnata-v-pp/': {
+        '/realty/rooms_and_flats/komnata-v-pp//': {
             redirect : {
                 to : "/realty/pavlovskiy_posad/buy/vtorichka/komnata/",
                 statusCode : 301,
             }
         },
-        '/realty/rooms_and_flats/kvartira-1-komnatnaya/': {
+        '/realty/rooms_and_flats/kvartira-1-komnatnaya//': {
             redirect : {
                 to : "/realty/all-cities/buy/vtorichka/dnokomnatnye/",
                 statusCode : 301,
             }
         },
-        '/realty/rooms_and_flats/kvartira-1-komnatnaya-v-pp/': {
+        '/realty/rooms_and_flats/kvartira-1-komnatnaya-v-pp//': {
             redirect : {
                 to : "/realty/pavlovskiy_posad/buy/vtorichka/dnokomnatnye/",
                 statusCode : 301,
             }
         },
-        '/realty/rooms_and_flats/kvartira-2-komnatnaya-v-pp/': {
+        '/realty/rooms_and_flats/kvartira-2-komnatnaya-v-pp//': {
             redirect : {
                 to : "/realty/pavlovskiy_posad/buy/vtorichka/dvuhkomnatnye/",
                 statusCode : 301,
             }
         },
-        '/realty/rooms_and_flats/kvartira-3-komnatnaya/': {
+        '/realty/rooms_and_flats/kvartira-3-komnatnaya//': {
             redirect : {
                 to : "/realty/all-cities/buy/vtorichka/tryohkomnatnye/",
                 statusCode : 301,
             }
         },
-        '/realty/rooms_and_flats/kvartira-3-komnatnaya-v-pp/': {
+        '/realty/rooms_and_flats/kvartira-3-komnatnaya-v-pp//': {
             redirect : {
                 to : "/realty/pavlovskiy_posad/buy/vtorichka/tryohkomnatnye/",
                 statusCode : 301,
             }
         },
-        '/realty/country_real_estate/': {
+        '/realty/country_real_estate//': {
             redirect : {
                 to : "/realty/all-cities/buy/zagorodnaya/",
                 statusCode : 301,
             }
         },
-        '/realty/commercial_real_estate/': {
+        '/realty/commercial_real_estate//': {
             redirect : {
                 to : "/realty/all-cities/buy/commerce/",
                 statusCode : 301,
             }
         },
-        '/realty/commercial_real_estate/offices/': {
+        '/realty/commercial_real_estate/offices//': {
             redirect : {
                 to : "/realty/all-cities/buy/commerce/office/",
                 statusCode : 301,
             }
         },
-        '/realty/commercial_real_estate/svobodnoye-naznachenie/': {
+        '/realty/commercial_real_estate/svobodnoye-naznachenie//': {
             redirect : {
                 to : "/realty/all-cities/buy/commerce/any_goal_room/",
                 statusCode : 301,
             }
         },
-        '/realty/commercial_real_estate/torgovoe-pomeshenie/': {
+        '/realty/commercial_real_estate/torgovoe-pomeshenie//': {
             redirect : {
                 to : "/realty/all-cities/buy/commerce/trade_space/",
                 statusCode : 301,
             }
         },
-        '/realty/commercial_real_estate/zemlya/': {
+        '/realty/commercial_real_estate/zemlya//': {
             redirect : {
                 to : "/realty/all-cities/buy/commerce/area/",
                 statusCode : 301,
             }
         },
-        '/realty/rent/rent_flats_and_romms/': {
+        '/realty/rent/rent_flats_and_romms//': {
             redirect : {
                 to : "/realty/all-cities/rent/vtorichka/",
                 statusCode : 301,
             }
         },
-        '/realty/rent/commerc/': {
+        '/realty/rent/commerc//': {
             redirect : {
                 to : "/realty/all-cities/rent/commerce/",
                 statusCode : 301,
