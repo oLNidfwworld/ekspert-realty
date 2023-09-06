@@ -73,8 +73,8 @@ const currUrl = () => {
   return location.href;
 }
 useSeoMeta({
-  title : (product.value.item.seoProps.ELEMENT_META_TITLE)? product.value.item.seoProps.ELEMENT_META_TITLE : product.value.item.name + ' | Эксперт'  ,
-  description : (product.value.item.seoProps.ELEMENT_META_DESCRIPTION)?product.value.item.seoProps.ELEMENT_META_DESCRIPTION: '', 
+  title : `${product.value.item.name} | Эксперт` ,
+  description : `${product.value.item.typeOffer} ${product.value.item.name} по цене ${product.value.item.price} р. в АН "Эксперт"`,
 })
 
 console.log(product.value)
@@ -200,7 +200,7 @@ console.log(product.value)
           </li>
           <li v-if="product.item.communications" v-for="(comm,commi) in product.item.communications" class="flex flex-col">
             <span>
-              {{ comm.name }}
+              {{ comm.electocity }}
             </span>
             <span class="font-bold">
               Да

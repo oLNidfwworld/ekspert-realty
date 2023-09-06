@@ -47,7 +47,7 @@ const props = defineProps({
         <div class="hidden lg:block bg-cover-n" style="background: url(/services/some-man-writing.png)"> </div>
       </nuxt-link>
 
-      <nuxt-link v-if="!only4" :to="{path:`/services/act-help/`}" class="rounded-[6px] overflow-hidden grid grid-cols-2 bg-grey-light ">
+      <nuxt-link v-if="!only4" :to="{path:`/services/tenants/`}" class="rounded-[6px] overflow-hidden grid grid-cols-2 bg-grey-light ">
         <div CLASS="py-[16px] px-[24px]" >
           <div class="font-bold mb-[14px] text-[15px]">Арендаторам</div>
           <div class="leading-[22px] text-[14px]">Мы составляем договоры, предметом которых являются: квартиры, комнаты, дома, дачи, земельные участки и недвижимость коммерческого назначения различных видов использования</div>

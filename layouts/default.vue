@@ -48,25 +48,25 @@ const { data : seoData } = await useAsyncData(
                 <Filter v-if="route.path === '/'|| route.path === '/map'|| (route.path.split('/')[1] === 'realty' && !route.path.split('/')[2].includes('immovable-')) "/>
                 <div class="top-banner" v-else-if="route.path === '/blog/' || route.path === '/act-help/' ">
                   <div class="m-auto container">
-                    <div class="top-banner__text" v-show="route.path === `/blog/`">Блог</div>
-                    <div class="top-banner__text" v-show="route.path === `/act-help/`">Составление договоров</div>
+                    <h1 class="top-banner__text" v-show="route.path === `/blog/`">Блог</h1>
+                    <h1 class="top-banner__text" v-show="route.path === `/act-help/`">Составление договоров</h1>
                   </div>
                 </div>
                 <div class="f-top-banner" v-else-if="route.path.split('/')[1] === 'services'">
                   <div class="m-auto container">
-                    <div class="top-banner__text" v-show="route.path === '/services/'">Услуги</div>
-                    <div class="top-banner__text" v-show="route.path.split('/')[2] === 'customers'">Покупателям</div>
-                    <div class="top-banner__text" v-show="route.path.split('/')[2] === 'sellers'">Продавцам</div>
-                    <div class="top-banner__text" v-show="route.path.split('/')[2] === 'tenants'">Арендаторам</div>
-                    <div class="top-banner__text" v-show="route.path.split('/')[2] === 'lessors'">Арентодателям</div>
-                    <div class="top-banner__text" v-show="route.path.split('/')[2] === 'srochnyy-vykup-kvartir'">Срочный выкуп</div>
-                    <div class="top-banner__text" v-show="route.path.split('/')[2] === 'mortpage'">Ипотека</div>
+                    <h1 class="top-banner__text" v-show="route.path === '/services/'">Услуги</h1>
+                    <h1 class="top-banner__text" v-show="route.path.split('/')[2] === 'customers'">Покупателям</h1>
+                    <h1 class="top-banner__text" v-show="route.path.split('/')[2] === 'sellers'">Продавцам</h1>
+                    <h1 class="top-banner__text" v-show="route.path.split('/')[2] === 'tenants'">Арендаторам</h1>
+                    <h1 class="top-banner__text" v-show="route.path.split('/')[2] === 'lessors'">Арендодателям</h1>
+                    <h1 class="top-banner__text" v-show="route.path.split('/')[2] === 'srochnyy-vykup-kvartir'">Срочный выкуп</h1>
+                    <h1 class="top-banner__text" v-show="route.path.split('/')[2] === 'mortpage'">Ипотека</h1>
                   </div>
                 </div>
                 <div class="l-top-banner" v-else-if="route.path === '/about/' || route.path === '/contacts/'">
                   <div   class="m-auto container">
-                    <div class="top-banner__text" v-show="route.path === '/about/'">О компании</div>
-                    <div class="top-banner__text" v-show="route.path === '/contacts/'">Контакты</div>
+                    <h1 class="top-banner__text" v-show="route.path === '/about/'">О компании</h1>
+                    <h1 class="top-banner__text" v-show="route.path === '/contacts/'">Контакты</h1>
                   </div>
                 </div>
                 <div v-else class="min-h-[50px]">

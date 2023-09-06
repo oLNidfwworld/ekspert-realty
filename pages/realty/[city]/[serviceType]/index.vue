@@ -12,20 +12,7 @@ import NoProducts from "~/components/Catalog/NoProducts.vue";
 const route = useRoute();
 const router = useRouter();
 
-const { data : seoData } = await useAsyncData(
-      () => useApiFetch(`/Seo/`,{
-        query : {
-          'link' : route.path,
-        }
-      }), 
-  ); 
-
-  if(seoData.value){
-    useSeoMeta( 
-      seoData.value
-    )
-  }  
-
+  
 const page = computed(() => {
   return route.query.page ? route.query.page.toString() : '1'
 })
@@ -50,7 +37,16 @@ if(catalogItems.value.status === '404'){
 }
 const filter = useFilterStore();
 
-filter.pageTitle = catalogItems.value.title;
+filter.pageTitle = catalogItems.value.h1;
+
+
+useSeoMeta( {
+  title : catalogItems.value.title,
+  description : catalogItems.value.description
+})
+
+
+
 </script>
 <template>
   <div v-if="pending">

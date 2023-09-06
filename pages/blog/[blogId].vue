@@ -13,10 +13,17 @@ useSeoMeta({
   title : blogElement.value[0].SEO.ELEMENT_META_TITLE,
   description : blogElement.value[0].SEO.ELEMENT_META_DESCRIPTION
 })
+
+console.log(blogElement.value)
+
 </script>
 <template>
   <div>
-    <div class="blog-element-image" :style="`background-image: url('http://test.ekspert-realty.ru${blogElement[0].DETAIL_PICTURE}')`"></div>
+    <h1>{{ blogElement[0].NAME }}</h1>
+    <div class="relative">
+      <img class="blog-element-image"  :src="`http://test.ekspert-realty.ru${blogElement[0].DETAIL_PICTURE}`"/>
+      <div class="bg-grey absolute top-0 -left-[100%] w-[300%] h-full z-[0]"></div>
+    </div>
     <div v-html="blogElement[0].DETAIL_TEXT " class="blog-element-text">
     </div>
     <button @click="goBack" class="flex items-center">
@@ -29,12 +36,11 @@ useSeoMeta({
 </template>
 <style scoped>
   .blog-element{
+    &-text{
+    @apply mt-4;
+    }
     &-image{
-      width:100%;
-     min-height:400px;
-      background-color: var(--grey-light);
-      background-repeat: no-repeat;
-      background-size:cover;
+      @apply m-auto z-[1] relative;
      }
   }
 </style>

@@ -32,10 +32,9 @@ import {useApiFetchWithRefresh} from "../composables/api";
 </script>
 <template>
   <teleport to="body">
-    <transition     name="appear">
-      <keep-alive>
         <div v-if="isVisible"  @click.self="close($event)" class="popup__outer">
-          <div class="popup">
+    <transition     name="appear"> 
+          <div v-if="isVisible" class="popup">
             <div class="popup__wrapper">
               <transition mode="out-in" name="sliding">
                 <div v-if="!fallbackIncome">
@@ -51,10 +50,9 @@ import {useApiFetchWithRefresh} from "../composables/api";
                 </div>
               </transition>
             </div>
-          </div>
-        </div>
-      </keep-alive>
+          </div> 
     </transition>
+        </div>
   </teleport>
 </template>
 <style lang="postcss">

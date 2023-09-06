@@ -13,20 +13,7 @@ import Skeleton from "primevue/skeleton";
 
 const route = useRoute();
 const router = useRouter();
-
-const { data : seoData } = await useAsyncData(
-      () => useApiFetch(`/Seo/`,{
-        query : {
-          'link' : route.path,
-        }
-      }), 
-  ); 
-
-  if(seoData.value){
-    useSeoMeta( 
-      seoData.value
-    )
-  }  
+ 
 
 
 const page = computed(() => {
@@ -51,7 +38,16 @@ watch(() => route.query, (cur) => {
 
 const filter = useFilterStore();
 
-filter.pageTitle = catalogItems.value.title;
+filter.pageTitle = catalogItems.value.h1;
+
+
+useSeoMeta( {
+  title : catalogItems.value.title,
+  description : catalogItems.value.description
+})
+
+console.log(catalogItems.value)
+
 if(catalogItems.value.status === '404'){
   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
 }

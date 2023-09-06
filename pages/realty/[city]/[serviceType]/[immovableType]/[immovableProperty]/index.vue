@@ -11,20 +11,7 @@ import Skeleton from "primevue/skeleton";
 import NoProducts from "~/components/Catalog/NoProducts.vue";
 const route = useRoute();
 const router = useRouter();
-
-const { data : seoData } = await useAsyncData(
-      () => useApiFetch(`/Seo/`,{
-        query : {
-          'link' : route.path,
-        }
-      }), 
-  ); 
-
-  if(seoData.value){
-    useServerSeoMeta( 
-      seoData.value
-    )
-  }  
+ 
 
 
 
@@ -59,7 +46,14 @@ watch(() => route.query, (cur) => {
 
 const filter = useFilterStore();
 
-filter.pageTitle = catalogItems.value.title;
+filter.pageTitle = catalogItems.value.h1;
+
+
+useSeoMeta( {
+  title : catalogItems.value.title,
+  description : catalogItems.value.description
+})
+
 </script>
 <template>
   <div v-if="pending">
