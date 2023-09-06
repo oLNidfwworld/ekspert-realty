@@ -120,6 +120,7 @@ export const useFilterStore = defineStore('filter', () =>{
             }
             )
             pageTitle.value = mapData.value.titler
+            console.log('ddd')
     }
     return {
         setFilterServiceType,
