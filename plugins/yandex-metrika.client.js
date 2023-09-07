@@ -1,8 +1,9 @@
-export default defineNuxtPlugin(  app   => {
+import { useRouter } from "nuxt/app"
 
+export default defineNuxtPlugin(  app    => {
+    const router = useRouter();
     if (process.env.NODE_ENV !== 'production') return;
- 
-
+  
     (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
     m[i].l=1*new Date();
     for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -16,8 +17,9 @@ export default defineNuxtPlugin(  app   => {
          webvisor:true
     });
  
-  
-    app.router.afterEach((to, from) => {
-      ym(94861471, 'hit', to.fullPath);
-    })
+    router.afterEach((to, from) => {
+        ym(94861471, 'hit', to.fullPath);
+      })
+    console.log(app.vueApp)
+    console.log(app)
   }) 
