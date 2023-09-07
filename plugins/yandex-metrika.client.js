@@ -10,7 +10,7 @@ export default defineNuxtPlugin(  app    => {
     k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
     (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
  
-    ym(94861471, "init", {
+    ym(5096872, "init", {
          clickmap:true,
          trackLinks:true,
          accurateTrackBounce:true,
@@ -18,7 +18,7 @@ export default defineNuxtPlugin(  app    => {
     });
  
     router.afterEach((to, from) => {
-        ym(94861471, 'hit', to.fullPath);
+        ym(5096872, 'hit', to.fullPath);
       })
     console.log(app.vueApp)
     console.log(app)
