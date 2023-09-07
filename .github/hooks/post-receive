@@ -1,0 +1,5 @@
+#!/bin/bash
+ 
+DEPLOY_SCRIPT=/home/node/test/deploy.sh
+ 
+$DEPLOY_SCRIPT
