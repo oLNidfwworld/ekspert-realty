@@ -1,40 +1,32 @@
-name: build and deploy
+name: Deploy to VDS
+
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: ['18.x']
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm run build --if-present
-      - uses: actions/upload-artifact@v3
-        with:
-          name: builded artifacts
-          path: /*
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: builded artifacts
-          path: /*
-      - name: Deploy to Hosting
-        uses: SamKirkland/FTP-Deploy-Action@4.0.0
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir:  ${{ vars.FTP_PATH }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          cd ${{ vars.FTP_PATH }}
+          npm i
+
+      - name: Build Nuxt.js project
+        run: |
+          cd ${{ vars.FTP_PATH }}
+          npm run build
+
+      - name: Deploy to VDS
+        run: |
+          # Замените секреты и адрес VDS на ваше реальное значение
+          ssh ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }} "cd ${{ vars.FTP_PATH }}&& git pull origin master && pm2 restart ekspert-realty"
+
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
