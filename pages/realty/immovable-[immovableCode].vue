@@ -76,8 +76,7 @@ useSeoMeta({
   title : `${product.value.item.name} | Эксперт` ,
   description : `${product.value.item.typeOffer} ${product.value.item.name} по цене ${product.value.item.price} р. в АН "Эксперт"`,
 })
-
-console.log(product.value)
+ 
 </script>
 <template>
   <div class="grid gap-10 catalog-item__detail-wrapper">

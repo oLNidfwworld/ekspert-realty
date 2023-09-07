@@ -13,8 +13,7 @@ useSeoMeta({
   title : blogElement.value[0].SEO.ELEMENT_META_TITLE,
   description : blogElement.value[0].SEO.ELEMENT_META_DESCRIPTION
 })
-
-console.log(blogElement.value)
+ 
 
 </script>
 <template>

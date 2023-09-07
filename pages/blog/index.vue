@@ -28,8 +28,7 @@ const { data: blogg, pending, error, refresh } = await useAsyncData(
           }
         }
     )
-)
-console.log(blogg)
+) 
 
 watch(() => route.query, (cur) => {
   refresh()

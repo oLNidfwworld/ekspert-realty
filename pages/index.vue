@@ -27,8 +27,7 @@ const { data : seoData } = await useAsyncData(
         'link' : route.path,
       }
     }), 
-); 
-console.log(seoData.value)
+);  
 if(seoData.value){
   useSeoMeta( 
     seoData.value

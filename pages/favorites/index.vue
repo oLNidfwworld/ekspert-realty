@@ -29,9 +29,7 @@ const { data : seoData } = await useAsyncData(
       seoData.value
     )
   }  
-
-console.log(JSON.stringify(favStore.favoriteList))
-console.log(favStore.favoriteList)
+ 
 </script>
 <template>
   <ClientOnly>

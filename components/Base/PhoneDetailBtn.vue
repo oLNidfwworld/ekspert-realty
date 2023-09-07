@@ -4,8 +4,7 @@ const props = defineProps({
   agentData: Object,
   variant: String,
 })
-const showPhone = ref(false)
-console.log(props.agentData)
+const showPhone = ref(false) 
 </script>
 <template>
   <div v-if="agentData.name != '' || agentData.phone != ''">

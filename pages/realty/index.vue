@@ -43,8 +43,7 @@ watch(() => route.query, (cur) => {
 })
 if(catalogItems.value.status === '404'){
   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
-}
-console.log(catalogItems.value)
+} 
 </script>
 <template>
   <div>

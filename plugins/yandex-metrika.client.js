@@ -19,7 +19,5 @@ export default defineNuxtPlugin(  app    => {
  
     router.afterEach((to, from) => {
         ym(5096872, 'hit', to.fullPath);
-      })
-    console.log(app.vueApp)
-    console.log(app)
+      }) 
   }) 

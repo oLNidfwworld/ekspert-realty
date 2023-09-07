@@ -39,8 +39,7 @@
       isResult.value = true;
     }
   })
-
-  console.log(allData)
+ 
 </script>
 <template>
   <div>
