@@ -17,7 +17,7 @@ jobs:
           ssh ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }} "cd ${{ vars.FTP_PATH }}&& git pull origin master && pm2 restart ekspert-realty"
           
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2 
         
 
       - name: Install dependencies
