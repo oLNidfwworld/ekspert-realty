@@ -10,8 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+      - name: Deploy to VDS
+        run: |
+          # Замените секреты и адрес VDS на ваше реальное значение
+          ssh ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }} "cd ${{ vars.FTP_PATH }}&& git pull origin master && pm2 restart ekspert-realty"
+          
       - name: Checkout code
         uses: actions/checkout@v2
+        
 
       - name: Install dependencies
         run: |
@@ -23,10 +30,6 @@ jobs:
           cd ${{ vars.FTP_PATH }}
           npm run build
 
-      - name: Deploy to VDS
-        run: |
-          # Замените секреты и адрес VDS на ваше реальное значение
-          ssh ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }} "cd ${{ vars.FTP_PATH }}&& git pull origin master && pm2 restart ekspert-realty"
 
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
