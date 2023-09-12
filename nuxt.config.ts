@@ -37,7 +37,7 @@ export default defineNuxtConfig({
     },
     modules: [
         '@nuxtjs/tailwindcss',
-        "@nuxtjs/robots",
+        // "@nuxtjs/robots",
         ['@pinia/nuxt',
             {
                 autoImports: ['defineStore', 'acceptHMRUpdate'],
