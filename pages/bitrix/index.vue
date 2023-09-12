@@ -1,4 +1,4 @@
 
 <script setup>
-navigateTo('https://test.ekspert-realty.ru/bitrix/',{external : true})
+navigateTo('https://api-ekspert.tw1.ru/bitrix/',{external : true})
 </script>
