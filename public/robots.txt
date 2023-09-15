@@ -31,6 +31,7 @@ Disallow: /*?bxajaxid=
 Disallow: /*&bxajaxid=
 Disallow: /*?view_result=
 Disallow: /*&view_result=
+Disallow: /w6xay/
 Allow: /bitrix/components/
 Allow: /bitrix/cache/
 Allow: /bitrix/js/
@@ -38,3 +39,4 @@ Allow: /bitrix/templates/
 Allow: /bitrix/panel/
 Host: https://ekspert-realty.ru/
 Sitemap: https://ekspert-realty.ru/sitemap.xml
+Sitemap: https:///sitemap.xml
