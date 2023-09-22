@@ -75,8 +75,7 @@ const currUrl = () => {
 useSeoMeta({
   title : `${product.value.item.name} | Эксперт` ,
   description : `${product.value.item.typeOffer} ${product.value.item.name} по цене ${product.value.item.price} р. в АН "Эксперт"`,
-})
- 
+}) 
 </script>
 <template>
   <div class="grid gap-10 catalog-item__detail-wrapper">
@@ -199,7 +198,7 @@ useSeoMeta({
           </li>
           <li v-if="product.item.communications" v-for="(comm,commi) in product.item.communications" class="flex flex-col">
             <span>
-              {{ comm.electocity }}
+              {{ comm.name }}
             </span>
             <span class="font-bold">
               Да
