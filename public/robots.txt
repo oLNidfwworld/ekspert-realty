@@ -37,6 +37,6 @@ Allow: /bitrix/cache/
 Allow: /bitrix/js/
 Allow: /bitrix/templates/
 Allow: /bitrix/panel/
+Clean-param: set_filter
 Host: https://ekspert-realty.ru/
-Sitemap: https://ekspert-realty.ru/sitemap.xml
-Sitemap: https:///sitemap.xml
+Sitemap: https://ekspert-realty.ru/sitemap.xml 
