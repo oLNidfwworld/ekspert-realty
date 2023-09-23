@@ -15,7 +15,7 @@ jobs:
 
     - name: Deploy to Server
       run: |
-        ssh-keyscan -t rsa your-server-ip >> ~/.ssh/known_hosts # Добавить сервер в список известных хостов
+        ssh-keyscan -t rsa {{ secrets.FTP_SERVER }} >> ~/.ssh/known_hosts # Добавить сервер в список известных хостов
         chmod 600 ~/.ssh/id_rsa # Установить правильные права доступа для ключа
         scp -i ~/.ssh/id_rsa -r /path/to/your/script.sh {{ secrets.FTP_USERNAME }}@{{ secrets.FTP_SERVER }}:{{ variables.FTP_PATH }}
         ssh -i ~/.ssh/id_rsa {{ secrets.FTP_USERNAME }}@{{ secrets.FTP_SERVER }} "{{ variables.FTP_PATH }}/deploy.sh"
