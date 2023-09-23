@@ -1,4 +1,4 @@
-name: Deploy to VDS
+name: Deploy to Server
 
 on:
   push:
@@ -7,29 +7,18 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Выберите соответствующую ОС
 
     steps:
-    
-      - name: Deploy to VDS
-        run: |
-          # Замените секреты и адрес VDS на ваше реальное значение
-          ssh ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }} "cd ${{ vars.FTP_PATH }}&& git pull origin master && pm2 restart ekspert-realty"
-          
-      - name: Checkout code
-        uses: actions/checkout@v2 
-        
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: |
-          cd ${{ vars.FTP_PATH }}
-          npm i
+    - name: Install SSH key
+      uses: webfactory/ssh-agent@v0.5
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }} # Добавьте ваш ключ SSH как секрет в репозиторий
 
-      - name: Build Nuxt.js project
-        run: |
-          cd ${{ vars.FTP_PATH }}
-          npm run build
-
-
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Deploy to Server
+      run: |
+        # Подключение к серверу и выполнение скрипта .sh
+        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} {{ secrets.FTP_USERNAME }}@{{ secrets.FTP_SERVER }} "cd {{ variables.FTP_PATH }} && ./update.sh"
