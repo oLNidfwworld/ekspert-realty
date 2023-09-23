@@ -7,18 +7,18 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest # Выберите соответствующую ОС
+    runs-on: ubuntu-latest # Замените на вашу ОС
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install SSH key
-      uses: webfactory/ssh-agent@v0.7.0
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
     - name: Deploy to Server
       run: |
-        # Подключение к серверу и выполнение скрипта .sh
-        ssh -i ${{ secrets.SSH_PRIVATE_KEY }} {{ secrets.FTP_USERNAME }}@{{ secrets.FTP_SERVER }} "cd {{ variables.FTP_PATH }} && ./update.sh"
+        ssh-keyscan -t rsa your-server-ip >> ~/.ssh/known_hosts # Добавить сервер в список известных хостов
+        chmod 600 ~/.ssh/id_rsa # Установить правильные права доступа для ключа
+        scp -i ~/.ssh/id_rsa -r /path/to/your/script.sh {{ secrets.FTP_USERNAME }}@{{ secrets.FTP_SERVER }}:{{ variables.FTP_PATH }}
+        ssh -i ~/.ssh/id_rsa {{ secrets.FTP_USERNAME }}@{{ secrets.FTP_SERVER }} "{{ variables.FTP_PATH }}/deploy.sh"
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
