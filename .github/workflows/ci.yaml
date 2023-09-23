@@ -12,7 +12,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
+    - name: Create known_hosts file
+      run: touch ~/.ssh/known_hosts
     - name: Deploy to Server
       run: |
         ssh-keyscan -t rsa {{ secrets.FTP_SERVER }} >> ~/.ssh/known_hosts # Добавить сервер в список известных хостов
