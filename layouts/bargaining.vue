@@ -68,7 +68,7 @@ main{
 }
 
 .content-wrapper {
-  @apply relative mb-20;
+  @apply relative  mb-0;
   padding-top:0px;
 }
 .top-banner{
@@ -123,13 +123,13 @@ main{
 .page{
     &-wrapper{
       @apply flex flex-col;
-      min-height:100vh;
+      min-height:80vh;
     }
 }
 .content{
   &-wrapper{
      @apply flex flex-col items-center overflow-hidden;
-     min-height:100vh;
+     min-height:80vh;
   }
 }
 .page-enter-active,
