@@ -68,8 +68,7 @@ main{
 }
 
 .content-wrapper {
-  @apply relative  mb-0;
-  padding-top:0px;
+  @apply relative  mb-0 pt-[90px];  
 }
 .top-banner{
   @apply mb-6;
