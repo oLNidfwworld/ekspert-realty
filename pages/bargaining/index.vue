@@ -13,7 +13,7 @@ definePageMeta({
 
 useSeoMeta(
     {
-      title : 'Продажа участков в Субботино'
+      title : 'Продажа земельных участокв МКР Трубицыно'
     }
 )
 
@@ -107,7 +107,7 @@ const mapInit = (mapHandler) => {
     });
 }
 const balloonContentTemplate = (name, square,stat , price) => {
-    if(stat.CODE === 'SELLED'){
+    if(stat.CODE === 'SELLED' || stat.CODE === 'RESERVED'){
       return `
 
       <div class="ballon" >
@@ -209,7 +209,7 @@ watch(()=>userPhone,()=>{
                     <li><span class="history__col"  style="background:var(--sellable);"></span> В продаже</li>
                 </ul>
             </div>
-            <h1 class="title auto-place">Продажа участков в Субботино</h1>
+            <h1 class="title auto-place">Продажа земельных участокв МКР Трубицыно</h1>
         </div>
     </ClientOnly>
 
@@ -248,7 +248,8 @@ watch(()=>userPhone,()=>{
     height: 80vh !important;
 }
 .auto-place{
-  @apply absolute text-[16px] sm:text-[24px] md:text-[30px] z-[3] top-5 left-0 right-0 m-auto w-fit bg-white py-2 px-4;
+  @apply absolute text-[16px] sm:text-[24px] md:text-[30px] z-[3] top-5 left-0 right-0 m-auto w-fit bg-white py-2 px-4 text-center  sm:text-left;
+  text-wrap : balance;
 }
 .history{
     @apply absolute z-[3] sm:left-[40px] bottom-[40px] bg-white p-5 left-0 right-0 sm:right-[unset] ;
