@@ -22,6 +22,10 @@ export default defineEventHandler((event) => {
                 name:'Контакты',
                 url: '/contacts/'
             },
+            {
+                name:'Участки Трубицыно',
+                url: '/bargaining/'
+            },
         ]
     }
 })
