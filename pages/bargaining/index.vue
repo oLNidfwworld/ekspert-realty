@@ -79,10 +79,16 @@ const mapInit = (mapHandler) => {
             console.log()
         });
     objectManager.objects.events.add('balloonopen', () => {
-      let btnOrder = document.querySelector('.ballon button')
+      let btnOrder = document.querySelector('.ballon .makeOrder')
+      let btnLookout = document.querySelector('.ballon .lookout')
       if(btnOrder){
         btnOrder.addEventListener('click',()=>{
-          makeOrder(btnOrder.dataset.id);
+            makeOrder(btnOrder.dataset.id);
+        })
+      }
+      if(btnLookout){
+        btnLookout.addEventListener('click',()=>{
+            lookOut(btnLookout.dataset.id);
         })
       }
     })
@@ -120,6 +126,7 @@ const balloonContentTemplate = (name, square,stat , price) => {
                   <li><span>Площадь :</span><span>${square}м<sup>2</sup></span></li>
                   <li><span>Статус :</span><span class="stat_${stat.CODE}">${stat.NAME}</span></li>
               </ul>
+              <button  data-id="${name}" class="btn-blue   p-3 mt-3  btn lookout">Подробнее</button>
           </div>
 
       </div>
@@ -138,7 +145,13 @@ const balloonContentTemplate = (name, square,stat , price) => {
                   <li><span>Площадь :</span><span>${square}м<sup>2</sup></span></li>
                   <li><span>Статус :</span><span class="stat_${stat.CODE}">${stat.NAME}</span></li>
               </ul>
-              <button   data-id="${name}" class="btn border-red text-red p-3 mt-3 btn-red">Заказать</button>
+              <div class="flex flex-row">
+                
+                
+                <button   data-id="${name}" class="btn border-red text-red p-3 mt-3 btn-red makeOrder">Заказать</button>
+                <button   data-id="${name}" class="btn-blue   p-3 mt-3 ml-3  btn lookout">Подробнее</button>
+            
+              </div>
           </div>
 
       </div>
@@ -161,6 +174,10 @@ const makeOrder =  (id : String) => {
   const {NAME : placementName} = placements.value.items.find(x => x.NAME == id);
   whatsObject.value = placementName;
   isPopupVisible.value = true;
+}
+const lookOut =  (id : String) => {
+  const lookOutObject = placements.value.items.find(x => x.NAME == id);
+  console.log(lookOutObject);
 }
 const sendData = async (e) => {
 
@@ -198,7 +215,7 @@ watch(()=>userPhone,()=>{
 </script>
 <template>
     <ClientOnly>
-        <div class="relative">
+        <div class="bargaining-wrapper">
             <YandexMap @created="mapInit" :controls="[]" :coordinates="mapCenter" :zoom="zoom">
             </YandexMap>
             <div class="history">
@@ -213,7 +230,12 @@ watch(()=>userPhone,()=>{
         </div>
     </ClientOnly>
 
-    <e-popup-form :fallback-income="fallback"  :is-visible="isPopupVisible" @fallback-return="fallback=false" @close="isPopupVisible = !isPopupVisible" >
+
+    <div>
+
+    </div>
+
+        <e-popup-form :fallback-income="fallback"  :is-visible="isPopupVisible" @fallback-return="fallback=false" @close="isPopupVisible = !isPopupVisible" >
             <template v-slot:header>
                 <h3 class="">Заказать участок {{ whatsObject }}</h3>
             </template>
@@ -239,6 +261,12 @@ watch(()=>userPhone,()=>{
         </e-popup-form>
 </template>
 <style >
+.bargaining-wrapper{
+    @apply relative;
+    & .yandex-container{
+        height: 80vh !important;
+    }
+}
 *{
     --reserved : rgb(87, 98, 255);
     --selled : #e02d1f;

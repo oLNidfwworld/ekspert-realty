@@ -31,6 +31,12 @@
       @apply text-red bg-white;
     }
   }
+  &-blue {
+    @apply text-white border-[#302bcb] bg-[#302bcb]; 
+    &:hover{
+      @apply text-[#302bcb] bg-white;
+    }
+  }
   &-white {
     @apply text-red border-red;
     &:hover{

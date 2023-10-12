@@ -1,8 +1,4 @@
-<script setup lang="ts">
-// vue transition bug handle
-import {useFilterStore} from "../store/smartFilter";
-import ProductCard from "../components/Catalog/ProductCard";
-import {useSeoMeta} from "@unhead/vue";
+<script setup lang="ts"> 
 const messages = [
   `Uncaught NotFoundError: Failed to execute 'insertBefore' on 'Node': The node before which the new node is to be inserted is not a child of this node.`, // chromium based
   `NotFoundError: The object can not be found here.`, // safari
@@ -17,20 +13,7 @@ if (typeof window !== 'undefined') {
 } 
 const route = useRoute() 
 
- 
-// const { data : seoData } = await useAsyncData(
-//       () => useApiFetch(`/Seo/`,{
-//         query : {
-//           'link' : '#GLOBAL_KEYWORDS#',
-//         }
-//       }), 
-//   ); 
-
-//   if(seoData.value){
-//     useSeoMeta( 
-//       seoData.value
-//     )
-//   }  
+  
 
 </script>
 <template>
@@ -45,7 +28,7 @@ const route = useRoute()
         <TheFooter/>
     </div>
 </template>
-<style lang="postcss">
+<style  lang="postcss">
 body {
   font-family: 'Open Sans', sans-serif;
 }
@@ -139,18 +122,7 @@ main{
 .page-leave-to {
   opacity: 0;
   filter: blur(1rem);
-}
-.swiper-prev, .swiper-next{
-    @apply w-[30px] h-[30px] bg-red flex justify-center items-center rounded-md;
-}
-.swiper-next:after {
-  @apply text-white;
-  content: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNyIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDcgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0yLjcwNzExIDAuNzA3MTA5QzIuMzE2NTggMC4zMTY1ODQgMS42ODM0MiAwLjMxNjU4NCAxLjI5Mjg5IDAuNzA3MTA4TDAuNzA3MTA1IDEuMjkyOUMwLjMxNjU4MSAxLjY4MzQyIDAuMzE2NTgxIDIuMzE2NTkgMC43MDcxMDQgMi43MDcxMUwyLjI5Mjg5IDQuMjkyOUMyLjY4MzQyIDQuNjgzNDMgMi42ODM0MiA1LjMxNjU5IDIuMjkyODkgNS43MDcxMUwwLjcwNzEyMSA3LjI5Mjg5QzAuMzE2NTk4IDcuNjgzNDEgMC4zMTY1OTggOC4zMTY1OCAwLjcwNzEyMSA4LjcwNzFMMS4yOTI5MSA5LjI5Mjg5QzEuNjgzNDMgOS42ODM0MiAyLjMxNjYgOS42ODM0MiAyLjcwNzEyIDkuMjkyODlMNi4yOTI4OSA1LjcwNzExQzYuNjgzNDIgNS4zMTY1OSA2LjY4MzQyIDQuNjgzNDMgNi4yOTI4OSA0LjI5MjlMMi43MDcxMSAwLjcwNzEwOVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=');
-}
-.swiper-prev:after {
-  @apply text-white;
-  content: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNyIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDcgMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik00LjI5Mjg5IDkuMjkyODlDNC42ODM0MiA5LjY4MzQyIDUuMzE2NTggOS42ODM0MiA1LjcwNzExIDkuMjkyODlMNi4yOTI5IDguNzA3MUM2LjY4MzQyIDguMzE2NTggNi42ODM0MiA3LjY4MzQxIDYuMjkyOSA3LjI5Mjg5TDQuNzA3MTEgNS43MDcxQzQuMzE2NTggNS4zMTY1NyA0LjMxNjU4IDQuNjgzNDEgNC43MDcxMSA0LjI5Mjg5TDYuMjkyODggMi43MDcxMUM2LjY4MzQgMi4zMTY1OSA2LjY4MzQgMS42ODM0MiA2LjI5Mjg4IDEuMjkyOUw1LjcwNzA5IDAuNzA3MTA4QzUuMzE2NTcgMC4zMTY1ODMgNC42ODM0IDAuMzE2NTg0IDQuMjkyODcgMC43MDcxMDlMMC43MDcxMDQgNC4yOTI4OUMwLjMxNjU4MSA0LjY4MzQxIDAuMzE2NTgxIDUuMzE2NTcgMC43MDcxMDQgNS43MDcxTDQuMjkyODkgOS4yOTI4OVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=');
-}
+} 
 .title {
   @apply text-3xl font-bold mb-7;
 }
