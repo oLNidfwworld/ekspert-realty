@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { YandexMap } from "vue-yandex-maps";
 import EBtn from "~/components/Base/E-btn.vue";
-import EInput from "~/components/Base/E-input.vue";
+import EInput from "~/components/Base/E-input.vue"; 
 import ETextarea from "../../components/Base/E-textarea.vue";
 import {watch} from "vue";
 import {useSeoMeta} from "unhead";
 
 definePageMeta({
     layout: "bargaining",
-})
-
-
+}) 
 useSeoMeta(
     {
       title : 'Продажа земельных участокв МКР Трубицыно'
@@ -21,8 +19,26 @@ const mapCenter = ref([55.77157346148135, 38.5848870091816, ])
 const zoom = 17;
 const { data: placements, pending, error, refresh } = await useAsyncData(
     () => useApiFetch(`/Bargaining/`)
-);
+); 
+
+const getRandomArbitrary = (min, max) => {
+    return parseInt(Math.random() * (max - min) + min);
+}
+ 
+const similarData  = computed(() => {
+    // let max = toRaw(placements.value.items).reduce((acc, curr) => acc.id > curr.id  ? acc : curr).id;
+    // let min = toRaw(placements.value.items).reduce((acc, curr) => acc.id < curr.id  ? acc : curr).id; 
+    
+    let data = [];
+    for( let i= 0; i < 4; i++ ){  
+        data.push(
+            placements.value.items[Math.floor(Math.random()*placements.value.items.length)]
+        );
+    }
+    return data;
+}) 
 const { data: foregroundLayout } = await useFetch('/api/foreground');
+
 
 const mapInit = (mapHandler) => {
 
@@ -76,7 +92,6 @@ const mapInit = (mapHandler) => {
     objectManager.objects.events.add('click', function (e) {
             var objectId = e.get('objectId');
             objectManager.objects.balloon.open(objectId);
-            console.log()
         });
     objectManager.objects.events.add('balloonopen', () => {
       let btnOrder = document.querySelector('.ballon .makeOrder')
@@ -122,7 +137,7 @@ const balloonContentTemplate = (name, square,stat , price) => {
 
               <div class="ballon__title">Участок номер ${name}</div>
               <ul class="ballon__list">
-                  <li><span>Стоимость :</span><span>${price}</span></li>
+                  <li><span>Стоимость :</span><span>${price} ₽</span></li>
                   <li><span>Площадь :</span><span>${square}м<sup>2</sup></span></li>
                   <li><span>Статус :</span><span class="stat_${stat.CODE}">${stat.NAME}</span></li>
               </ul>
@@ -141,7 +156,7 @@ const balloonContentTemplate = (name, square,stat , price) => {
 
               <div class="ballon__title">Участок номер ${name}</div>
               <ul class="ballon__list">
-                  <li><span>Стоимость :</span><span>${price}</span></li>
+                  <li><span>Стоимость :</span><span>${price} ₽</span></li>
                   <li><span>Площадь :</span><span>${square}м<sup>2</sup></span></li>
                   <li><span>Статус :</span><span class="stat_${stat.CODE}">${stat.NAME}</span></li>
               </ul>
@@ -175,9 +190,16 @@ const makeOrder =  (id : String) => {
   whatsObject.value = placementName;
   isPopupVisible.value = true;
 }
+
+const lookOutObject = ref(null), scrollAnchor = ref(null);
 const lookOut =  (id : String) => {
-  const lookOutObject = placements.value.items.find(x => x.NAME == id);
-  console.log(lookOutObject);
+    
+    scrollAnchor.value.scrollIntoView({ 
+        behavior : 'smooth'
+      })
+   
+  lookOutObject.value = placements.value.items.find(x => x.NAME == id); 
+  
 }
 const sendData = async (e) => {
 
@@ -231,8 +253,8 @@ watch(()=>userPhone,()=>{
     </ClientOnly>
 
 
-    <div>
-
+    <div ref="scrollAnchor" class="container m-auto " :class="{ 'py-[150px]' : lookOutObject }"> 
+        <BargainingPreview v-if='lookOutObject' :similar="similarData" :placement-object="lookOutObject"></BargainingPreview>
     </div>
 
         <e-popup-form :fallback-income="fallback"  :is-visible="isPopupVisible" @fallback-return="fallback=false" @close="isPopupVisible = !isPopupVisible" >

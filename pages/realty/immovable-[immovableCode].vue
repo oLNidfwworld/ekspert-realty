@@ -61,7 +61,7 @@ const mapElement = ref(null)
 const showMap = () => {
   isMapAppear.value = !isMapAppear.value;
   setTimeout(()=>{
-    if(isMapAppear.value){
+    if(e.value){
       mapElement.value.scrollIntoView({
         block : 'center',
         behavior : 'smooth'

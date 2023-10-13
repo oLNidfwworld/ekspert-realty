@@ -35,7 +35,7 @@ const config = useRuntimeConfig()
               },
             }"
     >
-      <template v-if="pictures.length > 1" >
+      <template v-if="pictures.length >= 1" >
         <SwiperSlide v-for="(slide, index) in pictures" :key="index">
           <div :class="[sliderClasses, 'swiper-detail__slide h-full w-full bg-center bg-cover']" :style="`background-image: url('${config.UPLOAD_URL}${slide.url}/${slide.filename}')`">
           </div>
