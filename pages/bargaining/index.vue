@@ -190,15 +190,27 @@ const makeOrder =  (id : String) => {
   whatsObject.value = placementName;
   isPopupVisible.value = true;
 }
-
+const router = useRouter(), route = useRoute();
 const lookOutObject = ref(null), scrollAnchor = ref(null);
+
+const preFillObject = () => {
+    const objectIdFromUrl =route.query.objectId;
+    const lookOutObjectVal = placements.value.items.find(x => x.NAME == objectIdFromUrl);
+    if( route.query.objectId && lookOutObjectVal ){
+        lookOutObject.value = lookOutObjectVal;
+    }else{
+        console.warn('object ' + objectIdFromUrl + ' is not reacheable');
+    }
+}
+preFillObject();
 const lookOut =  (id : String) => {
     
     scrollAnchor.value.scrollIntoView({ 
         behavior : 'smooth'
       })
-   
-  lookOutObject.value = placements.value.items.find(x => x.NAME == id); 
+    const myObj = placements.value.items.find(x => x.NAME == id);
+    router.push({path: route.path, query: { ...route.query, objectId: myObj.NAME} });
+    lookOutObject.value = myObj; 
   
 }
 const sendData = async (e) => {
@@ -228,12 +240,10 @@ const sendData = async (e) => {
         fallback.value = true;
       }
     })
-  }
-
+  } 
 }
-watch(()=>userPhone,()=>{
-  console.log(userPhone.value)
-})
+
+
 </script>
 <template>
     <ClientOnly>
