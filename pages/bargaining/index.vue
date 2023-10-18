@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {watch} from "vue";
 import {useSeoMeta} from "unhead";
+import {useBargainingStore} from "~/store/bargaining"
 
 definePageMeta({
     layout: "bargaining",
@@ -32,30 +33,35 @@ const similarData  = computed(() => {
 }) 
 
 
-const lookOutObject = ref(null), scrollAnchor = ref(null);
+const lookOutObject = ref(null);
 
 
 
 const router = useRouter(), route = useRoute();
+const useBarg = useBargainingStore()
 const preFillObject = () => {
     const objectIdFromUrl =route.query.objectId;
     const lookOutObjectVal = placements.value.items.find(x => x.NAME == objectIdFromUrl);
     if( route.query.objectId && lookOutObjectVal ){
-        lookOutObject.value = lookOutObjectVal;
+        useBarg.setLookOutObject(lookOutObjectVal) 
     }else{
         console.warn('object ' + objectIdFromUrl + ' is not reacheable');
     }
 }
 preFillObject();
 
-
+provide('fromIBargainingToPreview', {
+    "zoom" : zoom,
+    "mapCenter" : mapCenter,
+    "placements" : placements
+});
 
 </script>
 <template>
-    <BargainingMap :map-center="mapCenter" :zoom="zoom" :placements="placements"></BargainingMap>
+    <BargainingMap v-if="placements && !useBarg.lookOutObject" :map-center="mapCenter" :zoom="zoom" :placements="placements"></BargainingMap>
 
-    <div ref="scrollAnchor" class="container m-auto " :class="{ 'py-[150px]' : lookOutObject }"> 
-        <BargainingPreview v-if='lookOutObject' :similar="similarData" :placement-object="lookOutObject"></BargainingPreview>
+    <div class="container m-auto py-[50px]"> 
+        <BargainingPreview v-if='useBarg.lookOutObject'  :similar="similarData" :placement-object="useBarg.lookOutObject"></BargainingPreview>
     </div>
 
 </template>

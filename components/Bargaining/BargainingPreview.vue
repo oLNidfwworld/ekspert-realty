@@ -2,6 +2,7 @@
 import PictureDetailSlider from "../../components/Catalog/PictureDetailSlider.vue"; 
 import ProductCard from "../../components/Catalog/ProductCard.vue";  
 import EBtn from "../../components/Base/E-btn.vue";
+import { inject } from "vue";
 const isShareButtonActive = ref(false);
 
 const props = defineProps({ 
@@ -23,19 +24,8 @@ const print = () => {
   window.print()
 }
 
-const isMapAppear = ref(false)
-const mapElement = ref(null)
-const showMap = () => {
-  isMapAppear.value = !isMapAppear.value;
-  setTimeout(()=>{
-    if(mapElement.value){
-      mapElement.value.scrollIntoView({
-        block : 'center',
-        behavior : 'smooth'
-      })
-    }
-  },10)
-}
+const injected = inject('fromIBargainingToPreview', null);
+console.log(injected)
 </script>
 <template>
     <div v-if="placementObject" class="grid gap-10 catalog-item__detail-wrapper">
@@ -75,7 +65,6 @@ const showMap = () => {
           <div class="grid grid-cols-1 lg:grid-cols-[5fr_6fr] xl:grid-cols-[3fr_6fr] justify-between gap-3 lg:gap-[91px]">
           <div class="flex flex-col sm:flex-row md:flex-col flex-shirk flex-wrap grid-cols-1 gap-4 w-full mb-8">
               <ClientOnly> 
-                <e-btn @click="showMap" :class="{'mapActive':isMapAppear }" class="btn-grey sm:w-fit md:w-full "><nuxt-icon class="text-red mr-2" width="30px" height="30px" name="MapMarker"/>На карте</e-btn>
                 <e-btn class="btn-grey sm:w-fit md:w-full" @click="print"><nuxt-icon class="text-red mr-2" width="30px" height="30px" name="Print"/>Версия для печати</e-btn>
                 <div class="relative">
                   <e-btn @click="isShareButtonActive = !isShareButtonActive" :class="{'mapActive':isShareButtonActive}" class="z-[1] btn-grey   w-full" ><nuxt-icon class="text-red mr-2" width="30px" height="30px" name="Share"/>Поделиться </e-btn>
@@ -128,25 +117,9 @@ const showMap = () => {
         </div>
         </div> 
       </div> 
-
-      <div ref="mapElement" v-if=" isMapAppear" >
-      <ClientOnly >
-        <YandexMap  :coordinates="center">
-          <!--Markers-->
-          <YandexMarker :coordinates="center" :options="{
-            iconLayout: 'default#imageWithContent',
-            iconImageHref: '/ekspertMarker.svg',
-            iconImageSize: [50, 50],
-            iconImageOffset: [-25,-55]
-          }" :marker-id="placementObject.NAME">
-            <template #component>
-              МКР Трубицыно Участок {{placementObject.NAME}}
-            </template>
-          </YandexMarker>
-        </YandexMap>
-      </ClientOnly>
-    </div>
-    
+       
+      <BargainingMap   :map-center="injected.mapCenter.value" :zoom="injected.zoom" :placements="injected.placements.value"></BargainingMap>
+ 
       <section>
         <h2 class="mb-3 font-bold text-3xl">Похожие объявления</h2>
         <div class="grid grid-cols-1 gap-5">
@@ -157,7 +130,6 @@ const showMap = () => {
       </section>   
     </div>
   </template>
-<style>
 <style scoped>
 .share-appear-enter-active, .share-appear-leave-active{
   transition : 0.4s;

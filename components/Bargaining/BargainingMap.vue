@@ -3,7 +3,7 @@ import { YandexMap } from "vue-yandex-maps";
 import EBtn from "~/components/Base/E-btn.vue";
 import EInput from "~/components/Base/E-input.vue"; 
 import ETextarea from "../../components/Base/E-textarea.vue";
-
+import {useBargainingStore} from "~/store/bargaining"
 const props = defineProps({
     mapCenter: Array,
     zoom: Number,
@@ -15,12 +15,12 @@ const { data: foregroundLayout } = await useFetch('/api/foreground');
 
 
 
-const mapInit = (mapHandler) => {
-
+const mapInit = async (mapHandler) => {
+    
     var objectManager = new ymaps.ObjectManager({});
     mapHandler.geoObjects.add(objectManager);
     objectManager.add(toRaw(foregroundLayout.value));
-    toRaw(placements.value).items.map(item => {
+    toRaw(props.placements).items.map(item => {
         let fillCol = ';'
         if(item.STATUS.CODE === 'SELLABLE'){
             fillCol = '#79cd79';
@@ -162,20 +162,18 @@ const validation = ref(false);
 const validationMessage = ref('');
 
 const makeOrder =  (id : String) => {
-  const {NAME : placementName} = placements.value.items.find(x => x.NAME == id);
+  const {NAME : placementName} = props.placements.items.find(x => x.NAME == id);
   whatsObject.value = placementName;
   isPopupVisible.value = true;
 }
 
 const router = useRouter(), route = useRoute();
+const useBarg = useBargainingStore()
 const lookOut =  (id : String) => {
     
-    scrollAnchor.value.scrollIntoView({ 
-        behavior : 'smooth'
-      })
-    const myObj = placements.value.items.find(x => x.NAME == id);
+    const myObj = props.placements.items.find(x => x.NAME == id);
     router.push({path: route.path, query: { ...route.query, objectId: myObj.NAME} });
-    lookOutObject.value = myObj; 
+    useBarg.setLookOutObject(myObj) 
   
 }
 const sendData = async (e) => {
