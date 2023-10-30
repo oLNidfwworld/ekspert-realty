@@ -2,7 +2,7 @@
 const props = defineProps({
   pictures: Array,
   sliderClasses: String
-})
+}) 
 const prev = ref(null)
 const next = ref(null)
 const config = useRuntimeConfig()
@@ -30,9 +30,10 @@ const config = useRuntimeConfig()
             }"
     >
       <template v-if="pictures?.length > 0">
-        <SwiperSlide v-for="(slide, index) in pictures" :key="index">
-          <div :class="[sliderClasses, 'h-full w-full bg-center bg-cover']" :style="`background-image: url('${config.UPLOAD_URL}${slide.url}/${slide.filename}')`">
-          </div>
+        <SwiperSlide v-for="(slide, index) in pictures" :key="index"> 
+            <img v-if="slide.resizedPath" :class="[sliderClasses, 'h-full w-full bg-center bg-cover']" loading="lazy" :src="`${(config.UPLOAD_URL).replace('upload/','')}${slide.resizedPath}`" > 
+            <div v-else :class="[sliderClasses, 'h-full w-full bg-center bg-cover']" :style="`background-image: url('${config.UPLOAD_URL}${slide.url}/${slide.filename}')`">
+            </div>
         </SwiperSlide>
       </template>
       <template v-else>

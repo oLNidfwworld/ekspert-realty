@@ -1,9 +1,6 @@
 <script setup>
-import {computed} from "../../.nuxt/imports";
-import EBtn from "../Base/E-btn";
-import Favorite from "../Base/Favorite";
-import PictureSlider from "/components/Catalog/PictureSlider";
-import PhoneBtn from "../Base/PhoneBtn";
+import {computed} from "../../.nuxt/imports"; 
+import PictureSlider from "/components/Catalog/PictureSlider"; 
 const props = defineProps({
   product: Object
 })

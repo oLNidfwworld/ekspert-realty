@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import EBtn from "./E-btn";
 const props = defineProps({
-  agentData: Object,
-  variant: String,
+  agentData: Object, 
 })
 const showPhone = ref(false) 
 </script>

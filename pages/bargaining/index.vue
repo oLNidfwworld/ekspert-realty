@@ -1,7 +1,5 @@
-<script setup lang="ts">
-import {watch} from "vue";
-import {useSeoMeta} from "unhead";
-import {useBargainingStore} from "~/store/bargaining"
+<script setup lang="ts"> 
+import {useSeoMeta} from "unhead"; 
 
 definePageMeta({
     layout: "bargaining",
@@ -31,24 +29,24 @@ const similarData  = computed(() => {
     }
     return data;
 }) 
-
-
-const lookOutObject = ref(null);
-
-
-
-const router = useRouter(), route = useRoute();
-const useBarg = useBargainingStore()
-const preFillObject = () => {
-    const objectIdFromUrl =route.query.objectId;
-    const lookOutObjectVal = placements.value.items.find(x => x.NAME == objectIdFromUrl);
-    if( route.query.objectId && lookOutObjectVal ){
-        useBarg.setLookOutObject(lookOutObjectVal) 
-    }else{
-        console.warn('object ' + objectIdFromUrl + ' is not reacheable');
-    }
-}
-preFillObject();
+const photos = computed(() => {
+    let photosValue  = [ ];
+    // @ts-ignore
+    placements.value.items.map(el => {
+        el.PHOTOS.map(photo => { 
+            photosValue.push(photo); 
+        })
+    })
+    return photosValue;
+})
+console.log(photos)
+const minPrice = computed(() => {
+    return placements.value.items.reduce((a, b) => Math.min(a, b.PRICE), Number.POSITIVE_INFINITY);
+}) 
+const minSquare = computed(() => {
+    return placements.value.items.reduce((a, b) => Math.min(a, b.SQUARE), Number.POSITIVE_INFINITY);
+})    
+ 
 
 provide('fromIBargainingToPreview', {
     "zoom" : zoom,
@@ -57,13 +55,10 @@ provide('fromIBargainingToPreview', {
 });
 
 </script>
-<template>
-    <BargainingMap v-if="placements && !useBarg.lookOutObject" :map-center="mapCenter" :zoom="zoom" :placements="placements"></BargainingMap>
-
+<template>  
     <div class="container m-auto py-[50px]"> 
-        <BargainingPreview v-if='useBarg.lookOutObject'  :similar="similarData" :placement-object="useBarg.lookOutObject"></BargainingPreview>
-    </div>
-
+        <BargainingPreview :photos="photos" :min-price="minPrice" :min-square="minSquare"  :similar="placements.items"  ></BargainingPreview>
+    </div> 
 </template>
 <style >
 .bargaining-wrapper{

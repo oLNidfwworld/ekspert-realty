@@ -70,17 +70,17 @@ const mapInit = async (mapHandler) => {
         });
     objectManager.objects.events.add('balloonopen', () => {
       let btnOrder = document.querySelector('.ballon .makeOrder')
-      let btnLookout = document.querySelector('.ballon .lookout')
+    //   let btnLookout = document.querySelector('.ballon .lookout')
       if(btnOrder){
         btnOrder.addEventListener('click',()=>{
             makeOrder(btnOrder.dataset.id);
         })
       }
-      if(btnLookout){
-        btnLookout.addEventListener('click',()=>{
-            lookOut(btnLookout.dataset.id);
-        })
-      }
+    //   if(btnLookout){
+    //     btnLookout.addEventListener('click',()=>{
+    //         lookOut(btnLookout.dataset.id);
+    //     })
+    //   }
     })
     objectManager.add(toRaw(foregroundLayout.value));
 
@@ -115,8 +115,7 @@ const balloonContentTemplate = (name, square, stat, price) => {
               <li><span>Стоимость :</span><span>${price} ₽</span></li>
               <li><span>Площадь :</span><span>${square}м<sup>2</sup></span></li>
               <li><span>Статус :</span><span class="stat_${stat.CODE}">${stat.NAME}</span></li>
-          </ul>
-          <button  data-id="${name}" class="btn-blue   p-3 mt-3  btn lookout">Подробнее</button>
+          </ul> 
       </div>
 
   </div>
@@ -138,8 +137,7 @@ const balloonContentTemplate = (name, square, stat, price) => {
           <div class="flex flex-row">
             
             
-            <button   data-id="${name}" class="btn border-red text-red p-3 mt-3 btn-red makeOrder">Заказать</button>
-            <button   data-id="${name}" class="btn-blue   p-3 mt-3 ml-3  btn lookout">Подробнее</button>
+            <button   data-id="${name}" class="btn border-red text-red p-3 mt-3 btn-red makeOrder">Заказать</button> 
         
           </div>
       </div>

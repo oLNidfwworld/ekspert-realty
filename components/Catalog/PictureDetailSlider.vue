@@ -37,7 +37,8 @@ const config = useRuntimeConfig()
     >
       <template v-if="pictures.length >= 1" >
         <SwiperSlide v-for="(slide, index) in pictures" :key="index">
-          <div :class="[sliderClasses, 'swiper-detail__slide h-full w-full bg-center bg-cover']" :style="`background-image: url('${config.UPLOAD_URL}${slide.url}/${slide.filename}')`">
+          <img v-if="slide.resizedPath" :class="[sliderClasses, 'swiper-detail__slide h-full w-full bg-center bg-cover']" loading="lazy" :src="`${(config.UPLOAD_URL).replace('upload/','')}${slide.resizedPath}`" > 
+          <div v-else :class="[sliderClasses, 'swiper-detail__slide h-full w-full bg-center bg-cover']" :style="`background-image: url('${config.UPLOAD_URL}${slide.url}/${slide.filename}')`">
           </div>
         </SwiperSlide>
       </template>
@@ -81,7 +82,8 @@ const config = useRuntimeConfig()
       >
         <template v-if="pictures.length > 0">
           <SwiperSlide v-for="(slide, index) in pictures" :key="index">
-            <div :class="[sliderClasses, 'swiper-detail__thumbs bg-center bg-cover']" :style="`background-image: url('${config.UPLOAD_URL}${slide.url}/${slide.filename}')`">
+            <img v-if="slide.resizedPath" :class="[sliderClasses, 'swiper-detail__thumbs bg-center bg-cover']" loading="lazy" :src="`${(config.UPLOAD_URL).replace('upload/','')}${slide.resizedPath}`" > 
+            <div v-else :class="[sliderClasses, 'swiper-detail__thumbs bg-center bg-cover']" :style="`background-image: url('${config.UPLOAD_URL}${slide.url}/${slide.filename}')`">
             </div>
           </SwiperSlide>
         </template>
