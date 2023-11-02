@@ -86,7 +86,7 @@ const injected = inject('fromIBargainingToPreview', null);
         </ClientOnly>
       </div>
       <div>
-        <h1 class="font-bold">Участки Трубицыно</h1>
+        <h1 class="font-bold">Продажа земельных участков под ИЖЭС в мкр. Трубицыно Павлово-посадского района</h1>
         <ClientOnly>
           <span class="text-2xl text-red font-bold">от {{ price }} ₽</span>
         </ClientOnly>

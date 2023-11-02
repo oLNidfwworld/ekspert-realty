@@ -219,7 +219,6 @@ const sendData = async (e) => {
                         <li><span class="history__col" style="background:var(--sellable);"></span> В продаже</li>
                     </ul>
                 </div>
-                <h1 class="title auto-place">Продажа земельных участокв МКР Трубицыно</h1>
             </div>
         </ClientOnly>
 
