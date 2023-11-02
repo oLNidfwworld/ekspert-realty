@@ -10,7 +10,7 @@ const props = defineProps({
 const route = useRoute()
 const pathToDetail = computed(() => {
   return route.path.split('/')[1]
-})
+}) 
 const price =computed(() => props.product.price.toLocaleString('ru-RU'))
 </script>
 <template>
@@ -94,6 +94,15 @@ const price =computed(() => props.product.price.toLocaleString('ru-RU'))
               {{product.floorCount}}
             </span>
         </li>
+        <li v-if="product.objectType.code === 'area' && product.communications" v-for="(comm, commi) in product.communications"
+              class="flex flex-col">
+              <span>
+                {{ comm.name }}
+              </span>
+              <span class="font-bold">
+                Да
+              </span>
+            </li>
       </ul>
       <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
         <e-btn class="w-full sm:w-fit btn-white mb-4 sm:mb-0" :to="{path: `/realty/immovable-${product.id}/`}">Подробнее</e-btn>

@@ -23,13 +23,13 @@ const print = () => {
   window.print()
 }
 
-const isMapAppear = ref(false)
+const isMapAppear = ref(true)
 const mapElement = ref(null)
 const showMap = () => {
   isMapAppear.value = !isMapAppear.value; 
 }
 
-const agentStaticData = reactive({name: 'Герцева Наталья', phone : '8-929-599-28-18'})
+const agentStaticData = reactive({phone : '8-901-517-86-51'})
 
 const myPhone = ref('')
 const validation = ref(false), validationMessage = ref('');
@@ -67,13 +67,17 @@ const callbackMe = async () => {
 const route = useRoute();
 
 const pageSize = 3, currentPage = ref(1);
+console.log(Math.ceil(props.similar.length / pageSize) );
 const totalPages = ref(props.similar.length / pageSize);
 
-const pageContent = ref(props.similar.slice(currentPage.value - 1, currentPage.value * pageSize ));
-
+const pageContent = ref(props.similar.slice((currentPage.value - 1) * pageSize, currentPage.value * pageSize ));
+watch(() => pageContent.value, () => {
+  console.log(pageContent.value)
+})
+console.log(props.similar);
 watch(()=>route.query,()=> {
   currentPage.value = parseInt(route.query.page);
-  pageContent.value = props.similar.slice(currentPage.value - 1, currentPage.value + pageSize - 1);
+  pageContent.value = props.similar.slice((currentPage.value - 1) * pageSize, ((currentPage.value - 1) * pageSize) + pageSize);
 })
 
 const injected = inject('fromIBargainingToPreview', null); 
@@ -95,7 +99,7 @@ const injected = inject('fromIBargainingToPreview', null);
         <ul class="bg-grey-light grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 px-2 py-3">
           <li class="flex flex-col">
             <span>
-              Площадь м<sup>2</sup>
+              Площадь (сотки)
             </span>
             <span class="font-bold">
               от {{ minSquare }}
@@ -181,7 +185,7 @@ const injected = inject('fromIBargainingToPreview', null);
           </div>
 
           <div class="bg-concrete grid grid-cols-1 font-semibold pt-2 md:w-full">
-              <span class="font-bold mb-3 justify-self-center px-5">Специалист по объекту</span>
+              <span class="font-bold mb-3 justify-self-center px-5">Офис продаж</span>
               <div class="flex flex-col justify-between px-5">
                 <PhoneDetailBtn :agentData="agentStaticData" />
                 <label class="mb-3">Оставьте свой номер,мы вам перезвоним</label>
@@ -274,15 +278,20 @@ const injected = inject('fromIBargainingToPreview', null);
   }
 }
 
+
+.bshadow {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+</style>
+<style>
+
 .mapActive {
   background: var(--red);
   color: var(--white);
 
-  span.nuxt-icon.nuxt-icon--fill svg path {
+  & span.nuxt-icon.nuxt-icon--fill svg path {
     fill: var(--white) !important;
   }
 }
-
-.bshadow {
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}</style>
+</style>

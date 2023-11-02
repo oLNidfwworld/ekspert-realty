@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import EBtn from "./E-btn";
 const props = defineProps({
-  agentData: Object, 
+  agentData: Object,  
 })
 const showPhone = ref(false) 
 </script>
 <template>
   <div v-if="agentData.name != '' || agentData.phone != ''">
     <div class="flex flex-col">
-      <span class="mb-3">{{ agentData.name }}</span>
+      <span class="mb-3" v-if="agentData.name">{{ agentData.name }}</span>
     <p class="mb-3 mr-1 flex" v-if="!showPhone">{{ agentData.phone.slice(0 , agentData.phone.length-4) }}X-XX <button class="ml-1 text-red text-sm flex items-center" v-if="!showPhone" @click="showPhone = !showPhone">
       Показать
       <svg class="ml-1" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
