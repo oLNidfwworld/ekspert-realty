@@ -66,15 +66,10 @@ const callbackMe = async () => {
 
 const route = useRoute();
 
-const pageSize = 3, currentPage = ref(1);
-console.log(Math.ceil(props.similar.length / pageSize) );
+const pageSize = 3, currentPage = ref(1); 
 const totalPages = ref(props.similar.length / pageSize);
 
-const pageContent = ref(props.similar.slice((currentPage.value - 1) * pageSize, currentPage.value * pageSize ));
-watch(() => pageContent.value, () => {
-  console.log(pageContent.value)
-})
-console.log(props.similar);
+const pageContent = ref(props.similar.slice((currentPage.value - 1) * pageSize, currentPage.value * pageSize ));  
 watch(()=>route.query,()=> {
   currentPage.value = parseInt(route.query.page);
   pageContent.value = props.similar.slice((currentPage.value - 1) * pageSize, ((currentPage.value - 1) * pageSize) + pageSize);
