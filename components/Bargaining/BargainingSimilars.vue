@@ -20,7 +20,7 @@ const price =computed(() => props.product.PRICE.toLocaleString('ru-RU'))
         <ul class="props grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 px-2 py-3 mb-7 md:mr-4" style="background: #D9D9D9;">
             <li  class="flex flex-col">
               <span>
-                Площадь (сотки)
+                Площадь м<sup>2</sup>
               </span>
               <span v-if="product.SQUARE" class="font-bold">
                 {{product.SQUARE}}

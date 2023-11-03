@@ -113,7 +113,7 @@ const balloonContentTemplate = (name, square, stat, price) => {
           <div class="ballon__title">Участок номер ${name}</div>
           <ul class="ballon__list">
               <li><span>Стоимость :</span><span>${price} ₽</span></li>
-              <li><span>Площадь :</span><span>${square} соток</span></li>
+              <li><span>Площадь :</span><span>${square} м<sup>2</sup></span></li>
               <li><span>Статус :</span><span class="stat_${stat.CODE}">${stat.NAME}</span></li>
           </ul> 
       </div>
@@ -131,7 +131,7 @@ const balloonContentTemplate = (name, square, stat, price) => {
           <div class="ballon__title">Участок номер ${name}</div>
           <ul class="ballon__list">
               <li><span>Стоимость :</span><span>${price} ₽</span></li>
-              <li><span>Площадь :</span><span>${square} соток</span></li>
+              <li><span>Площадь :</span><span>${square} м<sup>2</sup></span></li>
               <li><span>Статус :</span><span class="stat_${stat.CODE}">${stat.NAME}</span></li>
           </ul>
           <div class="flex flex-row">
