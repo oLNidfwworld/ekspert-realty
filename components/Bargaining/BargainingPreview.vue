@@ -97,7 +97,8 @@ const injected = inject('fromIBargainingToPreview', null);
               Площадь м<sup>2</sup>
             </span>
             <span class="font-bold">
-              от {{ minSquare }}
+              от 874
+              <!-- {{ minSquare }} -->
             </span>
           </li>
         </ul>
@@ -185,7 +186,7 @@ const injected = inject('fromIBargainingToPreview', null);
                 <PhoneDetailBtn :agentData="agentStaticData" />
                 <label class="mb-3">Оставьте свой номер,мы вам перезвоним</label>
                 <ClientOnly>
-                  <e-input class="mb-2" mask="+{7} 000 000-00-00" v-model="myPhone"  placeholder="+7(___) ___-__-__" />
+                  <e-input class="mb-2" mask="+{7} 900 000-00-00" v-model="myPhone"  placeholder="+7(___) ___-__-__" />
                 </ClientOnly>
               </div>
               <p class="text-center mb-2 text-red">
