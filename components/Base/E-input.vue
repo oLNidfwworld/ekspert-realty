@@ -23,10 +23,15 @@ const props = defineProps({
 })
 const { el, masked } = useIMask({
   mask: props.mask,
+  definitions: { 
+    '#' : /[9]/
+  },
   radix: '.',
 })
 const internalValue = ref(null)
 watch(internalValue, el => {
+  console.log(el);
+  console.log(internalValue.value);
   emit('update:value', el)
 })
 </script>
