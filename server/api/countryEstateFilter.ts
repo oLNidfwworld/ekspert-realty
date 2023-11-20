@@ -7,7 +7,7 @@ export default defineEventHandler((event) => {
                 name: 'OBJECT_TYPE',
                 type: 'multiSelector',
                 data: [
-                    {name: 'Доли',value: 'part'},
+                    // {name: 'Доли',value: 'part'},
                     {name: 'Дом/Коттедж',value: 'house'},
                     {name: 'Дача',value: 'dacha'},
                     {name: 'Земельный участок',value: 'area'}
