@@ -70,10 +70,10 @@ watch(() => route.query, (cur) => {
       </div>
       <div class="grid grid-cols-1 gap-5">
         <ProductCard v-if="catalogItems.items" v-for="(item,index) in catalogItems.items" :product="item" :key="index"/>
-        <Pagination :current-page="catalogItems.nav" :total-pages="catalogItems.nav_size"/>
+        <Pagination :scroll-to-top="true" :current-page="catalogItems.nav" :total-pages="catalogItems.nav_size"/>
       </div>
     </div>
-    <no-products v-else/>
+    <no-products v-else/> 
   </div>
 </template>
 <style scoped>

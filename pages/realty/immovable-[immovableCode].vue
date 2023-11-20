@@ -301,6 +301,8 @@ useSeoMeta({
         </div>
         {{ product.item.detailText }}
       </div>
+
+      <p class="leading-[22px] text-[16px] font-[300]">{{ product.item.description }}</p>
       <div ref="mapElement" v-if="product.item.coordinates.lat && product.item.coordinates.lon && isMapAppear">
         <ClientOnly>
           <YandexMap :coordinates="[product.item.coordinates.lat, product.item.coordinates.lon]">
@@ -319,7 +321,6 @@ useSeoMeta({
         </ClientOnly>
       </div>
       
-      <p class="leading-[22px] text-[16px] font-[300]">{{ product.item.description }}</p>
       <section>
         <h2 class="mb-3 font-bold text-3xl">Похожие объявления</h2>
         <div class="grid grid-cols-1 gap-5">

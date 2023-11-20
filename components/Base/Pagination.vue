@@ -6,7 +6,11 @@ const props = defineProps({
   totalPages: [String,Number],
   currentPage: [String,Number],
   PageSize: [String,Number],
-  totalItems: [String,Number]
+  totalItems: [String,Number],
+  scrollToTop : {
+    type : Boolean,
+    default : false,
+  }
 })
 const linksSize = computed(() => {
   let links = [];
@@ -18,13 +22,18 @@ const linksSize = computed(() => {
   }
   return links
 })
+const scrollToTop = () => {
+  if(props.scrollToTop) { 
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+}
 </script>
 <template>
     <div class="pagination justify-center md:justify-start">
       <p class="text-black font-bold mr-1 hidden md:block">Страница:</p>
-      <e-btn class="btn-grey w-[38px]" :to="{path: route.path, query: { ...route.query, page: `${currentPage-1}`}, params: {...route.params}}" v-if="currentPage > 1">&lt;</e-btn>
-      <e-btn :class="[index === props.currentPage  ? 'btn-red' : 'btn-grey']" class="w-[38px]" v-for="(index) in linksSize" :to="{path: route.path, query: { ...route.query, page: `${index}`}}">{{ index }}</e-btn>
-      <e-btn class="btn-grey w-[38px]" :to="{path: route.path, query: { ...route.query, page: `${currentPage+1}`}}" v-if="currentPage < totalPages">&gt;</e-btn>
+      <e-btn @click="scrollToTop()" class="btn-grey w-[38px]" :to="{path: route.path, query: { ...route.query, page: `${currentPage-1}`}, params: {...route.params}}" v-if="currentPage > 1">&lt;</e-btn>
+      <e-btn @click="scrollToTop()" :class="[index === props.currentPage  ? 'btn-red' : 'btn-grey']" class="w-[38px]" v-for="(index) in linksSize" :to="{path: route.path, query: { ...route.query, page: `${index}`}}">{{ index }}</e-btn>
+      <e-btn @click="scrollToTop()" class="btn-grey w-[38px]" :to="{path: route.path, query: { ...route.query, page: `${currentPage+1}`}}" v-if="currentPage < totalPages">&gt;</e-btn>
     </div>
 </template>
 <style>

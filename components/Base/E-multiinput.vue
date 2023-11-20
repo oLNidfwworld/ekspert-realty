@@ -34,7 +34,6 @@ watch(selectedValues, el => {
     </div>
   </div>
 </template>
-
 <style lang="postcss" scoped>
 .e-multiinput {
   &__wrapper {
@@ -47,6 +46,17 @@ watch(selectedValues, el => {
   &__item {
     @apply bg-transparent w-[100px];
     margin: 8px 12px;
+    /* Chrome,  Edge, Opera */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    /* Firefox */
+    &[type=number] {
+      -moz-appearance: textfield;
+    }
     &:first-child{
       border-right: 1px solid var(--grey);
     }

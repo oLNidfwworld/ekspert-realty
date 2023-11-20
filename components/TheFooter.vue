@@ -29,10 +29,7 @@ const currentYear = new Date().getFullYear()
               <ul class="socials">
                 <nuxt-link href="https://vk.com/ekspert_realty">
                   <nuxt-icon width="30px" height="30px" name="Vk"/>
-                </nuxt-link>
-                <nuxt-link href="https://www.facebook.com/groups/841397186055825/?fref=nf&__tn__=C-R">
-                  <nuxt-icon width="30px" height="30px" name="Facebook"/>
-                </nuxt-link>
+                </nuxt-link> 
                 <nuxt-link href="https://www.youtube.com/channel/UCMF6FOeygEuzxZ5Mk7rOIgg">
                   <nuxt-icon width="30px" height="30px" name="YouTube"/>
                 </nuxt-link>
