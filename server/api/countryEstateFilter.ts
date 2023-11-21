@@ -15,7 +15,7 @@ export default defineEventHandler((event) => {
                 value: []
             },
             {
-                label: 'Цена',
+                label: 'Стоимость, руб',
                 name: 'pricerange',
                 type: 'multiInput',
                 data: {

@@ -52,7 +52,7 @@ watch(selectedValues, el => {
       -webkit-appearance: none;
       margin: 0;
     }
-    
+    border-radius: 0px;
     /* Firefox */
     &[type=number] {
       -moz-appearance: textfield;

@@ -109,9 +109,8 @@ const isMapHref = computed(()=>{
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
     padding: 4px;
     &-item {
-      @apply rounded-md;
-      transition: all .3s ease-in;
-      padding: 4px 8px;
+      @apply rounded-md text-[16px] py-[4px] px-11 leading-[150%];
+      transition: all .3s ease-in; 
     }
     &--active {
       @apply bg-red text-white;
@@ -139,6 +138,7 @@ const isMapHref = computed(()=>{
   @apply mr-1;
 }
 .filter-estate__type .btn-grey{
+  padding : 8px 20px;
   flex:1;
   margin-bottom: 4px;
 }
