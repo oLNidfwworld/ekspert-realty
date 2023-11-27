@@ -41,7 +41,7 @@ const isMapHref = computed(()=>{
               </template>
               <template v-slot:multiplelabel="{ values }">
                 <div class="multiselect-multiple-label">
-                  Выбрано {{ values.length }}
+                  <span v-for="(val, i) in values"> {{ val.name }}<span v-if="values.length-1 != values.indexOf(val)">,</span> </span> 
                 </div>
               </template>
             </Multiselect>
@@ -65,6 +65,12 @@ const isMapHref = computed(()=>{
   </div>
 </template>
 <style lang="postcss">
+.multiselect-multiple-label{
+  max-width: 72%;
+  overflow: hidden;
+  text-wrap : nowrap;
+
+}
 .filter {
 &__main {
 &-block {

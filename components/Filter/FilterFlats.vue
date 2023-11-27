@@ -7,12 +7,6 @@ import {useFilterStore} from "../../store/smartFilter";
 const filter = useFilterStore()
 const { data: filterParams } = await useFetch('/api/flatsFilter')
 const isAdditionalPropsActive = ref(false)
-// defineProps({
-//   filterParameters: Object
-// })
-// watch(filterParams, (val) => {
-//  filterParams.value = val
-// })
 
 
 const route = useRoute();
@@ -20,6 +14,9 @@ const isMapHref = computed(()=>{
   return route.path.split('/')[1] !== 'map'
 })
 
+watch(filterParams.value.filter, (newVal) => {
+  filter.getFilterShitCount(newVal);
+})
 </script>
 <template>
   <div>
@@ -46,7 +43,7 @@ const isMapHref = computed(()=>{
               </template>
               <template v-slot:multiplelabel="{ values }">
                 <div class="multiselect-multiple-label">
-                  Выбрано {{ values.length }}
+                  <span v-for="(val, i) in values"> {{ val.name }}<span v-if="values.length-1 != values.indexOf(val)">,</span> </span> 
                 </div>
               </template>
             </Multiselect>
@@ -70,6 +67,12 @@ const isMapHref = computed(()=>{
   </div>
 </template>
 <style lang="postcss">
+.multiselect-multiple-label{
+  max-width: 72%;
+  overflow: hidden;
+  text-wrap : nowrap;
+
+}
 .filter {
   &__main {
     &-block {

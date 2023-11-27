@@ -109,7 +109,7 @@ const isMapHref = computed(()=>{
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
     padding: 4px;
     &-item {
-      @apply rounded-md text-[16px] py-[4px] sm:px-11 sm:w-fit w-full text-center leading-[150%];
+      @apply rounded-md text-[16px] py-[4px] px-11 leading-[150%];
       transition: all .3s ease-in; 
     }
     &--active {

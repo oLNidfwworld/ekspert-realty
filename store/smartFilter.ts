@@ -121,7 +121,20 @@ export const useFilterStore = defineStore('filter', () =>{
             )
             pageTitle.value = mapData.value.h1
     }
+    const getFilterShitCount = async (params : Object) => {
+        await formatParams(params);
+        const data = await useApiFetch(`/CatalogReborn/${filterCity.value}/${filterServiceType.value}/${filterImmovableType.value}/${filterImmovableProp.value}/${filterImmovablePropParams.value}`,
+            {
+                query: {
+                    page: `page-1`,
+                    size: `10000000`
+                }
+            }
+        );
+        console.log(data);
+    }
     return {
+        getFilterShitCount,
         setFilterServiceType,
         setFilterImmovableType,
         filterThisShitForMap,

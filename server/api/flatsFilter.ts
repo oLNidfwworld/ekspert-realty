@@ -23,7 +23,7 @@ export default defineEventHandler((event) => {
                     min: 0,
                     max: 9999999
                 },
-                value: null
+                value: ''
             },
             {
                 label: 'Общая площадь, м2',

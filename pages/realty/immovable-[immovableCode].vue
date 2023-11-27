@@ -76,6 +76,16 @@ useSeoMeta({
   title: `${product.value.item.name} | Эксперт`,
   description: `${product.value.item.typeOffer} ${product.value.item.name} по цене ${product.value.item.price} р. в АН "Эксперт"`,
 }) 
+
+const isLargeScreen = await useMediaQuery('(min-width: 780px)') 
+
+if(isLargeScreen.value) {
+  isMapAppear.value = true;
+}
+
+watch(() => isLargeScreen.value, () => {
+  isMapAppear.value = isLargeScreen.value;
+})
 </script>
 <template>
   <div>
