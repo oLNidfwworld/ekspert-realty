@@ -131,7 +131,11 @@ export const useFilterStore = defineStore('filter', () =>{
                 }
             }
         );
-        console.log(data);
+        if(data.items){
+            return data.items.length
+        }else {
+            return 0;
+        } 
     }
     return {
         getFilterShitCount,

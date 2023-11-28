@@ -16,7 +16,7 @@ const houseType = computed(() => {
   return Array.isArray(product.value.item.houseType) ? product.value.item.houseType[0] : product.value.item.houseType
 })
 const print = () => {
-  window.print()
+  navigateTo('/print/?objectData=' +  product.value.item.id)
 }
 const myPhone = ref('')
 const validation = ref(false), validationMessage = ref('');
@@ -50,11 +50,8 @@ const callbackMe = async () => {
     }
   }
 }
-
-
-const isShareButtonActive = ref(false);
-
-
+ 
+const isShareButtonActive = ref(false); 
 
 const isMapAppear = ref(false)
 const mapElement = ref(null)

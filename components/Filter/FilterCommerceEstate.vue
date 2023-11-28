@@ -14,6 +14,17 @@ const isMapHref = computed(()=>{
 })
 
 
+const resultCount =  ref(null);
+const isWaitingForCount = ref(false);
+const debouncedFn =   useDebounceFn(async (newVal) => {
+    isWaitingForCount.value = true
+    resultCount.value = await filter.getFilterShitCount(newVal);
+    isWaitingForCount.value = false;
+  }, 1500)
+watch(filterParams.value.filter,  (newVal) => {
+  
+  debouncedFn(newVal) 
+})
 
 </script>
 <template>
@@ -53,7 +64,15 @@ const isMapHref = computed(()=>{
           filter.filterThisShitForMap(filterParams.filter);
           navigateTo('/map');
           }"><nuxt-icon class="text-red mr-2" width="30px" height="30px" name="MapMarker"/> На карте</e-btn>
-        <e-btn class="btn-red" style="padding: 8px;" @click="(isMapHref)?filter.filterThisShit(filterParams.filter):filter.filterThisShitForMap(filterParams.filter)">Показать</e-btn>
+        <e-btn v-bind:inert="isWaitingForCount" class="btn-red" style="padding: 8px;" @click="(isMapHref)?filter.filterThisShit(filterParams.filter):filter.filterThisShitForMap(filterParams.filter)"> 
+          <span>Показать</span> &nbsp;
+          <span v-if="!isWaitingForCount"> {{ resultCount }}</span> 
+          <span class="waitingDots" v-else>
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+          </span>
+        </e-btn>
         <e-btn v-if="filterParams.filter.length > 5" class="btn-green filter__main-btn-extended" style="padding: 8px;" @click="isAdditionalPropsActive = !isAdditionalPropsActive">Расширенный фильтр</e-btn>
       </div>
     </div>
@@ -65,6 +84,32 @@ const isMapHref = computed(()=>{
   </div>
 </template>
 <style lang="postcss">
+.waitingDots span{
+  position: relative;
+}
+.waitingDots span:nth-child(1){
+  animation: fDot 1500ms linear 100ms infinite;
+}
+.waitingDots span:nth-child(2){
+  animation: fDot 1500ms linear 300ms infinite;
+}
+.waitingDots span:nth-child(3){
+  animation: fDot 1500ms linear 600ms infinite;
+}
+@keyframes fDot{
+  0%{
+    bottom: 0;
+  }
+  35%{
+    bottom: 5px;
+  }
+  60%{
+    bottom: 0;
+  }
+  100%{
+    bottom: 0;
+  }
+}
 .multiselect-multiple-label{
   max-width: 72%;
   overflow: hidden;
