@@ -12,6 +12,29 @@ console.log(product.value);
 <template>
     <PrintContent :product="product.item"></PrintContent>
 </template>
-<style scoped>
-
+<style >
+@media print { 
+  .pagebreak {
+      clear: both;
+      page-break-after: auto; 
+  }
+  /* 
+  
+  .pagebreak {
+      clear: both;
+      page-break-after: always;
+      page-break-before: always;
+  }
+  .pagebreak-top {
+      clear: both;
+      page-break-after: auto;
+      page-break-before: always;
+  }
+  .pagebreak-bott {
+      clear: both;
+      page-break-after: always;
+      page-break-before: auto;
+  }
+  */
+}
 </style>

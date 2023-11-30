@@ -12,7 +12,11 @@ const price = computed(() => item.price.toLocaleString("RU-ru"));
 const houseType = computed(() => {
   return Array.isArray(item.houseType) ? item.houseType[0] : item.houseType
 })
-
+const mapInited = () => {
+  setTimeout(() => {
+    window.print()
+  },1000)
+}
 </script>
 <template>
   <div class="print-content">
@@ -32,7 +36,7 @@ const houseType = computed(() => {
         <span class="text-[25px] font-bold text-red"> {{ price }} ₽ </span>
       </div>
 
-      <ul class="columns-4 text-[14px] my-[15px] gap-[35px] col-rule-red-1">
+      <ul class="  columns-4 text-[14px] my-[15px] gap-[35px] col-rule-red-1">
         <li v-if="item.roomsCount" class="flex flex-row justify-between">
           <span> Комнат </span>
           <span v-if="item.objectType.code == 'komnata'" class="font-bold">
@@ -114,28 +118,30 @@ const houseType = computed(() => {
         </li>
       </ul>
 
-      <p class="text-[18px] leading-[36px] font-light tracking-[0.4px]">
+      <p class="pagebreak text-[14px] leading-[30px] font-light tracking-[0.4px]">
         {{ item.description }}
       </p>
-      <p class="mt-3">
-        <b>Адрес: </b> {{ item.location }}
-      </p>
+      <div class="">
+          <p class="mt-3">
+          <b>Адрес: </b> {{ item.location }}
+            </p>
 
-      <ClientOnly>
-        <YandexMap class="mt-3" :zoom="13" :controls="{}" :coordinates="[item.coordinates.lat, item.coordinates.lon]">
-            <!--Markers-->
-            <YandexMarker :coordinates="[item.coordinates.lat, item.coordinates.lon]" :options="{
-              iconLayout: 'default#imageWithContent',
-              iconImageHref: '/ekspertMarker.svg',
-              iconImageSize: [50, 50],
-              iconImageOffset: [-25, -55]
-            }" :marker-id="item.id">
-              <template #component>
-                {{ item.location }}
-              </template>
-            </YandexMarker>
-          </YandexMap>
-      </ClientOnly>
+        <ClientOnly>
+          <YandexMap @created="mapInited" class="mt-3" :zoom="13" :controls="{}" :coordinates="[item.coordinates.lat, item.coordinates.lon]">
+              <!--Markers-->
+              <YandexMarker :coordinates="[item.coordinates.lat, item.coordinates.lon]" :options="{
+                iconLayout: 'default#imageWithContent',
+                iconImageHref: '/ekspertMarker.svg',
+                iconImageSize: [50, 50],
+                iconImageOffset: [-25, -55]
+              }" :marker-id="item.id">
+                <template #component>
+                  {{ item.location }}
+                </template>
+              </YandexMarker>
+            </YandexMap>
+        </ClientOnly>
+      </div>
 
       <div class="text-[20px] font-bold mt-[30px] m-auto w-fit">© 2005-2023</div>
     </div>
@@ -177,5 +183,6 @@ const houseType = computed(() => {
   width: 100% !important;
   overflow: hidden;
 }
+
 
 </style>

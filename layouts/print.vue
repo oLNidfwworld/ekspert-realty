@@ -16,17 +16,18 @@
     </div>
 
 </template>
-<style  lang="postcss" scoped>
+<style  lang="postcss" >
 
 @page {
-    margin-top: 0;
-    margin-bottom: 0;
+
+    page-break-inside: auto;
     size: A4 portrait;
 }
 
 *{
     --printer-width : 800px;
 }
+
 .print{
     &-wrapper{
         @apply max-w-[var(--printer-width)] m-auto flex flex-col; 
