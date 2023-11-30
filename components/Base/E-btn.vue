@@ -25,6 +25,9 @@
 .btn {
   @apply flex justify-center items-center border-solid border-red text-red py-3 px-4 rounded-md font-bold transition-all;
   border-width: 1px;
+  &[inert]{
+    @apply opacity-50;
+  }
   &-red {
     @apply text-white border-red bg-red;
     &:hover{

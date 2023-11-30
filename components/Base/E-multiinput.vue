@@ -18,11 +18,11 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:multiinputValue'])
 const selectedValues = ref({
-  min: 0,
-  max: 0,
+  min: null,
+  max: null,
 })
 watch(selectedValues, el => {
-  emit('update:multiinputValue', el)
+  emit('update:multiinputValue', el); 
 },{ deep: true })
 </script>
 <template>
