@@ -95,8 +95,8 @@ watch(() => isLargeScreen.value, () => {
         </div>
         <div>
           <div class="catalog-item__detail-top">
-            <div>
-              <!--          Просмотров: <span class="font-bold">N</span>-->
+            <div v-if="product.item.views !== 0">
+                       Просмотров: <span class="font-bold">{{ product.item.views }}</span>
             </div>
             <div>
               id: {{ product.item.productId }}

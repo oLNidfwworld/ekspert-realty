@@ -11,12 +11,58 @@ const { data: quickMenuRent } = await useAsyncData(
 const { data: quickMenuBuy } = await useAsyncData(
     () => $fetch(`/api/quickMenuBuy`)
 )
+
 const { data: quickCountryEstate } = await useAsyncData(
     () => $fetch(`/api/quickMenuCountryEstate`)
 )
 const { data: quickMenuCommerce } = await useAsyncData(
     () => $fetch(`/api/quickMenuCommerce`)
 )
+let sendUrls = [];
+let urls = ref([(quickMenuRent.value?.links), (quickCountryEstate.value?.links), (quickMenuBuy.value?.links),(quickMenuCommerce.value?.links)]); 
+urls.value.map(urlData => {
+  urlData.map((el) => {
+    sendUrls.push( el.url.replace('/realty','') );
+  })
+}) 
+const {data : countData} =  await useAsyncData(
+  () => useApiFetch(`/CatalogCountMultiply/` ,{
+                query: { 
+                  urlData : JSON.stringify(sendUrls) 
+                }
+      }
+  )
+);   
+  for(const [key,vals] of Object.entries(countData.value)){
+    let dataObject1 = quickMenuRent.value?.links.find(obj => {
+      return obj.url === key
+    });
+
+    if(dataObject1){
+      dataObject1.count = vals; 
+    }
+
+    let dataObject2 = quickMenuBuy.value?.links.find(obj => {
+      return obj.url === key
+    });
+
+    if(dataObject2){
+      dataObject2.count = vals; 
+    }
+    let dataObject3 = quickMenuCommerce.value?.links.find(obj => {
+      return obj.url === key
+    })
+    if(dataObject3){
+      dataObject3.count = vals; 
+    }
+    let dataObject4 = quickCountryEstate.value?.links.find(obj => {
+      return obj.url === key
+    })
+    if(dataObject4){
+      
+      dataObject4.count = vals; 
+    }
+  }  
 const { data:recommended, pending, error, refresh } = await useAsyncData(
     () => useApiFetch(`/Catalog`)
 )
