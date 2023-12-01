@@ -47,14 +47,14 @@ const { data: menuLinks } = await useFetch("/api/menuLinks");
               <g>
                 <path
                   d="M28.814 30.064a1.247 1.247 0 0 1-.884-.367L5.3 7.07A1.249 1.249 0 0 1 7.07 5.3L29.7 27.93a1.251 1.251 0 0 1-.884 2.134z"
-                  fill="var(--casal)"
+                  fill="var(--black)"
                   opacity="1"
                   data-original="#000000"
                   class=""
                 ></path>
                 <path
                   d="M6.186 30.064A1.251 1.251 0 0 1 5.3 27.93L27.93 5.3a1.25 1.25 0 0 1 1.77 1.77L7.07 29.7a1.247 1.247 0 0 1-.884.364z"
-                  fill="var(--casal)"
+                  fill="var(--black)"
                   opacity="1"
                   data-original="#000000"
                   class=""
@@ -73,7 +73,25 @@ const { data: menuLinks } = await useFetch("/api/menuLinks");
                 link.name
               }}</NuxtLink>
             </li>
+
+            <div>
+              <ul class="socials px-5"> 
+                <nuxt-link href="https://wa.me/79015178651">
+                  <nuxt-icon width="30px" height="30px"  name="WhatsApp"/>
+                </nuxt-link> 
+                <nuxt-link href="mailto:ekspert07@bk.ru">
+                  <nuxt-icon width="30px" height="30px" name="Mailru"/>
+                </nuxt-link>
+                <nuxt-link href="https://vk.com/ekspert_realty">
+                  <nuxt-icon width="30px" height="30px" name="Vk"/>
+                </nuxt-link> 
+                <nuxt-link href="https://www.youtube.com/channel/UCMF6FOeygEuzxZ5Mk7rOIgg">
+                  <nuxt-icon width="30px" height="30px" name="YouTube"/>
+                </nuxt-link>
+              </ul>
+            </div>
           </ul>
+          
         </div>
       </transition>
       <transition name="fade">
@@ -86,7 +104,15 @@ const { data: menuLinks } = await useFetch("/api/menuLinks");
     </teleport>
   </div>
 </template>
+<style>
+.menu .menu__list .socials a span svg * {
+  fill: var(--red) !important;
+  stroke: var(--black);
+  stroke-width: 0.1px;
+}
+</style>
 <style lang="postcss" scoped>
+
 .v-enter-active,
 .v-leave-active {
   transition: all 0.5s ease;
@@ -123,7 +149,7 @@ const { data: menuLinks } = await useFetch("/api/menuLinks");
     transform-style: preserve-3d;
   }
   &__btn {
-    @apply text-casal;
+    @apply text-black;
 
     transition: all 0.4s cubic-bezier(0.68, 0.24, 0.48, 0.8);
     &:hover {

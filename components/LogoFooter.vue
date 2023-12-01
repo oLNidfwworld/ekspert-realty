@@ -13,7 +13,7 @@ onMounted(() => {
   })
 </script>
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col gap-2">
     <nuxt-link class="mb-5" to="/">
   <!--    <nuxt-img src="/logo.png" />-->
       <img src="/logo-white.png" alt="logo"/>

@@ -123,7 +123,7 @@ export const useFilterStore = defineStore('filter', () =>{
     }
     const getFilterShitCount = async (params : Object) => {
         await formatParams(params);
-        const data = await useApiFetch(`/CatalogReborn/${filterCity.value}/${filterServiceType.value}/${filterImmovableType.value}/${filterImmovableProp.value}/${filterImmovablePropParams.value}`,
+        const data = await useApiFetch(`/CatalogCount/${filterCity.value}/${filterServiceType.value}/${filterImmovableType.value}/${filterImmovableProp.value}/${filterImmovablePropParams.value}`,
             {
                 query: {
                     page: `page-1`,
@@ -131,11 +131,8 @@ export const useFilterStore = defineStore('filter', () =>{
                 }
             }
         );
-        if(data.items){
-            return data.items.length
-        }else {
-            return 0;
-        } 
+        console.log(data);
+        return data 
     }
     return {
         getFilterShitCount,
