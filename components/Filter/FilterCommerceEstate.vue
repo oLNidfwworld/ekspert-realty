@@ -127,7 +127,7 @@ watch(filterParams.value.filter,  (newVal) => {
    gap:20px;
  }
 &__bottom {
-   @apply flex flex-col md:flex-row justify-end w-full;
+  @apply grid grid-cols-[1fr_auto] justify-between w-full gap-[50px];
 & .btn:not(:last-child) {
     @apply md:mr-5 mb-5 md:mb-0
   }

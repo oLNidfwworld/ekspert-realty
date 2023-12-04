@@ -22,12 +22,67 @@ const debouncedFn =   useDebounceFn(async (newVal) => {
     isWaitingForCount.value = false;
   }, 1500)
 watch(filterParams.value.filter,  (newVal) => {
-  
   debouncedFn(newVal) 
 })
+
+const selectedVars = computed(() => {
+  let values = {};
+  
+  filterParams.value.filter.map(category => { 
+    if(category.type === "multiInput"){
+      if(category.value?.min || category.value?.max){
+          values[category.name] ={
+          id : category.name,
+          name : category.label,
+          type: category.type,
+          values : {min: category.value?.min,max: category.value?.max}
+        }
+      } 
+    }else if(category.type === "multiSelect"){
+      if(Array.isArray(category.value))
+        category.value.map(categoryVal => {
+          if(values[category.name]){
+            values[category.name].values.push(category.data.find(x=> x.value === categoryVal));
+          }else{
+            values[category.name] ={
+              id : category.name,
+              type : category.type,
+              name : category.label,
+              values : [category.data.find(x=> x.value === categoryVal)]
+            }
+          }
+        }) 
+    }else {
+
+      if(Array.isArray(category.value))
+        category.value.map(categoryVal => {
+          if(values[category.name]){
+            values[category.name].values.push(categoryVal);
+          }else{
+            values[category.name] ={
+              id : category.name,
+              type : category.type,
+              name : category.label,
+              values : [categoryVal]
+            }
+          }
+        })
+    }
+  })  
+  return values;
+}) 
+const removeSelected = ( itemToRemove ) => {
+  const searchableObject = filterParams.value.filter.find( x => x.name === itemToRemove.id);
+  const index = filterParams.value.filter.indexOf(searchableObject);
+  if(filterParams.value.filter[index].type === "multiSelector"){
+    filterParams.value.filter[index].value = [] 
+  } else {
+    filterParams.value.filter[index].value = null 
+  }
+}
 </script>
 <template>
-  <div>
+  <div>  
   <ClientOnly>
     <div class="filter__main-block">
       <transition-group class="filter__main__props" name="list" tag="div" ref="propsContainer" >
@@ -59,20 +114,56 @@ watch(filterParams.value.filter,  (newVal) => {
         </div>
       </transition-group>
       <div class="filter__main__bottom">
-        <e-btn class="btn-map" @click="()=>{
-          filter.filterThisShitForMap(filterParams.filter);
-          navigateTo('/map');
-          }"><nuxt-icon class="text-red mr-2" width="30px" height="30px" name="MapMarker"/> На карте</e-btn>
-        <e-btn v-bind:inert="isWaitingForCount" class="btn-red" style="padding: 8px;" @click="(isMapHref)?filter.filterThisShit(filterParams.filter):filter.filterThisShitForMap(filterParams.filter)"> 
-          <span>Показать</span> &nbsp;
-          <span v-if="!isWaitingForCount"> {{ resultCount }}</span> 
-          <span class="waitingDots" v-else>
-            <span>.</span>
-            <span>.</span>
-            <span>.</span>
-          </span>
-        </e-btn>
-        <e-btn class="btn-green filter__main-btn-extended" style="padding: 8px;" @click="isAdditionalPropsActive = !isAdditionalPropsActive">Расширенный фильтр</e-btn>
+        <div class="filter__main__selected">
+          <div v-for="(item,index) in selectedVars" class="filter__main__selected-item">
+              <div>
+                {{ item.name }}: 
+                <template v-if="item.type === 'multiInput'">
+                  <span v-if="item.values?.min">
+                    от {{  item.values?.min.toLocaleString('ru-RU') }} 
+                  </span>
+                  <span v-if="item.values?.max">
+                    до {{ item.values?.max.toLocaleString('ru-RU') }}
+                  </span>
+                </template>
+                <template v-else-if="item.type === 'multiSelector'">
+                  <span v-for="(itemItems) in item.values"> {{ itemItems.name }}<span v-if="item.values.length-1 != item.values.indexOf(itemItems)">,</span>&nbsp;</span> 
+                </template> 
+                <template v-else-if="item.type === 'multiSelect'">
+                  <span v-for="(itemItems) in item.values"> {{ itemItems.name }}<span v-if="item.values.length-1 != item.values.indexOf(itemItems)">,</span>&nbsp;</span> 
+                </template>  
+              </div>
+              <button @click="removeSelected(item)">
+                <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_304_132)">
+                <path d="M3.29249 4.50013L0.146589 1.35423C-0.0488625 1.15894 -0.0488625 0.842083 0.146589 0.646798C0.342041 0.451347 0.658565 0.451347 0.854016 0.646798L3.99992 3.7927L7.14598 0.646798C7.34144 0.451347 7.65796 0.451347 7.85341 0.646798C8.04886 0.842083 8.04886 1.15894 7.85341 1.35423L4.70734 4.50013L7.85341 7.64603C8.04886 7.84131 8.04886 8.15817 7.85341 8.35346C7.75569 8.45101 7.62761 8.49988 7.4997 8.49988C7.37179 8.49988 7.24371 8.45101 7.14598 8.35329L3.99992 5.20739L0.854016 8.35329C0.75629 8.45101 0.628213 8.49988 0.500302 8.49988C0.372392 8.49988 0.244315 8.45101 0.146589 8.35329C-0.0488625 8.158 -0.0488625 7.84115 0.146589 7.64586L3.29249 4.50013Z" fill="#2D6D6D"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_304_132">
+                <rect width="8" height="8" fill="white" transform="matrix(-1 0 0 1 8 0.5)"/>
+                </clipPath>
+                </defs>
+                </svg>
+
+              </button>
+          </div>
+        </div>
+        <div class="filter__main__bottom-right">
+          <e-btn class="btn-map" @click="()=>{
+            filter.filterThisShitForMap(filterParams.filter);
+            navigateTo('/map');
+            }"><nuxt-icon class="text-red mr-2" width="30px" height="30px" name="MapMarker"/> На карте</e-btn>
+          <e-btn v-bind:inert="isWaitingForCount" class="btn-red" style="padding: 8px;" @click="(isMapHref)?filter.filterThisShit(filterParams.filter):filter.filterThisShitForMap(filterParams.filter)"> 
+            <span>Показать</span> &nbsp;
+            <span v-if="!isWaitingForCount"> {{ resultCount }}</span> 
+            <span class="waitingDots" v-else>
+              <span>.</span>
+              <span>.</span>
+              <span>.</span>
+            </span>
+          </e-btn>
+          <e-btn class="btn-green filter__main-btn-extended" style="padding: 8px;" @click="isAdditionalPropsActive = !isAdditionalPropsActive">Расширенный фильтр</e-btn>
+        </div>
       </div>
     </div>
     <div :class="[isAdditionalPropsActive ? 'filter__main__mobile-btn--active' : '', 'filter__main__mobile-btn']" @click="isAdditionalPropsActive = !isAdditionalPropsActive" v-if="filterParams.filter.length > 5">
@@ -117,18 +208,28 @@ watch(filterParams.value.filter,  (newVal) => {
 }
 .filter {
   &__main {
+    &__selected{
+      @apply flex flex-row gap-3 flex-wrap;
+      &-item{
+        @apply flex gap-2 items-center bg-grey p-[2px_8px] h-fit;
+        border-radius: 5px;
+      }
+    }
     &-block {
       @apply bg-concrete text-base flex flex-col rounded-md relative;
       z-index: 10;
     }
     &__props {
-      @apply flex flex-wrap items-end mb-5 w-full;
+      @apply flex flex-wrap  mb-5 w-full;
       gap:20px;
     }
     &__bottom {
-      @apply flex flex-col md:flex-row justify-end w-full;
+      @apply grid grid-cols-[1fr_auto] justify-between w-full gap-[50px];
       & .btn:not(:last-child) {
-        @apply md:mr-5 mb-5 md:mb-0
+        @apply md:mr-5 mb-5 md:mb-0;
+      }
+      &-right{
+        @apply flex flex-row h-fit;
       }
     }
     &__mobile-btn {

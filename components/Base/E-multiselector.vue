@@ -19,8 +19,9 @@
     } else {
       selectedValues.value.push(item)
     }
+
     emit('update:multiselectorValue', selectedValues.value)
-  }
+  } 
 </script>
 <template>
 <div class="e-multiselector">
