@@ -10,7 +10,7 @@ const { data: quickMenuRent } = await useAsyncData(
 )
 const { data: quickMenuBuy } = await useAsyncData(
     () => $fetch(`/api/quickMenuBuy`)
-)
+);
 
 const { data: quickCountryEstate } = await useAsyncData(
     () => $fetch(`/api/quickMenuCountryEstate`)
