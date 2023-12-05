@@ -121,7 +121,7 @@ const price =computed(() => props.product.price.toLocaleString('ru-RU'))
    }
   &-slider {
     &-image {
-      @apply w-[320px] sm:w-[480px] md:w-[300px] lg:w-[400px] h-[300px] sm:h-[350px];
+      @apply w-[100%] sm:w-[480px] md:w-[300px] lg:w-[400px] h-[300px] sm:h-[350px];
     }
   }
 }

@@ -9,6 +9,7 @@ export default defineNuxtConfig({
         public: {
             API_BASE_URL: process.env.API_BASE_URL,
             UPLOAD_URL: process.env.UPLOAD_URL, 
+            RESOURCE_URL: process.env.RESOURCE_URL, 
         },
     },
     app: {

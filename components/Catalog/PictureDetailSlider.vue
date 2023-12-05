@@ -11,7 +11,7 @@ const next = ref(null)
 const setThumbsSwiper = (swiper) => {
   thumbsSwiper = swiper;
 }
-const config = useRuntimeConfig()
+const config = useRuntimeConfig() 
 </script>
 <template>
   <div :class="[sliderClasses, 'swiper-detail__slide swiper-detail__wrapper h-full relative rounded-md overflow-hidden']">
@@ -38,8 +38,11 @@ const config = useRuntimeConfig()
       <template v-if="pictures.length >= 1" >
         <SwiperSlide v-for="(slide, index) in pictures" :key="index">
           <img v-if="slide.resizedPath" :class="[sliderClasses, 'swiper-detail__slide h-full w-full bg-center bg-cover']" loading="lazy" :src="`${(config.UPLOAD_URL).replace('upload/','')}${slide.resizedPath}`" > 
-          <div v-else :class="[sliderClasses, 'swiper-detail__slide h-full w-full bg-center bg-cover']" :style="`background-image: url('${config.UPLOAD_URL}${slide.url}/${slide.filename}')`">
-          </div>
+          <picture v-else>
+            <source :srcset='`${config.UPLOAD_URL}${slide.url}/${slide.filename}`'>
+            <img loading="lazy" :class="[sliderClasses, 'swiper-detail__slide h-full w-full bg-center bg-cover']">
+          </picture>
+          
         </SwiperSlide>
       </template>
       <template v-else>
@@ -49,7 +52,7 @@ const config = useRuntimeConfig()
       </template>
     </Swiper>
     <div class="flex h-fit bottom-0 w-full z-10 justify-between items-center pb-5">
-      <span v-if="pictures.length > 1" ref="prev" class="swiper-detail-prev"></span>
+      <button v-if="pictures.length > 1" ref="prev" class="swiper-detail-prev"></button>
       <Swiper
           :thumbs="{ swiper: thumbsSwiper }"
           :modules="[SwiperNavigation, SwiperEffectCreative, SwiperThumbs]"
@@ -83,8 +86,10 @@ const config = useRuntimeConfig()
         <template v-if="pictures.length > 0">
           <SwiperSlide v-for="(slide, index) in pictures" :key="index">
             <img v-if="slide.resizedPath" :class="[sliderClasses, 'swiper-detail__thumbs bg-center bg-cover']" loading="lazy" :src="`${(config.UPLOAD_URL).replace('upload/','')}${slide.resizedPath}`" > 
-            <div v-else :class="[sliderClasses, 'swiper-detail__thumbs bg-center bg-cover']" :style="`background-image: url('${config.UPLOAD_URL}${slide.url}/${slide.filename}')`">
-            </div>
+            <picture v-else>
+              <source :srcset='`${config.UPLOAD_URL}${slide.url}/${slide.filename}`'>
+              <img  loading="lazy" :class="[sliderClasses, 'swiper-detail__thumbs bg-center bg-cover']" >
+            </picture> 
           </SwiperSlide>
         </template>
         <template v-else>
@@ -93,7 +98,7 @@ const config = useRuntimeConfig()
           </SwiperSlide>
         </template>
       </Swiper>
-      <span v-if="pictures.length > 1" ref="next" class="swiper-detail-next"></span>
+      <button v-if="pictures.length > 1" ref="next" class="swiper-detail-next"></button>
     </div>
   </div>
 </template>
