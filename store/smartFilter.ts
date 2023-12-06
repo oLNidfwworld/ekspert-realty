@@ -130,8 +130,7 @@ export const useFilterStore = defineStore('filter', () =>{
                     size: `10000000`
                 }
             }
-        );
-        console.log(data);
+        ); 
         return data 
     }
     return {

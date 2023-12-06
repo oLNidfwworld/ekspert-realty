@@ -14,14 +14,21 @@ const props = defineProps({
     type: String,
     required: false,
     default: ''
+  },
+  selectedValues: { 
+    required: false,
+    default: {min : null, max : null}
   }
 })
 const emit = defineEmits(['update:multiinputValue'])
-const selectedValues = ref({
+const selectedValuesTmp = ref({
   min: null,
   max: null,
 })
-watch(selectedValues, el => {
+watch(() => props.selectedValues , (newVal) => {
+  selectedValuesTmp.value = newVal;
+})
+watch(selectedValuesTmp, el => { 
   emit('update:multiinputValue', el); 
 },{ deep: true })
 </script>
@@ -29,8 +36,8 @@ watch(selectedValues, el => {
   <div class="e-multiinput">
     <label class="e-multiinput__label" v-if="label.length > 0"> {{label}}</label>
     <div class="e-multiinput__wrapper">
-      <input type="number" :min="minVal" :max="maxVal" v-model="selectedValues.min" class="e-multiinput__item" placeholder="От"/>
-      <input type="number" :min="minVal" :max="maxVal" v-model="selectedValues.max" class="e-multiinput__item" placeholder="До"/>
+      <input type="number" :min="minVal" :max="maxVal" v-model="selectedValuesTmp.min" class="e-multiinput__item" placeholder="От"/>
+      <input type="number" :min="minVal" :max="maxVal" v-model="selectedValuesTmp.max" class="e-multiinput__item" placeholder="До"/>
     </div>
   </div>
 </template>

@@ -12,16 +12,15 @@ const isAdditionalPropsActive = ref(false)
 const route = useRoute();
 const isMapHref = computed(()=>{
   return route.path.split('/')[1] !== 'map'
-})
-
+}) 
 const resultCount =  ref(null);
 const isWaitingForCount = ref(false);
-const debouncedFn =   useDebounceFn(async (newVal) => {
-    isWaitingForCount.value = true
+const debouncedFn =   useDebounceFn(async (newVal) => { 
     resultCount.value = await filter.getFilterShitCount(newVal);
     isWaitingForCount.value = false;
   }, 1500)
 watch(filterParams.value.filter,  (newVal) => {
+  isWaitingForCount.value = true
   debouncedFn(newVal) 
 })
 
@@ -71,14 +70,26 @@ const selectedVars = computed(() => {
   })  
   return values;
 }) 
-const removeSelected = ( itemToRemove ) => {
-  const searchableObject = filterParams.value.filter.find( x => x.name === itemToRemove.id);
-  const index = filterParams.value.filter.indexOf(searchableObject);
-  if(filterParams.value.filter[index].type === "multiSelector"){
-    filterParams.value.filter[index].value = [] 
-  } else {
-    filterParams.value.filter[index].value = null 
-  }
+const removeSelected = ( itemId, itemType, itemToDel ) => { 
+
+  const obj = filterParams.value.filter.find( x => x.name === itemId );
+  const indexObj = filterParams.value.filter.indexOf(obj);
+
+  if(itemType === 'multiSelector' ||  itemType === 'multiSelect') { 
+    
+    const valueObj = filterParams.value.filter[indexObj].value.find( x => x.name === itemToDel);    
+    const indexValueObj = filterParams.value.filter[indexObj].value.indexOf(valueObj); 
+
+    filterParams.value.filter[indexObj].value.splice(indexValueObj, 1)
+  } else if ( itemType === 'multiInput' ) {
+
+     
+    if(itemToDel === 'min'){
+      filterParams.value.filter[indexObj].value.min = ''
+    } else if (itemToDel === 'max'){
+      filterParams.value.filter[indexObj].value.max = ''
+    }  
+  }  
 }
 </script>
 <template>
@@ -87,8 +98,8 @@ const removeSelected = ( itemToRemove ) => {
     <div class="filter__main-block">
       <transition-group class="filter__main__props" name="list" tag="div" ref="propsContainer" >
         <div v-for="(component, index) in filterParams.filter" :is="component.type" :key="index" v-show="index < 5 || isAdditionalPropsActive">
-          <e-multiselector v-if="component.type === 'multiSelector'"  v-model:multiselectorValue="component.value" :label="component.label" :availableValues="component.data"/>
-          <e-multiinput v-if="component.type === 'multiInput'" v-model:multiinputValue="component.value" :label="component.label" :min-val="component.data.min" :max-val="component.data.max"/>
+          <e-multiselector v-if="component.type === 'multiSelector'" :selectedValues="component.value"  v-model:multiselectorValue="component.value" :label="component.label" :availableValues="component.data"/> 
+          <e-multiinput v-if="component.type === 'multiInput'" :selectedValues="component.value" v-model:multiinputValue="component.value" :label="component.label" :min-val="component.data.min" :max-val="component.data.max"/>
           <div v-if="component.type === 'multiSelect'" class="w-fit">
             <label class="font-bold mb-1">{{component.label}}</label>
             <Multiselect class="e-multiselect"
@@ -114,26 +125,13 @@ const removeSelected = ( itemToRemove ) => {
         </div>
       </transition-group>
       <div class="filter__main__bottom">
-        <div class="filter__main__selected">
-          <div v-for="(item,index) in selectedVars" class="filter__main__selected-item">
-              <div>
-                {{ item.name }}: 
-                <template v-if="item.type === 'multiInput'">
-                  <span v-if="item.values?.min">
-                    от {{  item.values?.min.toLocaleString('ru-RU') }} 
-                  </span>
-                  <span v-if="item.values?.max">
-                    до {{ item.values?.max.toLocaleString('ru-RU') }}
-                  </span>
-                </template>
-                <template v-else-if="item.type === 'multiSelector'">
-                  <span v-for="(itemItems) in item.values"> {{ itemItems.name }}<span v-if="item.values.length-1 != item.values.indexOf(itemItems)">,</span>&nbsp;</span> 
-                </template> 
-                <template v-else-if="item.type === 'multiSelect'">
-                  <span v-for="(itemItems) in item.values"> {{ itemItems.name }}<span v-if="item.values.length-1 != item.values.indexOf(itemItems)">,</span>&nbsp;</span> 
-                </template>  
-              </div>
-              <button @click="removeSelected(item)">
+        <div class="filter__main__selected"> 
+          <template class="filter__main__selected-item" v-for="(item,index) in selectedVars"  >  
+            <template v-if="item.type === 'multiSelector'" v-for="(itemValue) in item.values"> 
+              <div class="filter__main__selected-item">
+                {{ item.name }}:  {{ itemValue.name }}
+
+              <button @click="removeSelected(item.id, item.type, itemValue.name)">
                 <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_304_132)">
                 <path d="M3.29249 4.50013L0.146589 1.35423C-0.0488625 1.15894 -0.0488625 0.842083 0.146589 0.646798C0.342041 0.451347 0.658565 0.451347 0.854016 0.646798L3.99992 3.7927L7.14598 0.646798C7.34144 0.451347 7.65796 0.451347 7.85341 0.646798C8.04886 0.842083 8.04886 1.15894 7.85341 1.35423L4.70734 4.50013L7.85341 7.64603C8.04886 7.84131 8.04886 8.15817 7.85341 8.35346C7.75569 8.45101 7.62761 8.49988 7.4997 8.49988C7.37179 8.49988 7.24371 8.45101 7.14598 8.35329L3.99992 5.20739L0.854016 8.35329C0.75629 8.45101 0.628213 8.49988 0.500302 8.49988C0.372392 8.49988 0.244315 8.45101 0.146589 8.35329C-0.0488625 8.158 -0.0488625 7.84115 0.146589 7.64586L3.29249 4.50013Z" fill="#2D6D6D"/>
@@ -146,7 +144,60 @@ const removeSelected = ( itemToRemove ) => {
                 </svg>
 
               </button>
-          </div>
+              </div>
+            </template> 
+            <template v-else-if="item.type === 'multiInput'" > 
+              <div v-if="item.values.min" class="filter__main__selected-item">
+                {{ item.name }}: от {{ (item.values.min).toLocaleString('ru-RU') }} 
+              <button @click="removeSelected(item.id, item.type, 'min')">
+                <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_304_132)">
+                <path d="M3.29249 4.50013L0.146589 1.35423C-0.0488625 1.15894 -0.0488625 0.842083 0.146589 0.646798C0.342041 0.451347 0.658565 0.451347 0.854016 0.646798L3.99992 3.7927L7.14598 0.646798C7.34144 0.451347 7.65796 0.451347 7.85341 0.646798C8.04886 0.842083 8.04886 1.15894 7.85341 1.35423L4.70734 4.50013L7.85341 7.64603C8.04886 7.84131 8.04886 8.15817 7.85341 8.35346C7.75569 8.45101 7.62761 8.49988 7.4997 8.49988C7.37179 8.49988 7.24371 8.45101 7.14598 8.35329L3.99992 5.20739L0.854016 8.35329C0.75629 8.45101 0.628213 8.49988 0.500302 8.49988C0.372392 8.49988 0.244315 8.45101 0.146589 8.35329C-0.0488625 8.158 -0.0488625 7.84115 0.146589 7.64586L3.29249 4.50013Z" fill="#2D6D6D"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_304_132">
+                <rect width="8" height="8" fill="white" transform="matrix(-1 0 0 1 8 0.5)"/>
+                </clipPath>
+                </defs>
+                </svg> 
+              </button>
+              </div>
+              <div v-if="item.values.max" class="filter__main__selected-item">
+                {{ item.name }}: до {{ (item.values.max).toLocaleString('ru-RU') }} 
+              <button @click="removeSelected(item.id, item.type, 'max')">
+                <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_304_132)">
+                <path d="M3.29249 4.50013L0.146589 1.35423C-0.0488625 1.15894 -0.0488625 0.842083 0.146589 0.646798C0.342041 0.451347 0.658565 0.451347 0.854016 0.646798L3.99992 3.7927L7.14598 0.646798C7.34144 0.451347 7.65796 0.451347 7.85341 0.646798C8.04886 0.842083 8.04886 1.15894 7.85341 1.35423L4.70734 4.50013L7.85341 7.64603C8.04886 7.84131 8.04886 8.15817 7.85341 8.35346C7.75569 8.45101 7.62761 8.49988 7.4997 8.49988C7.37179 8.49988 7.24371 8.45101 7.14598 8.35329L3.99992 5.20739L0.854016 8.35329C0.75629 8.45101 0.628213 8.49988 0.500302 8.49988C0.372392 8.49988 0.244315 8.45101 0.146589 8.35329C-0.0488625 8.158 -0.0488625 7.84115 0.146589 7.64586L3.29249 4.50013Z" fill="#2D6D6D"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_304_132">
+                <rect width="8" height="8" fill="white" transform="matrix(-1 0 0 1 8 0.5)"/>
+                </clipPath>
+                </defs>
+                </svg>
+
+              </button>
+              </div>
+            </template>
+            <template v-else-if="item.type === 'multiSelect'" v-for="(itemValue) in item.values">   
+              <div class="filter__main__selected-item">
+                {{ itemValue.name }} 
+              <button @click="removeSelected(item.id, item.type, itemValue)">
+                <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_304_132)">
+                <path d="M3.29249 4.50013L0.146589 1.35423C-0.0488625 1.15894 -0.0488625 0.842083 0.146589 0.646798C0.342041 0.451347 0.658565 0.451347 0.854016 0.646798L3.99992 3.7927L7.14598 0.646798C7.34144 0.451347 7.65796 0.451347 7.85341 0.646798C8.04886 0.842083 8.04886 1.15894 7.85341 1.35423L4.70734 4.50013L7.85341 7.64603C8.04886 7.84131 8.04886 8.15817 7.85341 8.35346C7.75569 8.45101 7.62761 8.49988 7.4997 8.49988C7.37179 8.49988 7.24371 8.45101 7.14598 8.35329L3.99992 5.20739L0.854016 8.35329C0.75629 8.45101 0.628213 8.49988 0.500302 8.49988C0.372392 8.49988 0.244315 8.45101 0.146589 8.35329C-0.0488625 8.158 -0.0488625 7.84115 0.146589 7.64586L3.29249 4.50013Z" fill="#2D6D6D"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_304_132">
+                <rect width="8" height="8" fill="white" transform="matrix(-1 0 0 1 8 0.5)"/>
+                </clipPath>
+                </defs>
+                </svg>
+
+              </button>
+              </div> 
+            </template>
+          </template>
         </div>
         <div class="filter__main__bottom-right">
           <e-btn class="btn-map" @click="()=>{

@@ -32,8 +32,9 @@ const config = useRuntimeConfig()
       <template v-if="pictures?.length > 0">
         <SwiperSlide v-for="(slide, index) in pictures" :key="index"> 
             <img v-if="slide.resizedPath" :class="[sliderClasses, 'h-full w-full bg-center bg-cover']" loading="lazy" :src="`${(config.UPLOAD_URL).replace('upload/','')}${slide.resizedPath}`" > 
-            <picture v-else>
-              <source :srcset='`${config.UPLOAD_URL}${slide.url}/${slide.filename}`'>
+            <picture v-else> 
+              <source :srcset='`${config.RESOURCE_URL}${slide.websrc}`'>
+              <source :srcset='`${config.RESOURCE_URL}${slide.src}`'>
               <img loading="lazy" :class="[sliderClasses, 'h-full w-full bg-center bg-cover']">
             </picture>
         </SwiperSlide>

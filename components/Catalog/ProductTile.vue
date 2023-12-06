@@ -9,13 +9,13 @@ const props = defineProps({
 })
 const price = computed(() => props.product.price.toLocaleString('ru-RU'))
 const route = useRoute()
-const config = useRuntimeConfig()
-console.log(props.product);
+const config = useRuntimeConfig() 
 </script>
 <template>
   <div class="product-tile">
     <picture v-if="product.photos.length > 0" >
               <source :srcset='`${config.RESOURCE_URL}${product.photos[0].websrc}`'>
+              <source :srcset='`${config.RESOURCE_URL}${product.photos[0].src}`'>
               <img loading="lazy" class="product-tile-image">
     </picture>
       <div v-else class="product-tile-image">
