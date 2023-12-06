@@ -268,7 +268,7 @@ const removeSelected = ( itemId, itemType, itemToDel ) => {
      gap:20px;
    }
   &__bottom {
-    @apply grid grid-cols-[1fr_auto] justify-between w-full gap-[50px];
+    @apply flex flex-col-reverse md:grid grid-cols-[1fr_auto] justify-between w-full gap-[50px];
     & .btn:not(:last-child) {
         @apply md:mr-5 mb-5 md:mb-0
       }

@@ -262,7 +262,7 @@ const removeSelected = ( itemId, itemType, itemToDel ) => {
     &__selected{
       @apply flex flex-row gap-3 flex-wrap;
       &-item{
-        @apply flex gap-2 items-center bg-grey p-[2px_8px] h-fit;
+        @apply text-[14px] lg:text-[16px] flex gap-2 items-center bg-grey p-[2px_8px] h-fit;
         border-radius: 5px;
       }
     }
@@ -275,12 +275,12 @@ const removeSelected = ( itemId, itemType, itemToDel ) => {
       gap:20px;
     }
     &__bottom {
-      @apply grid grid-cols-[1fr_auto] justify-between w-full gap-[50px];
+      @apply flex flex-col-reverse md:grid grid-cols-[1fr_auto] justify-between w-full gap-[50px];
       & .btn:not(:last-child) {
         @apply md:mr-5 mb-5 md:mb-0;
       }
       &-right{
-        @apply flex flex-row h-fit;
+        @apply flex flex-row h-fit justify-between md:justify-start;
       }
     }
     &__mobile-btn {
