@@ -40,9 +40,9 @@ export const useFilterStore = defineStore('filter', () =>{
                     const elValue = el?.value;
                     if(elValue && (elValue.min !== '') && (elValue.max !== '')){
                         if(paramsPart === ''){
-                            paramsPart += `?${el.name}=${String(elValue.min)}between${String(elValue.max)}`;
+                            paramsPart += `?${el.name}=${String((elValue.min === null)?0:elValue.min)}between${String((elValue.max === null)?0:elValue.max)}`;
                         }else{
-                            paramsPart += `&${el.name}=${String(elValue.min)}between${String(elValue.max)}`;
+                            paramsPart += `&${el.name}=${String((elValue.min === null)?0:elValue.min)}between${String((elValue.max === null)?0:elValue.max)}`;
                         }
                     }
                     break;
