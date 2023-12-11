@@ -20,7 +20,7 @@ const debouncedFn =   useDebounceFn(async (newVal) => {
     isWaitingForCount.value = false;
   }, 1500)
 watch(filterParams.value.filter,  (newVal) => {
-  isWaitingForCount.value = true
+  isWaitingForCount.value = true; 
   debouncedFn(newVal) 
 })
 
@@ -106,7 +106,54 @@ const removeSelected = ( itemId, itemType, itemToDel ) => {
       filterParams.value.filter[indexObj].value.max = ''
     }  
   }  
+} 
+let urlParams = {
+  ... route.query,
+  ... route.params
+}; 
+onMounted(() => {
+  if(urlParams){
+  delete urlParams.serviceType;
+  delete urlParams.immovableType;
+  if(urlParams.city === 'all-cities'){
+    delete urlParams.city 
+  }   
+  if(urlParams.immovableProperty === 'all-immovable-properties'){
+    delete urlParams.immovableProperty
+  }   
+  Object.keys(urlParams).forEach( (key, index) => {
+    let searchObject = null
+    if(key === "immovableProperty"){ 
+      searchObject =  filterParams.value.filter.find( x => x.name === "OBJECT_TYPE" )
+    }else{
+      searchObject = filterParams.value.filter.find( x => x.name === key );
+    }
+    const searchableIndex = filterParams.value.filter.indexOf(searchObject);
+   
+    switch(searchObject.type){
+      case "multiInput":
+        let minmaxValue = urlParams[key].split('between');
+        console.log('ОДИН ' + minmaxValue[0])
+        console.log('ТВА ' + minmaxValue[1])
+        filterParams.value.filter[searchableIndex].value = {min : (minmaxValue[0])?minmaxValue[0]:'', max : (minmaxValue[1])?minmaxValue[1]:'' }
+        break;
+      case "multiSelector":
+        let urlQueryVal = urlParams[key].split('-');
+        console.log(urlQueryVal);
+        console.log(filterParams.value.filter[searchableIndex]);
+        let tmpArray = [];
+        urlQueryVal.map( urlVal => {
+          tmpArray.push(filterParams.value.filter[searchableIndex].data.find( x => x.value === urlVal ))
+        });
+        filterParams.value.filter[searchableIndex].value = tmpArray;
+        console.log(tmpArray);
+        break;
+      case "multiSelect":
+        break;
+    } 
+  }); 
 }
+})
 </script>
 <template>
   <div>  

@@ -69,6 +69,22 @@ const selectedVars = computed(() => {
   })  
   return values;
 }) 
+const isSomethingIsSelected = computed(() => {
+  if( Object.values(selectedVars.value).length > 0){
+    return true
+  } else {
+    return false
+  }
+})
+const clearAll = ( ) => { 
+  filterParams.value.filter.map(item => {
+    if(item.type === 'multiSelector' || item.type === 'multiSelect' ){
+      item.value = [];
+    } else if (item.type === 'multiInput'){
+      item.value = ""
+    }  
+  })
+}
 const removeSelected = ( itemId, itemType, itemToDel ) => { 
 
   const obj = filterParams.value.filter.find( x => x.name === itemId );
@@ -197,6 +213,18 @@ const removeSelected = ( itemId, itemType, itemToDel ) => {
               </div> 
             </template>
           </template>
+          <button v-if="isSomethingIsSelected" @click="clearAll" class="text-red filter__main__selected-item">
+            Очистить <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_304_132)">
+                <path d="M3.29249 4.50013L0.146589 1.35423C-0.0488625 1.15894 -0.0488625 0.842083 0.146589 0.646798C0.342041 0.451347 0.658565 0.451347 0.854016 0.646798L3.99992 3.7927L7.14598 0.646798C7.34144 0.451347 7.65796 0.451347 7.85341 0.646798C8.04886 0.842083 8.04886 1.15894 7.85341 1.35423L4.70734 4.50013L7.85341 7.64603C8.04886 7.84131 8.04886 8.15817 7.85341 8.35346C7.75569 8.45101 7.62761 8.49988 7.4997 8.49988C7.37179 8.49988 7.24371 8.45101 7.14598 8.35329L3.99992 5.20739L0.854016 8.35329C0.75629 8.45101 0.628213 8.49988 0.500302 8.49988C0.372392 8.49988 0.244315 8.45101 0.146589 8.35329C-0.0488625 8.158 -0.0488625 7.84115 0.146589 7.64586L3.29249 4.50013Z" fill="var(--red)"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_304_132">
+                <rect width="8" height="8" fill="white" transform="matrix(-1 0 0 1 8 0.5)"/>
+                </clipPath>
+                </defs>
+                </svg>
+          </button>
         </div>
         <div class="filter__main__bottom-right"> 
           <e-btn class="btn-map" @click="()=>{

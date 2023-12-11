@@ -46,6 +46,26 @@ const changeEstateType = (estateTypeValue : String,immovableTypeValue : String) 
 
 
 const route = useRoute();
+
+onMounted(() => { 
+  if(route.params.serviceType){
+    filter.setFilterServiceType(route.params.serviceType);
+  }
+  if(route.params.immovableType){
+    switch(route.params.immovableType) { 
+      case "vtorichka" : 
+        estateType.value = 'Вторичная'
+        break;
+      case "zagorodnaya" : 
+        estateType.value = 'Загородная'
+        break;
+      case "commerce" : 
+        estateType.value = 'Коммерческая'
+        break; 
+    }  
+  }
+}) 
+console.log(filter.filterServiceType)
 const isMapHref = computed(()=>{
   if(route.path.split('/')[1] !== 'map'){
     return 'href'
@@ -66,8 +86,7 @@ const isMapHref = computed(()=>{
         <div class="filter-estate__type">
           <nuxt-link :[isMapHref]="`/realty/${filter.filterCity}/${filter.filterServiceType}/vtorichka/`"  @click="changeEstateType('Вторичная','vtorichka')" :class="[ estateType === 'Вторичная'? 'filter__type--active': '', 'btn-grey font-bold py-3 px-4 rounded-md  text-sm']">Вторичная</nuxt-link>
           <nuxt-link :[isMapHref]="`/realty/${filter.filterCity}/${filter.filterServiceType}/zagorodnaya/`"  @click="changeEstateType('Загородная','zagorodnaya')" :class="[ estateType === 'Загородная'? 'filter__type--active': '', 'btn-grey font-bold py-3 px-4 rounded-md   text-sm']">Загородная</nuxt-link>
-          <nuxt-link :[isMapHref]="`/realty/${filter.filterCity}/${filter.filterServiceType}/commerce/`"   @click="changeEstateType('Коммерческая','commerce')" :class="[ estateType === 'Коммерческая'? 'filter__type--active': '', 'btn-grey font-bold py-3 px-4 rounded-md text-sm']">Коммерческая</nuxt-link>
-
+          <nuxt-link :[isMapHref]="`/realty/${filter.filterCity}/${filter.filterServiceType}/commerce/`"   @click="changeEstateType('Коммерческая','commerce')" :class="[ estateType === 'Коммерческая'? 'filter__type--active': '', 'btn-grey font-bold py-3 px-4 rounded-md text-sm']">Коммерческая</nuxt-link> 
         </div>
         <div class="hidden md:flex max-w-[310px] flex-col relative">
           <e-input class="relative" type="text" v-model="searchString" @input="searchProduct" placeholder="Поиск по ID объекта"/>
