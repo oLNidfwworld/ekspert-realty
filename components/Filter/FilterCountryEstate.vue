@@ -106,6 +106,54 @@ const removeSelected = ( itemId, itemType, itemToDel ) => {
     }  
   }  
 }
+let urlParams = {
+  ... route.query,
+  ... route.params
+}; 
+// watch url to fill filter 
+
+onMounted(() => {
+  if(Object.values(urlParams).length !== 0){
+  delete urlParams.serviceType;
+  delete urlParams.immovableType;
+  if(urlParams.city === 'all-cities'){
+    delete urlParams.city 
+  }   
+  if(urlParams.immovableProperty === 'all-immovable-properties'){
+    delete urlParams.immovableProperty
+  }    
+  Object.keys(urlParams).forEach( (key, index) => {
+    let searchObject = null;
+    if(key === "immovableProperty"){ 
+      searchObject =  filterParams.value.filter.find( x => x.name === "OBJECT_TYPE" )
+    } else if (key === "city"){
+      searchObject = filterParams.value.filter.find( x => x.name === "Location" )
+    } else {
+      searchObject = filterParams.value.filter.find( x => x.name === key );
+    }
+    const searchableIndex = filterParams.value.filter.indexOf(searchObject);
+   
+    switch(searchObject.type){
+      case "multiInput":
+        let minmaxValue = urlParams[key].split('between'); 
+        filterParams.value.filter[searchableIndex].value = {min : (minmaxValue[0])?minmaxValue[0]:'', max : (minmaxValue[1])?minmaxValue[1]:'' }
+        break;
+      case "multiSelector":
+        let urlQueryVal = urlParams[key].split('-'); 
+        let tmpArray = [];
+        urlQueryVal.map( urlVal => {
+          tmpArray.push(filterParams.value.filter[searchableIndex].data.find( x => x.value === urlVal ))
+        });
+        filterParams.value.filter[searchableIndex].value = tmpArray; 
+        break;
+      case "multiSelect":
+        let urlQueryValM = urlParams[key].split('-'); 
+        filterParams.value.filter[searchableIndex].value = urlQueryValM;
+        break;
+    } 
+  }); 
+}
+})  
 </script>
 <template>
   <div>

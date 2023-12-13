@@ -33,6 +33,7 @@ const {data : countData} =  await useAsyncData(
       }
   )
 );   
+if(countData.value){
   for(const [key,vals] of Object.entries(countData.value)){
     let dataObject1 = quickMenuRent.value?.links.find(obj => {
       return obj.url === key
@@ -63,6 +64,7 @@ const {data : countData} =  await useAsyncData(
       dataObject4.count = vals; 
     }
   }  
+}
 const { data:recommended, pending, error, refresh } = await useAsyncData(
     () => useApiFetch(`/Catalog`)
 )

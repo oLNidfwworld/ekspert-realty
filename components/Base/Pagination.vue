@@ -11,7 +11,8 @@ const props = defineProps({
     type : Boolean,
     default : false,
   }
-})
+});
+console.log(props);
 const linksSize = computed(() => {
   let links = [];
   if(props.currentPage-1 > 0) {
