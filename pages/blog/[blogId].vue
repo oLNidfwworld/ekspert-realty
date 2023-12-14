@@ -9,6 +9,7 @@ const { data:blogElement, pending, error, refresh } = await useAsyncData(
 const goBack = () => {
   navigateTo('/blog/')
 }
+const config = useRuntimeConfig();
 useSeoMeta({
   title : blogElement.value[0].SEO.ELEMENT_META_TITLE,
   description : blogElement.value[0].SEO.ELEMENT_META_DESCRIPTION
@@ -20,7 +21,7 @@ useSeoMeta({
   <div>
     <h1>{{ blogElement[0].NAME }}</h1>
     <div class="relative">
-      <img class="blog-element-image"  :src="`http://test.ekspert-realty.ru${blogElement[0].DETAIL_PICTURE}`"/>
+      <img class="blog-element-image"  :src="`${config.RESOURCE_URL}${blogElement[0].DETAIL_PICTURE}`"/>
       <div class="bg-grey absolute top-0 -left-[100%] w-[300%] h-full z-[0]"></div>
     </div>
     <div v-html="blogElement[0].DETAIL_TEXT " class="blog-element-text">

@@ -3,6 +3,7 @@
 import {useFilterStore} from "../store/smartFilter";
 import ProductCard from "../components/Catalog/ProductCard";
 import {useSeoMeta} from "@unhead/vue";
+import ECallRow from "~~/components/Base/E-CallRow.vue";
 const messages = [
   `Uncaught NotFoundError: Failed to execute 'insertBefore' on 'Node': The node before which the new node is to be inserted is not a child of this node.`, // chromium based
   `NotFoundError: The object can not be found here.`, // safari
@@ -76,6 +77,7 @@ const { data : seoData } = await useAsyncData(
                 </main>
             </div>
         <TheFooter/>
+        <ECallRow></ECallRow>
     </div>
 </template>
 <style lang="postcss">

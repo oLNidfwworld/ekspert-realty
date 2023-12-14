@@ -5,11 +5,15 @@ import {computed} from "../../.nuxt/imports";
 const props = defineProps(['blogElement','blogPic'])
 const route = useRoute()
 
-
+const config = useRuntimeConfig();
+console.log(config)
 </script>
 <template>
   <div class="blog-card">
-    <div class="blog-image" v-if="blogPic?.url" :style="`background-image: url('http://test.ekspert-realty.ru${blogPic.url}')`">  </div>
+    <picture   v-if="blogPic?.url"  >  
+      <source :srcset='`${config.RESOURCE_URL}${blogPic.url}`'>
+      <img  class="blog-image" :alt="blogElement.NAME">
+    </picture>
     <div class="blog-image opacity-10" v-else :style="`background:var(--grey-dark)`"></div>
     <div class="blog-text-wrapper">
       <div>
@@ -39,6 +43,8 @@ const route = useRoute()
     }
     &-image{
       height:250px;
+      object-fit: cover;
+      width: 100%;
     }
      &-title{
       @apply font-bold mb-4;

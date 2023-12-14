@@ -60,7 +60,7 @@ watch(() => route.query, (cur) => {
         <e-btn :class="[pageSizeApi === '20' ? 'btn-red': 'btn-grey', 'mr-2']" @click="router.push({path: route.path, query: { ...route.query, size: 20} })">20</e-btn>
         <e-btn :class="[pageSizeApi === '40' ? 'btn-red': 'btn-grey']" @click="router.push({path: route.path, query: { ...route.query, size: 40}})">40</e-btn>
       </div>
-      <div class="grid gric-cols-1 md:grid-cols-2 lg:grid-cols-3 2lg:grid-cols-4 gap-2">
+      <div class="grid gric-cols-1 md:grid-cols-2 lg:grid-cols-3 2lg:grid-cols-4 gap-2 mb-4">
         <blog-card v-for="(item,index) in blogg.items" :key="index" :blogPic="item.DETAIL_PICTURE" :blogElement="item"></blog-card>
       </div>
       <Pagination :current-page="blogg.nav" :total-pages="blogg.nav_size"/>
