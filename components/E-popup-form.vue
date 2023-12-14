@@ -1,8 +1,5 @@
 <script setup>
-import {ref, watch, watchEffect} from "vue"
-  import EInput from '../components/Base/E-input'
-import EBtn from "../components/Base/E-btn";
-import {useApiFetchWithRefresh} from "../composables/api";
+import {ref, watch, watchEffect} from "vue" 
 
   const props = defineProps({
     isVisible : {
@@ -36,6 +33,9 @@ import {useApiFetchWithRefresh} from "../composables/api";
     <transition     name="appear"> 
           <div v-if="isVisible" class="popup">
             <div class="popup__wrapper">
+              <button @click="$emit('close')" class="absolute right-[5%] top-[5%] w-fit">
+                <svg data-v-43bf210c="" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" x="0" y="0" viewBox="0 0 35 35" xml:space="preserve" class=""><g data-v-43bf210c=""><path data-v-43bf210c="" d="M28.814 30.064a1.247 1.247 0 0 1-.884-.367L5.3 7.07A1.249 1.249 0 0 1 7.07 5.3L29.7 27.93a1.251 1.251 0 0 1-.884 2.134z" fill="var(--black)" opacity="1" data-original="#000000" class=""></path><path data-v-43bf210c="" d="M6.186 30.064A1.251 1.251 0 0 1 5.3 27.93L27.93 5.3a1.25 1.25 0 0 1 1.77 1.77L7.07 29.7a1.247 1.247 0 0 1-.884.364z" fill="var(--black)" opacity="1" data-original="#000000" class=""></path></g></svg>
+              </button>
               <transition mode="out-in" name="sliding">
                 <div v-if="!fallbackIncome">
                   <div class="popup__header">

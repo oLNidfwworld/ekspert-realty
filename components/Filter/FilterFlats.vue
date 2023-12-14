@@ -339,7 +339,7 @@ onMounted(() => {
     &__selected{
       @apply flex flex-row gap-3 flex-wrap;
       &-item{
-        @apply text-[14px] lg:text-[16px] flex gap-2 items-center bg-grey p-[2px_8px] h-fit;
+        @apply text-[14px] leading-[140%] lg:text-[16px] flex gap-2 items-center bg-grey p-[2px_8px] h-fit;
         border-radius: 5px;
       }
     }
