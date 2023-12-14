@@ -25,14 +25,14 @@ export default defineNuxtConfig({
             meta : [
                 { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0' }
             ],  
+            link  : [
+                { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+            ]
         }
     },
     build : {
         transpile: ["primevue"]
-    },
-    head: [
-        { rel: 'icon', type: 'image/x-icon', href: '/public/favicon.ico' }
-    ],
+    }, 
     loadingIndicator: {
         color: '#E02D1F',
     },
