@@ -20,7 +20,7 @@ onMounted(() => {
     </nuxt-link>
     <span class="text-sm">© 2005-{{props.date}}</span>
     <!--LiveInternet counter-->
-    <a href="https://www.liveinternet.ru/click" target="_blank">
+    <a class="hidden" href="https://www.liveinternet.ru/click" target="_blank">
       <img id="licnt6334" width="88" height="120" style="border:0"
     title="LiveInternet: показано количество просмотров и посетителей"
     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
