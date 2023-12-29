@@ -42,6 +42,7 @@ const { data : seoData } = await useAsyncData(
 
 </script>
 <template>
+    <div class="snow__wrapper"></div>
     <div class="page-wrapper">
         <TheHeader/>
           <NuxtLoadingIndicator color="#E02D1F" style="height:5px;top:90px;"/>
@@ -81,6 +82,19 @@ const { data : seoData } = await useAsyncData(
     </div>
 </template>
 <style lang="postcss">
+
+.snow__wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+  z-index: 1000;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
 }
